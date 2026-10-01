@@ -63,6 +63,31 @@ body::after{
   mask-image:radial-gradient(circle at 50% 30%, #000 20%, transparent 78%);
 }
 
+/* ============ 水印 ============ */
+.watermark{
+  position:fixed;
+  bottom:24px;
+  right:28px;
+  z-index:9999;
+  font-family:var(--font-display);
+  font-size:28px;
+  letter-spacing:4px;
+  color:rgba(230,36,41,.22);
+  pointer-events:none;
+  user-select:none;
+  text-shadow:0 0 20px rgba(230,36,41,.15);
+  transform:rotate(-6deg);
+  transition:opacity .3s;
+}
+
+.watermark::before{
+  content:'hjy';
+}
+
+@media (max-width:760px){
+  .watermark{font-size:18px;bottom:14px;right:16px;letter-spacing:2px;}
+}
+
 .wrap{
   width:100%;
   max-width:var(--max);
@@ -1641,6 +1666,9 @@ body::after{
 </head>
 <body>
 
+<!-- ============ 水印 ============ -->
+<div class="watermark" aria-hidden="true"></div>
+
 <header class="nav">
   <div class="nav-inner">
     <a class="logo" href="#top">
@@ -1671,7 +1699,7 @@ body::after{
       英雄分为漫画表现与电影表现两套独立评分体系，互不干扰。
     </p>
     <div class="banner-stats">
-      <div><b id="stat-heroes">5</b><span>收录角色</span></div>
+      <div><b id="stat-heroes">7</b><span>收录角色</span></div>
       <div><b id="stat-gears">0</b><span>装备神器</span></div>
       <div><b id="stat-dims">13</b><span>评测维度</span></div>
       <div><b id="stat-systems">2</b><span>表现体系</span></div>
@@ -1860,7 +1888,7 @@ body::after{
   <div class="footer-inner">
     <span>MARVEL POWER RANK · 非官方粉丝向数据站</span>
     <span class="dots"><i></i><i></i><i></i></span>
-    <span>Data Version 1.0.0</span>
+    <span>Data Version 1.0.0 · by hjy</span>
   </div>
 </footer>
 
@@ -1913,6 +1941,7 @@ const STAT_KEYS = ['战商', '智力', '力量', '防御', '装备', '速度', '
 const DB = {
   hero: {
     comic: [
+      /* ---------- T5 凡人级 ---------- */
       {
         id: 'h-c-blackwidow',
         name: '黑寡妇',
@@ -1927,7 +1956,9 @@ const DB = {
           { name:'鹰眼', type:'ally', label:'盟友 / 搭档' },
           { name:'美国队长', type:'team', label:'队友' },
           { name:'冬兵', type:'ally', label:'旧识' },
-          { name:'浩克', type:'team', label:'队友' }
+          { name:'浩克', type:'team', label:'队友' },
+          { name:'钢铁侠', type:'team', label:'队友' },
+          { name:'绯红女巫', type:'team', label:'队友' }
         ]
       },
       {
@@ -1944,9 +1975,31 @@ const DB = {
           { name:'黑寡妇', type:'ally', label:'盟友 / 搭档' },
           { name:'美国队长', type:'team', label:'队友' },
           { name:'雷神', type:'team', label:'队友' },
+          { name:'浩克', type:'team', label:'队友' },
+          { name:'钢铁侠', type:'team', label:'队友' },
+          { name:'绯红女巫', type:'team', label:'队友' }
+        ]
+      },
+      {
+        id: 'h-c-warMachine',
+        name: '战争机器',
+        sub: 'James Rhodes',
+        tag: '复仇者 / 军方',
+        tier: 't5',
+        power: 62,
+        img: 'https://placehold.co/400x500/1a1a20/8a8a99?text=War+Machine',
+        stats: { 战商: 72, 智力: 68, 力量: 78, 防御: 80, 装备: 82, 速度: 70, 耐力: 75, 体质: 60, 技能: 65, 格斗: 55, 射击: 85, 黑客: 45, 神力: 0 },
+        reason: '战争机器本质为强化版凡人，依赖斯塔克科技，但缺乏独立研发能力，战斗力受限于军方需求和装备迭代。装备局限：战甲多为斯塔克早期技术（如Mark 2改造），武器以常规导弹和机枪为主，缺乏纳米技术或能量武器升级。战斗表现：《复联2》中对抗奥创哨兵有效，但《美队3》因幻视误击致残，凸显防御短板。电影中始终落后于钢铁侠战甲，如《复联4》未获纳米技术支援。战术价值：团队中承担火力支援角色，但单兵作战能力有限。',
+        relations: [
+          { name:'钢铁侠', type:'ally', label:'挚友 / 战友' },
+          { name:'美国队长', type:'team', label:'队友' },
+          { name:'黑寡妇', type:'team', label:'队友' },
+          { name:'鹰眼', type:'team', label:'队友' },
           { name:'浩克', type:'team', label:'队友' }
         ]
       },
+
+      /* ---------- T4 超凡级 ---------- */
       {
         id: 'h-c-captain',
         name: '美国队长',
@@ -1962,9 +2015,13 @@ const DB = {
           { name:'鹰眼', type:'team', label:'队友' },
           { name:'浩克', type:'team', label:'队友' },
           { name:'雷神', type:'team', label:'队友' },
-          { name:'冬兵', type:'ally', label:'挚友' }
+          { name:'冬兵', type:'ally', label:'挚友' },
+          { name:'钢铁侠', type:'team', label:'队友 / 理念冲突' },
+          { name:'战争机器', type:'team', label:'队友' }
         ]
       },
+
+      /* ---------- T3 星球级 ---------- */
       {
         id: 'h-c-hulk',
         name: '绿巨人',
@@ -1979,9 +2036,13 @@ const DB = {
           { name:'雷神', type:'ally', label:'亦敌亦友' },
           { name:'美国队长', type:'team', label:'队友' },
           { name:'黑寡妇', type:'team', label:'队友' },
-          { name:'鹰眼', type:'team', label:'队友' }
+          { name:'鹰眼', type:'team', label:'队友' },
+          { name:'钢铁侠', type:'team', label:'队友 / 被其反浩克装甲针对' },
+          { name:'战争机器', type:'team', label:'队友' }
         ]
       },
+
+      /* ---------- T1.5 宇宙级 ---------- */
       {
         id: 'h-c-thor',
         name: '雷神',
@@ -1996,7 +2057,50 @@ const DB = {
           { name:'浩克', type:'ally', label:'亦敌亦友' },
           { name:'美国队长', type:'team', label:'队友' },
           { name:'黑寡妇', type:'team', label:'队友' },
-          { name:'鹰眼', type:'team', label:'队友' }
+          { name:'鹰眼', type:'team', label:'队友' },
+          { name:'钢铁侠', type:'team', label:'队友' },
+          { name:'绯红女巫', type:'team', label:'队友' }
+        ]
+      },
+      {
+        id: 'h-c-ironman',
+        name: '钢铁侠',
+        sub: 'Tony Stark',
+        tag: '复仇者 / 斯塔克工业',
+        tier: 't15',
+        power: 92,
+        img: 'https://placehold.co/400x500/1a1a20/e62429?text=Iron+Man',
+        stats: { 战商: 92, 智力: 100, 力量: 85, 防御: 82, 装备: 98, 速度: 85, 耐力: 78, 体质: 65, 技能: 90, 格斗: 72, 射击: 78, 黑客: 98, 神力: 15 },
+        reason: '钢铁侠的战斗力高度依赖战甲技术，常态为星球级（T3），但在特殊装备加持下可跃升至宇宙级。弑神者战甲：古老种族为对抗天神组制造的战甲，单次攻击可毁灭星球，逻辑上达到多元宇宙级门槛。石中剑融合：平行宇宙中融合亚瑟王石中剑，获得多元宇宙级力量，可操控时空。吞星使者：短暂成为行星吞噬者的使者，获得单体宇宙级能量，但需依赖外部赋予。MCU表现：纳米战甲（如Mark 85）在《复联4》中可短暂抗衡灭霸，但依赖团队配合和战术智商。',
+        relations: [
+          { name:'美国队长', type:'team', label:'队友 / 理念冲突' },
+          { name:'战争机器', type:'ally', label:'挚友 / 战友' },
+          { name:'浩克', type:'team', label:'队友 / 被其反浩克装甲针对' },
+          { name:'雷神', type:'team', label:'队友' },
+          { name:'黑寡妇', type:'team', label:'队友' },
+          { name:'鹰眼', type:'team', label:'队友' },
+          { name:'绯红女巫', type:'team', label:'队友 / 曾受其精神影响' }
+        ]
+      },
+
+      /* ---------- T0.5 传说级 ---------- */
+      {
+        id: 'h-c-wanda',
+        name: '绯红女巫',
+        sub: 'Wanda Maximoff',
+        tag: '复仇者 / 变种人',
+        tier: 't05',
+        power: 96,
+        img: 'https://placehold.co/400x500/1a1a20/b23a5f?text=Scarlet+Witch',
+        stats: { 战商: 72, 智力: 80, 力量: 60, 防御: 70, 装备: 55, 速度: 75, 耐力: 78, 体质: 62, 技能: 88, 格斗: 45, 射击: 30, 黑客: 25, 神力: 99 },
+        reason: '绯红女巫的混沌魔法在漫画巅峰时期（如《M氏家族》事件）达到全能宇宙级，可修改现实、重启多元宇宙，甚至剥夺全地球超能力者的能力。混沌魔法：巅峰时期可凭意识瞬间抹杀变种人能力，创造新现实，其力量与凤凰之力齐名。高光表现：《M氏家族》中因精神崩溃引发混沌之力暴走，直接改写现实，导致变种人几乎灭绝。在漫画中可对抗无限手套灭霸，但无法击败宇宙之心灭霸。电影削弱：MCU中仅展现部分魔法能力（如心灵控制、能量操纵），但《复联4》暴走状态仍能短暂压制灭霸。',
+        relations: [
+          { name:'黑寡妇', type:'team', label:'队友' },
+          { name:'鹰眼', type:'team', label:'队友' },
+          { name:'美国队长', type:'team', label:'队友' },
+          { name:'浩克', type:'team', label:'队友' },
+          { name:'雷神', type:'team', label:'队友' },
+          { name:'钢铁侠', type:'team', label:'队友 / 曾受其精神影响' }
         ]
       }
     ],
@@ -2258,7 +2362,7 @@ function renderSlots(section) {
 }
 
 /* =========================================================
-   渲染：属性对比条（最多显示前8个维度，避免过长）
+   渲染：属性对比条（最多显示前8个维度）
    ========================================================= */
 const BARS_KEYS = ['战商', '智力', '力量', '防御', '装备', '速度', '耐力', '神力'];
 
