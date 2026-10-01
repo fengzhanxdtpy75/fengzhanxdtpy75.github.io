@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MARVEL POWER RANK · 漫威战力排行榜</title>
+<style>
+:root{
+  --red:#e62429;
+  --red-2:#ff4b50;
+  --red-dark:#7d0f13;
+  --gold:#f5c518;
+  --blue:#3d8bff;
+  --bg:#08080a;
+  --bg-2:#101014;
+  --bg-3:#16161c;
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(255,255,255,.14);
+  --text:#eceef3;
+  --muted:#8a8a99;
+  --max:1280px;
+  --font-display:'Impact','Bebas Neue','Arial Black','Noto Sans SC',sans-serif;
+  --font-body:'Noto Sans SC','PingFang SC','Microsoft YaHei',system-ui,-apple-system,sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 12% 6%, rgba(230,36,41,.20), transparent 42%),
+    radial-gradient(circle at 88% 88%, rgba(245,197,24,.10), transparent 45%),
+    radial-gradient(circle at 50% 120%, rgba(61,139,255,.08), transparent 50%);
+}
+
+body::after{
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:.35;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(circle at 50% 30%, #000 20%, transparent 78%);
+}
+
+.wrap{
+  width:100%;
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 24px;
+}
+
+/* ============ 导航 ============ */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(8,8,10,.78);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav-inner{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 24px;
+  height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color:inherit;
+  flex-shrink:0;
+}
+
+.logo-mark{
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  background:var(--red);
+  color:#fff;
+  font-family:var(--font-display);
+  font-size:22px;
+  letter-spacing:1px;
+  border-radius:6px;
+  box-shadow:0 0 22px rgba(230,36,41,.55);
+}
+
+.logo-text{
+  font-family:var(--font-display);
+  font-size:20px;
+  letter-spacing:2px;
+  color:#fff;
+}
+
+.logo-text em{
+  font-style:normal;
+  color:var(--red);
+}
+
+.nav-links{
+  display:flex;
+  gap:6px;
+}
+
+.nav-links a{
+  position:relative;
+  padding:8px 16px;
+  color:var(--muted);
+  text-decoration:none;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.5px;
+  border-radius:8px;
+  transition:.25s;
+}
+
+.nav-links a:hover{
+  color:var(--text);
+  background:rgba(255,255,255,.05);
+}
+
+.nav-links a.active{
+  color:#fff;
+}
+
+.nav-links a.active::after{
+  content:'';
+  position:absolute;
+  left:16px;right:16px;bottom:2px;
+  height:2px;
+  background:var(--red);
+  box-shadow:0 0 10px var(--red);
+}
+
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:11px;
+  letter-spacing:2px;
+  color:var(--muted);
+  font-weight:700;
+}
+
+.live-dot{
+  width:7px;height:7px;
+  border-radius:50%;
+  background:#28e07a;
+  box-shadow:0 0 10px #28e07a;
+  animation:pulse 1.8s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1);}
+  50%{opacity:.45;transform:scale(.8);}
+}
+
+/* ============ 头部横幅 ============ */
+.banner{
+  position:relative;
+  z-index:1;
+  padding:88px 0 64px;
+  overflow:hidden;
+}
+
+.banner::before{
+  content:'MARVEL';
+  position:absolute;
+  top:36px;
+  left:50%;
+  transform:translateX(-50%);
+  font-family:var(--font-display);
+  font-size:clamp(120px,20vw,260px);
+  letter-spacing:12px;
+  color:rgba(255,255,255,.022);
+  white-space:nowrap;
+  pointer-events:none;
+  user-select:none;
+}
+
+.banner-inner{
+  position:relative;
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 24px;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:11px;
+  letter-spacing:3px;
+  font-weight:800;
+  color:var(--red-2);
+  margin-bottom:20px;
+}
+
+.eyebrow::before{
+  content:'';
+  width:32px;height:2px;
+  background:var(--red);
+}
+
+.banner h1{
+  font-family:var(--font-display);
+  font-size:clamp(44px,7vw,84px);
+  line-height:.98;
+  letter-spacing:2px;
+  color:#fff;
+  margin-bottom:20px;
+  text-transform:uppercase;
+}
+
+.banner h1 span{
+  color:transparent;
+  -webkit-text-stroke:2px var(--red);
+}
+
+.lead{
+  max-width:560px;
+  color:var(--muted);
+  font-size:15px;
+  margin-bottom:44px;
+}
+
+.banner-stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+}
+
+.banner-stats > div{
+  flex:1;
+  min-width:130px;
+  padding:18px 20px;
+  background:linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+  border:1px solid var(--line);
+  border-radius:12px;
+  position:relative;
+  overflow:hidden;
+}
+
+.banner-stats > div::before{
+  content:'';
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:3px;
+  background:var(--red);
+  opacity:.7;
+}
+
+.banner-stats b{
+  display:block;
+  font-family:var(--font-display);
+  font-size:30px;
+  letter-spacing:1px;
+  color:#fff;
+  line-height:1.1;
+}
+
+.banner-stats span{
+  font-size:12px;
+  letter-spacing:1.5px;
+  color:var(--muted);
+}
+
+/* ============ 通用区块 ============ */
+.section{
+  position:relative;
+  z-index:1;
+  padding:64px 0;
+}
+
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px;
+  flex-wrap:wrap;
+  margin-bottom:28px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
+}
+
+.section-head h2{
+  font-family:var(--font-display);
+  font-size:clamp(26px,3.4vw,38px);
+  letter-spacing:2px;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.section-head h2 .num{
+  font-size:14px;
+  font-family:var(--font-body);
+  font-weight:800;
+  letter-spacing:2px;
+  color:var(--red);
+  border:1px solid rgba(230,36,41,.45);
+  border-radius:6px;
+  padding:3px 9px;
+  background:rgba(230,36,41,.09);
+}
+
+.section-desc{
+  font-size:13px;
+  color:var(--muted);
+  max-width:460px;
+}
+
+/* ============ 模式切换 ============ */
+.mode-switch{
+  display:inline-flex;
+  padding:5px;
+  gap:4px;
+  background:var(--bg-2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  margin-bottom:24px;
+}
+
+.mode-btn{
+  position:relative;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-family:var(--font-body);
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:1px;
+  padding:10px 26px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.mode-btn:hover{color:var(--text);}
+
+.mode-btn.active{
+  background:linear-gradient(135deg,var(--red),var(--red-dark));
+  color:#fff;
+  box-shadow:0 6px 22px rgba(230,36,41,.35);
+}
+
+/* ============ 对战台 ============ */
+.arena{
+  display:grid;
+  grid-template-columns:1fr 64px 1fr;
+  gap:0;
+  align-items:stretch;
+  margin-bottom:22px;
+}
+
+.slot{
+  position:relative;
+  min-height:172px;
+  background:linear-gradient(155deg, rgba(255,255,255,.045), rgba(255,255,255,.012));
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  transition:.3s;
+}
+
+.slot:first-child{border-radius:16px 0 0 16px;}
+.slot:last-child{border-radius:0 16px 16px 0;}
+
+.slot.filled{
+  border-color:rgba(255,255,255,.16);
+}
+
+.slot:first-child.filled{
+  box-shadow:inset 0 0 60px rgba(230,36,41,.14);
+  border-color:rgba(230,36,41,.4);
+}
+
+.slot:last-child.filled{
+  box-shadow:inset 0 0 60px rgba(245,197,24,.12);
+  border-color:rgba(245,197,24,.36);
+}
+
+.slot-empty{
+  height:100%;
+  min-height:172px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  color:var(--muted);
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+.slot-plus{
+  width:44px;height:44px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px dashed rgba(255,255,255,.22);
+  font-size:24px;
+  font-weight:300;
+  color:rgba(255,255,255,.35);
+}
+
+.slot-filled{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:18px;
+  height:100%;
+}
+
+.slot-media{
+  width:96px;
+  height:120px;
+  flex-shrink:0;
+  border-radius:10px;
+  overflow:hidden;
+  border:1px solid var(--line-2);
+  background:var(--bg-3);
+}
+
+.slot-media img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.slot-info{flex:1;min-width:0;}
+
+.slot-tag{
+  display:inline-block;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:2px;
+  padding:2px 8px;
+  border-radius:4px;
+  margin-bottom:8px;
+}
+
+.slot-tag.a{background:rgba(230,36,41,.18);color:var(--red-2);}
+.slot-tag.b{background:rgba(245,197,24,.16);color:var(--gold);}
+
+.slot-info h4{
+  font-size:20px;
+  font-weight:800;
+  color:#fff;
+  letter-spacing:.5px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.slot-info p{
+  font-size:12px;
+  color:var(--muted);
+  letter-spacing:.5px;
+  margin-bottom:10px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.slot-power{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+}
+
+.slot-power b{
+  font-family:var(--font-display);
+  font-size:30px;
+  color:#fff;
+  line-height:1;
+  letter-spacing:1px;
+}
+
+.slot-power span{
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:1px;
+}
+
+.slot-clear{
+  position:absolute;
+  top:10px;right:10px;
+  width:26px;height:26px;
+  border-radius:50%;
+  border:1px solid var(--line-2);
+  background:rgba(0,0,0,.4);
+  color:var(--muted);
+  font-size:16px;
+  line-height:1;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.slot-clear:hover{
+  background:var(--red);
+  color:#fff;
+  border-color:var(--red);
+}
+
+.vs-badge{
+  display:grid;
+  place-items:center;
+  font-family:var(--font-display);
+  font-size:22px;
+  letter-spacing:2px;
+  color:var(--red);
+  position:relative;
+  z-index:2;
+}
+
+.vs-badge::before,
+.vs-badge::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:1px;
+  height:34%;
+  background:linear-gradient(to bottom, transparent, rgba(230,36,41,.5));
+}
+
+.vs-badge::before{top:0;}
+.vs-badge::after{bottom:0;transform:translateX(-50%) rotate(180deg);}
+
+/* ============ 数据分析面板 ============ */
+.analysis{
+  display:grid;
+  grid-template-columns:minmax(300px,1fr) minmax(340px,1.15fr);
+  gap:26px;
+  background:var(--bg-2);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:26px;
+  margin-bottom:34px;
+}
+
+.verdict{
+  grid-column:1/-1;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+  padding:14px 18px;
+  border-radius:10px;
+  background:linear-gradient(90deg, rgba(230,36,41,.12), rgba(245,197,24,.10));
+  border:1px solid var(--line);
+  font-size:13px;
+  color:var(--muted);
+  letter-spacing:.5px;
+  min-height:52px;
+}
+
+.verdict strong{color:#fff;font-weight:800;}
+.verdict .win-a{color:var(--red-2);}
+.verdict .win-b{color:var(--gold);}
+
+.radar-wrap{
+  position:relative;
+  height:340px;
+  border-radius:12px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.03), transparent 70%);
+  border:1px solid var(--line);
+}
+
+.radar-wrap canvas{
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+.bars{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:15px;
+}
+
+.stat-compare{
+  display:grid;
+  grid-template-columns:1fr 78px 1fr;
+  align-items:center;
+  gap:12px;
+}
+
+.stat-compare .label{
+  text-align:center;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:2px;
+  color:var(--muted);
+}
+
+.side{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.side.a{flex-direction:row;}
+.side.b{flex-direction:row;}
+
+.side .bar{
+  flex:1;
+  height:9px;
+  border-radius:5px;
+  background:rgba(255,255,255,.06);
+  overflow:hidden;
+  display:flex;
+}
+
+.side.a .bar{justify-content:flex-end;}
+.side.b .bar{justify-content:flex-start;}
+
+.side .bar i{
+  display:block;
+  height:100%;
+  border-radius:5px;
+  transition:width .55s cubic-bezier(.4,0,.2,1);
+}
+
+.side.a .bar i{background:linear-gradient(90deg,#7d0f13,var(--red));}
+.side.b .bar i{background:linear-gradient(90deg,var(--gold),#8a6d00);}
+
+.side.a .bar i.win{box-shadow:0 0 14px rgba(230,36,41,.85);}
+.side.b .bar i.win{box-shadow:0 0 14px rgba(245,197,24,.8);}
+
+.side .val{
+  font-size:13px;
+  font-weight:800;
+  color:#fff;
+  min-width:26px;
+  font-variant-numeric:tabular-nums;
+}
+
+.side.a .val{text-align:right;color:var(--red-2);}
+.side.b .val{text-align:left;color:var(--gold);}
+
+.bars .empty{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  letter-spacing:1px;
+  padding:40px 0;
+}
+
+/* ============ 角色卡池 ============ */
+.roster{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(168px,1fr));
+  gap:16px;
+}
+
+.roster-empty{
+  grid-column:1/-1;
+  padding:56px 24px;
+  text-align:center;
+  border:1px dashed rgba(255,255,255,.12);
+  border-radius:14px;
+  color:var(--muted);
+  font-size:13px;
+  letter-spacing:1px;
+  background:rgba(255,255,255,.012);
+}
+
+.roster-empty b{
+  display:block;
+  font-family:var(--font-display);
+  font-size:22px;
+  letter-spacing:3px;
+  color:rgba(255,255,255,.18);
+  margin-bottom:8px;
+}
+
+.char-card{
+  position:relative;
+  background:var(--bg-2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:transform .28s cubic-bezier(.4,0,.2,1), border-color .28s, box-shadow .28s;
+}
+
+.char-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(230,36,41,.5);
+  box-shadow:0 16px 36px rgba(0,0,0,.55), 0 0 0 1px rgba(230,36,41,.25);
+}
+
+.card-media{
+  position:relative;
+  aspect-ratio:4/5;
+  background:var(--bg-3);
+  overflow:hidden;
+}
+
+.card-media img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .5s;
+  filter:saturate(.85);
+}
+
+.char-card:hover .card-media img{
+  transform:scale(1.07);
+  filter:saturate(1.1);
+}
+
+.card-media::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(16,16,20,.96) 4%, rgba(16,16,20,.15) 48%, transparent 70%);
+}
+
+.tier{
+  position:absolute;
+  top:9px;left:9px;
+  z-index:2;
+  font-family:var(--font-display);
+  font-size:13px;
+  letter-spacing:1px;
+  padding:2px 9px;
+  border-radius:5px;
+  background:rgba(0,0,0,.65);
+  border:1px solid rgba(255,255,255,.16);
+  color:#fff;
+}
+
+.tier.Sp{color:#ff8b8f;border-color:rgba(230,36,41,.55);background:rgba(230,36,41,.22);}
+.tier.S{color:var(--gold);border-color:rgba(245,197,24,.45);background:rgba(245,197,24,.14);}
+.tier.A{color:#7fd4ff;border-color:rgba(61,139,255,.45);background:rgba(61,139,255,.14);}
+
+.card-body{
+  padding:12px 13px 14px;
+}
+
+.card-body h4{
+  font-size:15px;
+  font-weight:800;
+  color:#fff;
+  letter-spacing:.5px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.card-body p{
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:.6px;
+  margin-bottom:9px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.power-row{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  padding-top:9px;
+  border-top:1px solid var(--line);
+}
+
+.power-row span{
+  font-size:10px;
+  letter-spacing:1.5px;
+  color:var(--muted);
+}
+
+.power-row b{
+  font-family:var(--font-display);
+  font-size:20px;
+  letter-spacing:1px;
+  color:var(--red-2);
+}
+
+.char-card.picked-a{
+  border-color:var(--red);
+  box-shadow:0 0 0 1px var(--red), 0 14px 34px rgba(230,36,41,.3);
+}
+
+.char-card.picked-b{
+  border-color:var(--gold);
+  box-shadow:0 0 0 1px var(--gold), 0 14px 34px rgba(245,197,24,.25);
+}
+
+.char-card.picked-a .card-media img,
+.char-card.picked-b .card-media img{
+  filter:saturate(1.15) brightness(1.05);
+}
+
+.char-card.picked-a::after,
+.char-card.picked-b::after{
+  position:absolute;
+  top:9px;right:9px;
+  z-index:3;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px;
+  padding:3px 8px;
+  border-radius:5px;
+  color:#fff;
+}
+
+.char-card.picked-a::after{
+  content:'A 方';
+  background:var(--red);
+}
+
+.char-card.picked-b::after{
+  content:'B 方';
+  background:var(--gold);
+  color:#241c00;
+}
+
+/* ============ 排行榜 ============ */
+.rank-table{
+  width:100%;
+  border-collapse:collapse;
+  background:var(--bg-2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+}
+
+.rank-table thead th{
+  text-align:left;
+  font-size:11px;
+  letter-spacing:2px;
+  font-weight:800;
+  color:var(--muted);
+  padding:14px 18px;
+  background:rgba(255,255,255,.03);
+  border-bottom:1px solid var(--line);
+  white-space:nowrap;
+}
+
+.rank-table tbody td{
+  padding:13px 18px;
+  border-bottom:1px solid rgba(255,255,255,.045);
+  font-size:14px;
+  vertical-align:middle;
+}
+
+.rank-table tbody tr:last-child td{border-bottom:0;}
+
+.rank-table tbody tr{
+  transition:background .2s;
+}
+
+.rank-table tbody tr:hover{
+  background:rgba(230,36,41,.06);
+}
+
+.rank-empty{
+  padding:56px 24px !important;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+.rank-empty b{
+  display:block;
+  font-family:var(--font-display);
+  font-size:22px;
+  letter-spacing:3px;
+  color:rgba(255,255,255,.18);
+  margin-bottom:8px;
+}
+
+.rank-no{
+  display:grid;
+  place-items:center;
+  width:28px;height:28px;
+  border-radius:8px;
+  font-family:var(--font-display);
+  font-size:15px;
+  background:rgba(255,255,255,.06);
+  color:var(--muted);
+}
+
+.rank-no.top1{background:linear-gradient(135deg,#f5c518,#b8860b);color:#241c00;box-shadow:0 0 18px rgba(245,197,24,.4);}
+.rank-no.top2{background:linear-gradient(135deg,#c9ced6,#7d858f);color:#1a1a1a;}
+.rank-no.top3{background:linear-gradient(135deg,#cd7f32,#8a5522);color:#fff;}
+
+.rank-name{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.rank-name img{
+  width:38px;height:46px;
+  object-fit:cover;
+  border-radius:7px;
+  border:1px solid var(--line-2);
+  flex-shrink:0;
+}
+
+.rank-name b{
+  display:block;
+  font-size:14px;
+  color:#fff;
+  font-weight:800;
+  letter-spacing:.5px;
+}
+
+.rank-name span{
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:.5px;
+}
+
+.tier-chip{
+  display:inline-block;
+  font-size:11px;
+  letter-spacing:1px;
+  font-weight:700;
+  padding:3px 10px;
+  border-radius:20px;
+  background:rgba(255,255,255,.07);
+  color:var(--muted);
+  border:1px solid var(--line);
+}
+
+.rank-table .num{
+  font-family:var(--font-display);
+  font-size:20px;
+  color:var(--red-2);
+  letter-spacing:1px;
+}
+
+.rank-bar{
+  height:8px;
+  border-radius:4px;
+  background:rgba(255,255,255,.07);
+  overflow:hidden;
+  min-width:120px;
+}
+
+.rank-bar i{
+  display:block;
+  height:100%;
+  border-radius:4px;
+  background:linear-gradient(90deg,var(--red-dark),var(--red),#ff7a7e);
+  transition:width .6s cubic-bezier(.4,0,.2,1);
+}
+
+/* ============ 关于 ============ */
+.about-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+}
+
+.about-card{
+  padding:24px;
+  background:var(--bg-2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  transition:.28s;
+}
+
+.about-card:hover{
+  border-color:rgba(230,36,41,.42);
+  transform:translateY(-4px);
+}
+
+.about-card h4{
+  font-size:16px;
+  color:#fff;
+  font-weight:800;
+  letter-spacing:1px;
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.about-card h4::before{
+  content:'';
+  width:4px;height:16px;
+  border-radius:2px;
+  background:var(--red);
+}
+
+.about-card p{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.75;
+}
+
+/* ============ 页脚 ============ */
+.footer{
+  position:relative;
+  z-index:1;
+  margin-top:60px;
+  padding:34px 0;
+  border-top:1px solid var(--line);
+  background:rgba(0,0,0,.35);
+}
+
+.footer-inner{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  flex-wrap:wrap;
+  font-size:12px;
+  color:var(--muted);
+  letter-spacing:.5px;
+}
+
+.footer-inner .dots{
+  display:flex;
+  gap:6px;
+}
+
+.footer-inner .dots i{
+  width:18px;height:4px;
+  border-radius:2px;
+  background:rgba(255,255,255,.14);
+}
+
+.footer-inner .dots i:nth-child(1){background:var(--red);}
+.footer-inner .dots i:nth-child(2){background:var(--gold);}
+.footer-inner .dots i:nth-child(3){background:var(--blue);}
+
+/* ============ 响应式 ============ */
+@media (max-width:980px){
+  .analysis{
+    grid-template-columns:1fr;
+  }
+  .radar-wrap{height:300px;}
+  .nav-links{display:none;}
+}
+
+@media (max-width:760px){
+  .arena{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .slot:first-child,
+  .slot:last-child,
+  .slot{border-radius:14px;}
+  .vs-badge{height:34px;}
+  .vs-badge::before,
+  .vs-badge::after{display:none;}
+  .banner{padding:56px 0 40px;}
+  .section{padding:44px 0;}
+  .stat-compare{grid-template-columns:1fr 62px 1fr;gap:8px;}
+  .rank-table thead th:nth-child(3),
+  .rank-table tbody td:nth-child(3){display:none;}
+  .rank-bar{min-width:70px;}
+}
+
+@media (max-width:520px){
+  .roster{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}
+  .slot-filled{gap:12px;padding:14px;}
+  .slot-media{width:74px;height:92px;}
+  .slot-info h4{font-size:17px;}
+  .slot-power b{font-size:24px;}
+  .rank-table thead th,
+  .rank-table tbody td{padding:11px 12px;}
+  .rank-table thead th:nth-child(5),
+  .rank-table tbody td:nth-child(5){display:none;}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#top">
+      <span class="logo-mark">M</span>
+      <span class="logo-text">POWER<em>RANK</em></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#heroes" class="active">英雄战力</a>
+      <a href="#gears">装备战力</a>
+      <a href="#ranking">综合总榜</a>
+      <a href="#about">评测体系</a>
+    </nav>
+    <div class="nav-actions">
+      <span class="live-dot"></span>
+      <span>DATA ONLINE</span>
+    </div>
+  </div>
+</header>
+
+<section class="banner" id="top">
+  <div class="banner-inner">
+    <p class="eyebrow">MARVEL POWER INDEX</p>
+    <h1>漫威战力<br><span>数据库</span></h1>
+    <p class="lead">
+      以「角色本体」与「装备加成」双线分离的方式，还原漫威宇宙中最接近真实的战力排行。
+      英雄分为漫画表现与电影表现两套独立评分体系，互不干扰。
+    </p>
+    <div class="banner-stats">
+      <div><b id="stat-heroes">0</b><span>收录角色</span></div>
+      <div><b id="stat-gears">0</b><span>装备神器</span></div>
+      <div><b id="stat-dims">0</b><span>评测维度</span></div>
+      <div><b id="stat-systems">0</b><span>表现体系</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="heroes">
+  <div class="wrap">
+    <div class="section-head">
+      <h2><span class="num">01</span> 英雄战力对比</h2>
+      <p class="section-desc">选择两名角色进入对战台，系统将生成雷达图与属性对比。</p>
+    </div>
+
+    <div class="mode-switch" data-section="hero">
+      <button class="mode-btn active" data-mode="comic">漫画表现</button>
+      <button class="mode-btn" data-mode="movie">电影表现</button>
+    </div>
+
+    <div class="arena">
+      <div class="slot" id="hero-slot-a"></div>
+      <div class="vs-badge">VS</div>
+      <div class="slot" id="hero-slot-b"></div>
+    </div>
+
+    <div class="analysis">
+      <div class="verdict" id="hero-verdict"></div>
+      <div class="radar-wrap"><canvas id="hero-radar"></canvas></div>
+      <div class="bars" id="hero-bars"></div>
+    </div>
+
+    <div class="roster" id="hero-roster"></div>
+  </div>
+</section>
+
+<section class="section" id="gears">
+  <div class="wrap">
+    <div class="section-head">
+      <h2><span class="num">02</span> 装备战力对比</h2>
+      <p class="section-desc">装备独立于角色本体评分，用于衡量武器、神器与装甲本身的强度上限。</p>
+    </div>
+
+    <div class="mode-switch" data-section="gear">
+      <button class="mode-btn active" data-mode="comic">漫画表现</button>
+      <button class="mode-btn" data-mode="movie">电影表现</button>
+    </div>
+
+    <div class="arena">
+      <div class="slot" id="gear-slot-a"></div>
+      <div class="vs-badge">VS</div>
+      <div class="slot" id="gear-slot-b"></div>
+    </div>
+
+    <div class="analysis">
+      <div class="verdict" id="gear-verdict"></div>
+      <div class="radar-wrap"><canvas id="gear-radar"></canvas></div>
+      <div class="bars" id="gear-bars"></div>
+    </div>
+
+    <div class="roster" id="gear-roster"></div>
+  </div>
+</section>
+
+<section class="section" id="ranking">
+  <div class="wrap">
+    <div class="section-head">
+      <h2><span class="num">03</span> 综合总榜</h2>
+      <p class="section-desc">榜单与上方「英雄战力」模式联动，切换漫画 / 电影后自动重排。</p>
+    </div>
+    <table class="rank-table">
+      <thead>
+        <tr>
+          <th>排名</th>
+          <th>角色</th>
+          <th>阵营</th>
+          <th>综合战力</th>
+          <th>强度条</th>
+        </tr>
+      </thead>
+      <tbody id="rank-body"></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <h2><span class="num">04</span> 评测体系</h2>
+      <p class="section-desc">此处为体系说明区，具体文字内容可随时替换。</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card">
+        <h4>六维评分</h4>
+        <p>力量、速度、防御、能量、技巧、智力六个维度，每项满分 100，综合战力由加权算法得出。</p>
+      </div>
+      <div class="about-card">
+        <h4>双体系分离</h4>
+        <p>漫画表现与电影表现各自独立建模，避免电影削弱设定污染漫画角色的真实上限。</p>
+      </div>
+      <div class="about-card">
+        <h4>角色 / 装备分离</h4>
+        <p>装备强度不计入角色本体，单独成榜，用于区分「本体强」与「靠装备强」两类角色。</p>
+      </div>
+      <div class="about-card">
+        <h4>持续更新</h4>
+        <p>随着新刊与新片上映，数据将持续修订。此处可放置更新日志与版本说明。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>MARVEL POWER RANK · hjy数据站</span>
+    <span class="dots"><i></i><i></i><i></i></span>
+    <span>Data Version 0.0.1</span>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   数据注入区
+   ---------------------------------------------------------
+   hero.comic  / hero.movie   → 英雄（漫画 / 电影）
+   gear.comic  / gear.movie   → 装备（漫画 / 电影）
+
+   每个条目字段：
+   id      唯一标识（字符串）
+   name    角色 / 装备名称
+   sub     英文名或副标题
+   tag     阵营 / 类型标签
+   tier    评级（S+ / S / A ...）
+   power   综合战力（数字，0-100）
+   stats   六维数值对象，键名与 STAT_KEYS 对应
+   img     图片链接（留空字符串则显示占位色块）
+
+   STAT_KEYS 定义在下方的配置区，修改维度名称请同步修改这里。
+   ========================================================= */
+
+const DB = {
+  hero: {
+    comic: [],
+    movie: []
+  },
+  gear: {
+    comic: [],
+    movie: []
+  }
+};
+
+/* =========================================================
+   配置区
+   ========================================================= */
+
+const STAT_KEYS = ['力量', '速度', '防御', '能量', '技巧', '智力'];
+
+const COLOR_A = '#e62429';
+const COLOR_B = '#f5c518';
+
+const State = {
+  hero: { mode: 'comic', a: null, b: null },
+  gear: { mode: 'comic', a: null, b: null }
+};
+
+/* =========================================================
+   工具函数
+   ========================================================= */
+
+function hexToRgba(hex, alpha) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+}
+
+function getList(section, mode) {
+  const group = DB[section];
+  if (!group) return [];
+  return group[mode] || [];
+}
+
+function findItem(section, mode, id) {
+  if (!id) return null;
+  return getList(section, mode).find(x => x.id === id) || null;
+}
+
+/* =========================================================
+   雷达图绘制
+   ========================================================= */
+
+function drawRadar(canvas, labels, series) {
+  const rect = canvas.getBoundingClientRect();
+  if (rect.width === 0 || rect.height === 0) return;
+
+  const dpr = window.devicePixelRatio || 1;
+  const w = rect.width;
+  const h = rect.height;
+
+  canvas.width = Math.round(w * dpr);
+  canvas.height = Math.round(h * dpr);
+
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, w, h);
+
+  const cx = w / 2;
+  const cy = h / 2;
+  const R = Math.min(w, h) / 2 - 46;
+  const n = labels.length;
+  if (n < 3) return;
+
+  const point = (i, r) => {
+    const angle = -Math.PI / 2 + i * 2 * Math.PI / n;
+    return [cx + Math.cos(angle) * r, cy + Math.sin(angle) * r];
+  };
+
+  for (let g = 1; g <= 4; g++) {
+    const r = R * g / 4;
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+      const [x, y] = point(i, r);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = g === 4 ? 'rgba(255,255,255,.20)' : 'rgba(255,255,255,.07)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  ctx.strokeStyle = 'rgba(255,255,255,.07)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i < n; i++) {
+    const [x, y] = point(i, R);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  }
+
+  ctx.font = '600 12px "Noto Sans SC", system-ui, sans-serif';
+  ctx.fillStyle = '#8a8a99';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  for (let i = 0; i < n; i++) {
+    const [x, y] = point(i, R + 26);
+    ctx.fillText(labels[i], x, y);
+  }
+
+  series.forEach(s => {
+    const pts = s.values.map((v, i) => {
+      const val = Math.max(0, Math.min(100, v));
+      return point(i, R * val / 100);
+    });
+
+    ctx.beginPath();
+    pts.forEach(([x, y], i) => {
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.closePath();
+    ctx.fillStyle = hexToRgba(s.color, 0.18);
+    ctx.fill();
+    ctx.strokeStyle = s.color;
+    ctx.lineWidth = 2;
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+
+    pts.forEach(([x, y]) => {
+      ctx.beginPath();
+      ctx.arc(x, y, 3.2, 0, Math.PI * 2);
+      ctx.fillStyle = s.color;
+      ctx.fill();
+      ctx.strokeStyle = '#0a0a0c';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    });
+  });
+}
+
+/* =========================================================
+   渲染：角色卡池
+   ========================================================= */
+
+function renderRoster(section) {
+  const st = State[section];
+  const list = getList(section, st.mode);
+  const el = document.getElementById(section + '-roster');
+
+  if (!list.length) {
+    el.innerHTML =
+      '<div class="roster-empty">' +
+        '<b>NO DATA</b>' +
+        '该分类尚未录入任何条目，等待数据注入。' +
+      '</div>';
+    return;
+  }
+
+  el.innerHTML = list.map(item => {
+    const pickedA = st.a === item.id;
+    const pickedB = st.b === item.id;
+    let cls = 'char-card';
+    if (pickedA) cls += ' picked-a';
+    if (pickedB) cls += ' picked-b';
+
+    let tierCls = 'tier';
+    if (item.tier === 'S+') tierCls += ' Sp';
+    else if (item.tier === 'S') tierCls += ' S';
+    else tierCls += ' A';
+
+    const media = item.img
+      ? '<img src="' + item.img + '" alt="' + item.name + '" loading="lazy">'
+      : '';
+
+    return '<article class="' + cls + '" data-id="' + item.id + '">' +
+      '<div class="card-media">' +
+        media +
+        '<span class="' + tierCls + '">' + (item.tier || '—') + '</span>' +
+      '</div>' +
+      '<div class="card-body">' +
+        '<h4>' + (item.name || '未命名') + '</h4>' +
+        '<p>' + (item.sub || '—') + '</p>' +
+        '<div class="power-row"><span>综合战力</span><b>' + (item.power ?? '—') + '</b></div>' +
+      '</div>' +
+    '</article>';
+  }).join('');
+}
+
+/* =========================================================
+   渲染：对战槽位
+   ========================================================= */
+
+function renderSlots(section) {
+  const st = State[section];
+  const list = getList(section, st.mode);
+
+  ['a', 'b'].forEach(side => {
+    const el = document.getElementById(section + '-slot-' + side);
+    const item = list.find(x => x.id === st[side]);
+
+    if (!item) {
+      el.classList.remove('filled');
+      el.innerHTML =
+        '<div class="slot-empty">' +
+          '<div class="slot-plus">+</div>' +
+          '<p>选择' + (side === 'a' ? '挑战者 A' : '挑战者 B') + '</p>' +
+        '</div>';
+      return;
+    }
+
+    el.classList.add('filled');
+    const media = item.img
+      ? '<img src="' + item.img + '" alt="' + item.name + '">'
+      : '';
+
+    el.innerHTML =
+      '<div class="slot-filled">' +
+        '<div class="slot-media">' + media + '</div>' +
+        '<div class="slot-info">' +
+          '<span class="slot-tag ' + side + '">' + side.toUpperCase() + '</span>' +
+          '<h4>' + (item.name || '未命名') + '</h4>' +
+          '<p>' + (item.sub || '—') + '</p>' +
+          '<div class="slot-power"><b>' + (item.power ?? '—') + '</b><span>综合战力</span></div>' +
+        '</div>' +
+        '<button class="slot-clear" data-section="' + section + '" data-side="' + side + '" title="移除">×</button>' +
+      '</div>';
+  });
+}
+
+/* =========================================================
+   渲染：属性对比条
+   ========================================================= */
+
+function renderBars(section, A, B) {
+  const el = document.getElementById(section + '-bars');
+
+  if (!A && !B) {
+    el.innerHTML = '<div class="empty">选择对比对象后显示六维属性</div>';
+    return;
+  }
+
+  if (!STAT_KEYS.length) {
+    el.innerHTML = '<div class="empty">尚未配置评测维度</div>';
+    return;
+  }
+
+  el.innerHTML = STAT_KEYS.map(key => {
+    const av = A && A.stats ? (A.stats[key] ?? 0) : 0;
+    const bv = B && B.stats ? (B.stats[key] ?? 0) : 0;
+    const aWin = A && B && av > bv;
+    const bWin = A && B && bv > av;
+
+    return '<div class="stat-compare">' +
+      '<div class="side a">' +
+        '<span class="val">' + (A ? av : '—') + '</span>' +
+        '<div class="bar"><i class="' + (aWin ? 'win' : '') + '" style="width:' + av + '%"></i></div>' +
+      '</div>' +
+      '<div class="label">' + key + '</div>' +
+      '<div class="side b">' +
+        '<div class="bar"><i class="' + (bWin ? 'win' : '') + '" style="width:' + bv + '%"></i></div>' +
+        '<span class="val">' + (B ? bv : '—') + '</span>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+/* =========================================================
+   渲染：文字结论
+   ========================================================= */
+
+function renderVerdict(section, A, B) {
+  const el = document.getElementById(section + '-verdict');
+
+  if (!A && !B) {
+    el.innerHTML = '请在下方选择两个对比对象，系统将自动生成战力差距分析。';
+    return;
+  }
+  if (!A || !B) {
+    const one = A || B;
+    el.innerHTML = '已锁定 <strong>' + (one.name || '未命名') + '</strong>，请再选择一名对比对象。';
+    return;
+  }
+
+  let aWin = 0;
+  let bWin = 0;
+  STAT_KEYS.forEach(k => {
+    const av = A.stats ? (A.stats[k] ?? 0) : 0;
+    const bv = B.stats ? (B.stats[k] ?? 0) : 0;
+    if (av > bv) aWin++;
+    else if (bv > av) bWin++;
+  });
+
+  const ap = A.power ?? 0;
+  const bp = B.power ?? 0;
+  const diff = Math.abs(ap - bp);
+  const leader = ap >= bp ? A : B;
+  const leaderCls = ap >= bp ? 'win-a' : 'win-b';
+
+  el.innerHTML =
+    '<strong>' + (A.name || '未命名') + '</strong> 以 <strong class="win-a">' + aWin + '</strong> 项占优 · ' +
+    '<strong>' + (B.name || '未命名') + '</strong> 以 <strong class="win-b">' + bWin + '</strong> 项占优 · ' +
+    '综合战力领先者：<strong class="' + leaderCls + '">' + (leader.name || '未命名') + '</strong> ' +
+    '（差值 ' + diff + '）';
+}
+
+/* =========================================================
+   渲染：分析面板（雷达 + 对比条 + 结论）
+   ========================================================= */
+
+function renderAnalysis(section) {
+  const st = State[section];
+  const A = findItem(section, st.mode, st.a);
+  const B = findItem(section, st.mode, st.b);
+
+  const series = [];
+  if (A && A.stats) series.push({ values: STAT_KEYS.map(k => A.stats[k] ?? 0), color: COLOR_A });
+  if (B && B.stats) series.push({ values: STAT_KEYS.map(k => B.stats[k] ?? 0), color: COLOR_B });
+
+  const canvas = document.getElementById(section + '-radar');
+  drawRadar(canvas, STAT_KEYS, series);
+
+  renderBars(section, A, B);
+  renderVerdict(section, A, B);
+}
+
+/* =========================================================
+   渲染：综合总榜（跟随英雄模式）
+   ========================================================= */
+
+function renderRanking() {
+  const body = document.getElementById('rank-body');
+  const list = getList('hero', State.hero.mode).slice();
+
+  if (!list.length) {
+    body.innerHTML =
+      '<tr><td class="rank-empty" colspan="5">' +
+        '<b>NO DATA</b>' +
+        '当前榜单暂无数据，等待英雄条目注入后自动生成。' +
+      '</td></tr>';
+    return;
+  }
+
+  list.sort((x, y) => (y.power ?? 0) - (x.power ?? 0));
+
+  body.innerHTML = list.map((item, index) => {
+    const rank = index + 1;
+    let rankCls = 'rank-no';
+    if (rank === 1) rankCls += ' top1';
+    else if (rank === 2) rankCls += ' top2';
+    else if (rank === 3) rankCls += ' top3';
+
+    const media = item.img
+      ? '<img src="' + item.img + '" alt="' + item.name + '">'
+      : '';
+
+    return '<tr>' +
+      '<td><span class="' + rankCls + '">' + rank + '</span></td>' +
+      '<td>' +
+        '<div class="rank-name">' +
+          media +
+          '<div><b>' + (item.name || '未命名') + '</b><span>' + (item.sub || '—') + '</span></div>' +
+        '</div>' +
+      '</td>' +
+      '<td><span class="tier-chip">' + (item.tag || '—') + '</span></td>' +
+      '<td class="num">' + (item.power ?? '—') + '</td>' +
+      '<td><div class="rank-bar"><i style="width:' + (item.power ?? 0) + '%"></i></div></td>' +
+    '</tr>';
+  }).join('');
+}
+
+/* =========================================================
+   渲染：顶部统计
+   ========================================================= */
+
+function renderStats() {
+  const heroCount = DB.hero.comic.length + DB.hero.movie.length;
+  const gearCount = DB.gear.comic.length + DB.gear.movie.length;
+
+  document.getElementById('stat-heroes').textContent = heroCount;
+  document.getElementById('stat-gears').textContent = gearCount;
+  document.getElementById('stat-dims').textContent = STAT_KEYS.length;
+  document.getElementById('stat-systems').textContent =
+    (DB.hero.comic.length || DB.hero.movie.length) ? 2 : 0;
+}
+
+/* =========================================================
+   交互逻辑
+   ========================================================= */
+
+function pick(section, id) {
+  const st = State[section];
+
+  if (st.a === id) {
+    st.a = null;
+  } else if (st.b === id) {
+    st.b = null;
+  } else if (!st.a) {
+    st.a = id;
+  } else if (!st.b) {
+    st.b = id;
+  } else {
+    st.a = st.b;
+    st.b = id;
+  }
+
+  renderRoster(section);
+  renderSlots(section);
+  renderAnalysis(section);
+}
+
+function clearSlot(section, side) {
+  State[section][side] = null;
+  renderRoster(section);
+  renderSlots(section);
+  renderAnalysis(section);
+}
+
+function bindEvents() {
+  ['hero', 'gear'].forEach(section => {
+    const roster = document.getElementById(section + '-roster');
+    roster.addEventListener('click', e => {
+      const card = e.target.closest('.char-card');
+      if (!card) return;
+      pick(section, card.dataset.id);
+    });
+
+    ['a', 'b'].forEach(side => {
+      const slot = document.getElementById(section + '-slot-' + side);
+      slot.addEventListener('click', e => {
+        const btn = e.target.closest('.slot-clear');
+        if (!btn) return;
+        clearSlot(section, btn.dataset.side);
+      });
+    });
+  });
+
+  document.querySelectorAll('.mode-switch').forEach(switcher => {
+    switcher.addEventListener('click', e => {
+      const btn = e.target.closest('.mode-btn');
+      if (!btn || btn.classList.contains('active')) return;
+
+      const section = switcher.dataset.section;
+
+      switcher.querySelectorAll('.mode-btn').forEach(b => {
+        b.classList.toggle('active', b === btn);
+      });
+
+      State[section].mode = btn.dataset.mode;
+      State[section].a = null;
+      State[section].b = null;
+
+      renderRoster(section);
+      renderSlots(section);
+      renderAnalysis(section);
+
+      if (section === 'hero') renderRanking();
+    });
+  });
+
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      renderAnalysis('hero');
+      renderAnalysis('gear');
+    }, 160);
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      link.classList.add('active');
+    });
+  });
+}
+
+/* =========================================================
+   初始化
+   ========================================================= */
+
+function init() {
+  ['hero', 'gear'].forEach(section => {
+    renderRoster(section);
+    renderSlots(section);
+    renderAnalysis(section);
+  });
+  renderRanking();
+  renderStats();
+  bindEvents();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
