@@ -13,13 +13,13 @@
   --blue:#3d8bff;
   --green:#28e07a;
   --purple:#a855f7;
-  --bg:#08080a;
-  --bg-2:#101014;
-  --bg-3:#16161c;
-  --line:rgba(255,255,255,.08);
-  --line-2:rgba(255,255,255,.14);
-  --text:#eceef3;
-  --muted:#8a8a99;
+  --bg:#0e0e12;
+  --bg-2:#18181f;
+  --bg-3:#1f1f28;
+  --line:rgba(255,255,255,.10);
+  --line-2:rgba(255,255,255,.16);
+  --text:#f2f3f7;
+  --muted:#9a9aab;
   --max:1280px;
   --font-display:'Impact','Bebas Neue','Arial Black','Noto Sans SC',sans-serif;
   --font-body:'Noto Sans SC','PingFang SC','Microsoft YaHei',system-ui,-apple-system,sans-serif;
@@ -44,9 +44,9 @@ body::before{
   z-index:0;
   pointer-events:none;
   background:
-    radial-gradient(circle at 12% 6%, rgba(230,36,41,.20), transparent 42%),
+    radial-gradient(circle at 12% 6%, rgba(230,36,41,.18), transparent 42%),
     radial-gradient(circle at 88% 88%, rgba(245,197,24,.10), transparent 45%),
-    radial-gradient(circle at 50% 120%, rgba(61,139,255,.08), transparent 50%);
+    radial-gradient(circle at 50% 120%, rgba(61,139,255,.09), transparent 50%);
 }
 
 body::after{
@@ -55,7 +55,7 @@ body::after{
   inset:0;
   z-index:0;
   pointer-events:none;
-  opacity:.35;
+  opacity:.22;
   background-image:
     linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
@@ -63,7 +63,6 @@ body::after{
   mask-image:radial-gradient(circle at 50% 30%, #000 20%, transparent 78%);
 }
 
-/* ============ 水印 ============ */
 .watermark{
   position:fixed;
   bottom:24px;
@@ -77,13 +76,52 @@ body::after{
   user-select:none;
   text-shadow:0 0 20px rgba(230,36,41,.15);
   transform:rotate(-6deg);
-  transition:opacity .3s;
 }
 
 .watermark::before{content:'hjy';}
 
 @media (max-width:760px){
   .watermark{font-size:18px;bottom:14px;right:16px;letter-spacing:2px;}
+}
+
+.scroll-top{
+  position:fixed;
+  bottom:28px;
+  left:28px;
+  z-index:999;
+  width:44px;height:44px;
+  border-radius:50%;
+  border:1px solid var(--line-2);
+  background:rgba(24,24,31,.9);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  color:var(--muted);
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(16px);
+  transition:.3s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+  padding:0;
+}
+
+.scroll-top.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
+
+.scroll-top:hover{
+  border-color:var(--red);
+  color:#fff;
+  background:var(--red);
+  box-shadow:0 0 24px rgba(230,36,41,.6);
+  transform:translateY(-3px);
+}
+
+.scroll-top svg{width:18px;height:18px;display:block;}
+
+@media (max-width:760px){
+  .scroll-top{width:38px;height:38px;bottom:24px;left:16px;}
+  .scroll-top svg{width:15px;height:15px;}
 }
 
 .wrap{
@@ -93,12 +131,11 @@ body::after{
   padding:0 24px;
 }
 
-/* ============ 导航 ============ */
 .nav{
   position:sticky;
   top:0;
   z-index:100;
-  background:rgba(8,8,10,.78);
+  background:rgba(14,14,18,.82);
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
   border-bottom:1px solid var(--line);
@@ -115,77 +152,54 @@ body::after{
   gap:24px;
 }
 
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  text-decoration:none;
-  color:inherit;
-  flex-shrink:0;
-}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;flex-shrink:0;}
 
 .logo-mark{
-  width:36px;
-  height:36px;
-  display:grid;
-  place-items:center;
-  background:var(--red);
-  color:#fff;
+  width:36px;height:36px;
+  display:grid;place-items:center;
+  background:var(--red);color:#fff;
   font-family:var(--font-display);
-  font-size:22px;
-  letter-spacing:1px;
+  font-size:22px;letter-spacing:1px;
   border-radius:6px;
   box-shadow:0 0 22px rgba(230,36,41,.55);
 }
 
-.logo-text{
-  font-family:var(--font-display);
-  font-size:20px;
-  letter-spacing:2px;
-  color:#fff;
-}
-
+.logo-text{font-family:var(--font-display);font-size:20px;letter-spacing:2px;color:#fff;}
 .logo-text em{font-style:normal;color:var(--red);}
 
 .nav-links{display:flex;gap:6px;}
 
 .nav-links a{
   position:relative;
-  padding:8px 16px;
+  padding:8px 14px;
   color:var(--muted);
   text-decoration:none;
-  font-size:14px;
+  font-size:13px;
   font-weight:600;
-  letter-spacing:.5px;
+  letter-spacing:.4px;
   border-radius:8px;
   transition:.25s;
 }
 
-.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.05);}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.06);}
 .nav-links a.active{color:#fff;}
 
 .nav-links a.active::after{
   content:'';
   position:absolute;
-  left:16px;right:16px;bottom:2px;
+  left:14px;right:14px;bottom:2px;
   height:2px;
   background:var(--red);
   box-shadow:0 0 10px var(--red);
 }
 
 .nav-actions{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-size:11px;
-  letter-spacing:2px;
-  color:var(--muted);
-  font-weight:700;
+  display:flex;align-items:center;gap:8px;
+  font-size:11px;letter-spacing:2px;color:var(--muted);font-weight:700;
 }
 
 .live-dot{
-  width:7px;height:7px;
-  border-radius:50%;
+  width:7px;height:7px;border-radius:50%;
   background:#28e07a;
   box-shadow:0 0 10px #28e07a;
   animation:pulse 1.8s infinite;
@@ -196,45 +210,28 @@ body::after{
   50%{opacity:.45;transform:scale(.8);}
 }
 
-/* ============ 头部横幅 ============ */
-.banner{
-  position:relative;
-  z-index:1;
-  padding:88px 0 64px;
-  overflow:hidden;
-}
+.banner{position:relative;z-index:1;padding:88px 0 64px;overflow:hidden;}
 
 .banner::before{
   content:'MARVEL';
   position:absolute;
-  top:36px;
-  left:50%;
+  top:36px;left:50%;
   transform:translateX(-50%);
   font-family:var(--font-display);
   font-size:clamp(120px,20vw,260px);
   letter-spacing:12px;
-  color:rgba(255,255,255,.022);
+  color:rgba(255,255,255,.028);
   white-space:nowrap;
   pointer-events:none;
   user-select:none;
 }
 
-.banner-inner{
-  position:relative;
-  max-width:var(--max);
-  margin:0 auto;
-  padding:0 24px;
-}
+.banner-inner{position:relative;max-width:var(--max);margin:0 auto;padding:0 24px;}
 
 .eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  font-size:11px;
-  letter-spacing:3px;
-  font-weight:800;
-  color:var(--red-2);
-  margin-bottom:20px;
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11px;letter-spacing:3px;font-weight:800;
+  color:var(--red-2);margin-bottom:20px;
 }
 
 .eyebrow::before{content:'';width:32px;height:2px;background:var(--red);}
@@ -242,267 +239,266 @@ body::after{
 .banner h1{
   font-family:var(--font-display);
   font-size:clamp(44px,7vw,84px);
-  line-height:.98;
-  letter-spacing:2px;
-  color:#fff;
-  margin-bottom:20px;
+  line-height:.98;letter-spacing:2px;
+  color:#fff;margin-bottom:20px;
   text-transform:uppercase;
 }
 
 .banner h1 span{color:transparent;-webkit-text-stroke:2px var(--red);}
 
-.lead{
-  max-width:560px;
-  color:var(--muted);
-  font-size:15px;
-  margin-bottom:44px;
-}
+.lead{max-width:560px;color:var(--muted);font-size:15px;margin-bottom:44px;}
 
 .banner-stats{display:flex;flex-wrap:wrap;gap:14px;}
 
 .banner-stats > div{
-  flex:1;
-  min-width:130px;
-  padding:18px 20px;
-  background:linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
-  border:1px solid var(--line);
-  border-radius:12px;
-  position:relative;
-  overflow:hidden;
+  flex:1;min-width:130px;padding:18px 20px;
+  background:linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border:1px solid var(--line);border-radius:12px;
+  position:relative;overflow:hidden;
 }
 
 .banner-stats > div::before{
   content:'';
-  position:absolute;
-  left:0;top:0;bottom:0;
-  width:3px;
-  background:var(--red);
-  opacity:.7;
+  position:absolute;left:0;top:0;bottom:0;
+  width:3px;background:var(--red);opacity:.75;
 }
 
 .banner-stats b{
-  display:block;
-  font-family:var(--font-display);
-  font-size:30px;
-  letter-spacing:1px;
-  color:#fff;
-  line-height:1.1;
+  display:block;font-family:var(--font-display);
+  font-size:30px;letter-spacing:1px;color:#fff;line-height:1.1;
 }
 
 .banner-stats span{font-size:12px;letter-spacing:1.5px;color:var(--muted);}
 
-/* ============ 通用区块 ============ */
-.section{
-  position:relative;
-  z-index:1;
-  padding:64px 0;
-}
+.section{position:relative;z-index:1;padding:64px 0;}
 
 .section-head{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:24px;
-  flex-wrap:wrap;
-  margin-bottom:28px;
-  padding-bottom:18px;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;
+  margin-bottom:28px;padding-bottom:18px;
   border-bottom:1px solid var(--line);
 }
 
 .section-head h2{
   font-family:var(--font-display);
   font-size:clamp(26px,3.4vw,38px);
-  letter-spacing:2px;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  gap:14px;
+  letter-spacing:2px;color:#fff;
+  display:flex;align-items:center;gap:14px;
 }
 
 .section-head h2 .num{
-  font-size:14px;
-  font-family:var(--font-body);
-  font-weight:800;
-  letter-spacing:2px;
+  font-size:14px;font-family:var(--font-body);
+  font-weight:800;letter-spacing:2px;
   color:var(--red);
   border:1px solid rgba(230,36,41,.45);
-  border-radius:6px;
-  padding:3px 9px;
-  background:rgba(230,36,41,.09);
+  border-radius:6px;padding:3px 9px;
+  background:rgba(230,36,41,.11);
 }
 
 .section-desc{font-size:13px;color:var(--muted);max-width:460px;}
 
-/* ============ 等级体系展示 ============ */
-.tier-system{
-  display:flex;
-  flex-direction:column;
-  gap:0;
-  margin-bottom:24px;
-}
+/* 等级体系 */
+.tier-system{display:flex;flex-direction:column;gap:0;margin-bottom:24px;}
 
 .tier-row{
-  display:flex;
-  align-items:center;
-  gap:16px;
+  display:flex;align-items:center;gap:16px;
   padding:14px 20px;
   border-bottom:1px solid var(--line);
-  transition:.25s;
-  position:relative;
+  transition:.25s;position:relative;
 }
 
 .tier-row:first-child{border-radius:14px 14px 0 0;}
 .tier-row:last-child{border-bottom:0;border-radius:0 0 14px 14px;}
-.tier-row:hover{background:rgba(255,255,255,.025);}
+.tier-row:hover{background:rgba(255,255,255,.03);}
 
 .tier-badge{
-  width:70px;
-  flex-shrink:0;
+  width:70px;flex-shrink:0;
   font-family:var(--font-display);
-  font-size:20px;
-  letter-spacing:1px;
-  text-align:center;
-  padding:5px 0;
-  border-radius:7px;
-  position:relative;
+  font-size:20px;letter-spacing:1px;
+  text-align:center;padding:5px 0;
+  border-radius:7px;position:relative;
 }
 
-.tier-badge.t5{background:rgba(138,138,153,.15);color:#8a8a99;border:1px solid rgba(138,138,153,.3);}
-.tier-badge.t4{background:rgba(61,139,255,.12);color:#7fd4ff;border:1px solid rgba(61,139,255,.3);}
-.tier-badge.t3{background:rgba(40,224,122,.10);color:#28e07a;border:1px solid rgba(40,224,122,.3);}
-.tier-badge.t2{background:rgba(168,85,247,.10);color:#c084fc;border:1px solid rgba(168,85,247,.3);}
-.tier-badge.t15{background:rgba(245,197,24,.10);color:#f5c518;border:1px solid rgba(245,197,24,.35);}
-.tier-badge.t1{background:rgba(255,75,80,.10);color:#ff4b50;border:1px solid rgba(255,75,80,.35);}
-.tier-badge.t05{background:rgba(230,36,41,.16);color:#ff7a7e;border:1px solid rgba(230,36,41,.5);box-shadow:0 0 14px rgba(230,36,41,.2);}
-.tier-badge.t0{background:linear-gradient(135deg,rgba(230,36,41,.3),rgba(245,197,24,.2));color:#fff;border:1px solid rgba(245,197,24,.5);box-shadow:0 0 20px rgba(245,197,24,.25);}
+.tier-badge.t5{background:rgba(138,138,153,.18);color:#a8a8b6;border:1px solid rgba(138,138,153,.35);}
+.tier-badge.t4{background:rgba(61,139,255,.15);color:#8fdcff;border:1px solid rgba(61,139,255,.35);}
+.tier-badge.t3{background:rgba(40,224,122,.13);color:#3eeb8b;border:1px solid rgba(40,224,122,.35);}
+.tier-badge.t2{background:rgba(168,85,247,.13);color:#c894ff;border:1px solid rgba(168,85,247,.35);}
+.tier-badge.t15{background:rgba(245,197,24,.13);color:#ffd230;border:1px solid rgba(245,197,24,.4);}
+.tier-badge.t1{background:rgba(255,75,80,.13);color:#ff6a6e;border:1px solid rgba(255,75,80,.4);}
+.tier-badge.t05{background:rgba(230,36,41,.2);color:#ff8a8e;border:1px solid rgba(230,36,41,.55);box-shadow:0 0 14px rgba(230,36,41,.2);}
+.tier-badge.t0{background:linear-gradient(135deg,rgba(230,36,41,.35),rgba(245,197,24,.22));color:#fff;border:1px solid rgba(245,197,24,.55);box-shadow:0 0 20px rgba(245,197,24,.25);}
 
 .tier-info{flex:1;min-width:0;}
 
-.tier-info b{
-  display:block;
-  font-size:14px;
-  color:#fff;
-  font-weight:800;
-  letter-spacing:.5px;
-}
-
+.tier-info b{display:block;font-size:14px;color:#fff;font-weight:800;letter-spacing:.5px;}
 .tier-info span{font-size:12px;color:var(--muted);letter-spacing:.3px;}
 
 .tier-count{
   font-family:var(--font-display);
-  font-size:22px;
-  color:rgba(255,255,255,.2);
-  letter-spacing:1px;
-  flex-shrink:0;
+  font-size:22px;color:rgba(255,255,255,.28);
+  letter-spacing:1px;flex-shrink:0;
 }
 
-/* ============ 模式切换 ============ */
-.mode-switch{
-  display:inline-flex;
-  padding:5px;
-  gap:4px;
+/* 等级分布 */
+.tier-distribution{
+  margin-bottom:28px;padding:22px 24px;
+  border-radius:14px;border:1px solid var(--line);
   background:var(--bg-2);
+  position:relative;overflow:hidden;
+}
+
+.tier-distribution::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--red),var(--gold),var(--blue));
+  opacity:.6;
+}
+
+.td-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;margin-bottom:18px;
+}
+
+.td-title{
+  font-size:12px;font-weight:900;letter-spacing:2px;
+  color:var(--red-2);display:flex;align-items:center;gap:8px;
+}
+
+.td-title::before{content:'';width:3px;height:14px;border-radius:2px;background:var(--red);}
+
+.td-total{font-size:12px;color:var(--muted);letter-spacing:1px;font-weight:600;}
+.td-total b{color:#fff;font-weight:800;}
+
+.td-stack{
+  display:flex;height:44px;border-radius:10px;
+  overflow:hidden;background:rgba(255,255,255,.04);
+  border:1px solid var(--line);margin-bottom:18px;
+  position:relative;
+}
+
+.td-segment{
+  height:100%;position:relative;
+  transition:all .35s cubic-bezier(.4,0,.2,1);
+  cursor:pointer;display:flex;align-items:center;
+  justify-content:center;min-width:0;overflow:hidden;
+}
+
+.td-segment::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.14),transparent 60%);
+  pointer-events:none;
+}
+
+.td-segment:hover{filter:brightness(1.3);transform:scaleY(1.06);}
+.td-segment.dimmed{opacity:.28;filter:grayscale(.4);}
+
+.td-segment span{
+  font-family:var(--font-display);
+  font-size:15px;letter-spacing:1px;
+  color:#fff;font-weight:400;position:relative;z-index:2;
+  text-shadow:0 1px 3px rgba(0,0,0,.7);
+}
+
+.td-segment.t5{background:linear-gradient(180deg,#8a8a99,#5a5a68);}
+.td-segment.t4{background:linear-gradient(180deg,#3d8bff,#1e4f9e);}
+.td-segment.t3{background:linear-gradient(180deg,#28e07a,#159648);}
+.td-segment.t2{background:linear-gradient(180deg,#a855f7,#6b2da8);}
+.td-segment.t15{background:linear-gradient(180deg,#f5c518,#a3850e);}
+.td-segment.t1{background:linear-gradient(180deg,#ff4b50,#a01e22);}
+.td-segment.t05{background:linear-gradient(180deg,#e62429,#7d0f13);}
+.td-segment.t0{background:linear-gradient(90deg,#e62429,#f5c518);}
+
+.td-legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;}
+
+.td-legend-item{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 12px;border-radius:8px;
   border:1px solid var(--line);
-  border-radius:12px;
-  margin-bottom:20px;
+  background:rgba(255,255,255,.03);
+  cursor:pointer;transition:.25s;
+  font-size:12px;color:var(--muted);letter-spacing:.3px;
+}
+
+.td-legend-item:hover{border-color:rgba(255,255,255,.26);background:rgba(255,255,255,.055);color:var(--text);}
+
+.td-legend-item.active{border-color:var(--red);background:rgba(230,36,41,.11);color:#fff;}
+
+.td-legend-item.active .td-dot{box-shadow:0 0 10px currentColor;}
+
+.td-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;transition:.25s;}
+
+.td-legend-item b{
+  color:#fff;font-weight:800;margin-left:auto;
+  font-family:var(--font-display);font-size:14px;letter-spacing:1px;
+}
+
+/* 模式切换 */
+.mode-switch{
+  display:inline-flex;padding:5px;gap:4px;
+  background:var(--bg-2);border:1px solid var(--line);
+  border-radius:12px;margin-bottom:20px;
 }
 
 .mode-btn{
-  position:relative;
-  border:0;
-  background:transparent;
-  color:var(--muted);
-  font-family:var(--font-body);
-  font-size:13px;
-  font-weight:700;
-  letter-spacing:1px;
-  padding:10px 26px;
-  border-radius:8px;
-  cursor:pointer;
-  transition:.25s;
+  position:relative;border:0;background:transparent;
+  color:var(--muted);font-family:var(--font-body);
+  font-size:13px;font-weight:700;letter-spacing:1px;
+  padding:10px 26px;border-radius:8px;
+  cursor:pointer;transition:.25s;
 }
 
 .mode-btn:hover{color:var(--text);}
 
 .mode-btn.active{
   background:linear-gradient(135deg,var(--red),var(--red-dark));
-  color:#fff;
-  box-shadow:0 6px 22px rgba(230,36,41,.35);
+  color:#fff;box-shadow:0 6px 22px rgba(230,36,41,.35);
 }
 
-/* ============ 对战台 ============ */
+/* 对战台 */
 .arena{
-  display:grid;
-  grid-template-columns:1fr 64px 1fr;
-  gap:0;
-  align-items:stretch;
-  margin-bottom:22px;
+  display:grid;grid-template-columns:1fr 76px 1fr;
+  gap:0;align-items:stretch;margin-bottom:22px;
 }
 
 .slot{
-  position:relative;
-  min-height:172px;
-  background:linear-gradient(155deg, rgba(255,255,255,.045), rgba(255,255,255,.012));
-  border:1px solid var(--line);
-  border-radius:16px;
-  overflow:hidden;
-  transition:.3s;
+  position:relative;min-height:172px;
+  background:linear-gradient(155deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+  border:1px solid var(--line);border-radius:16px;
+  overflow:hidden;transition:.3s;
 }
 
 .slot:first-child{border-radius:16px 0 0 16px;}
 .slot:last-child{border-radius:0 16px 16px 0;}
-.slot.filled{border-color:rgba(255,255,255,.16);}
+.slot.filled{border-color:rgba(255,255,255,.18);}
 
 .slot:first-child.filled{
   box-shadow:inset 0 0 60px rgba(230,36,41,.14);
-  border-color:rgba(230,36,41,.4);
+  border-color:rgba(230,36,41,.42);
 }
 
 .slot:last-child.filled{
   box-shadow:inset 0 0 60px rgba(245,197,24,.12);
-  border-color:rgba(245,197,24,.36);
+  border-color:rgba(245,197,24,.4);
 }
 
 .slot-empty{
-  height:100%;
-  min-height:172px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  color:var(--muted);
-  font-size:13px;
-  letter-spacing:1px;
+  height:100%;min-height:172px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;
+  color:var(--muted);font-size:13px;letter-spacing:1px;
 }
 
 .slot-plus{
-  width:44px;height:44px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  border:1px dashed rgba(255,255,255,.22);
-  font-size:24px;
-  font-weight:300;
-  color:rgba(255,255,255,.35);
+  width:44px;height:44px;display:grid;place-items:center;
+  border-radius:50%;border:1px dashed rgba(255,255,255,.26);
+  font-size:24px;font-weight:300;color:rgba(255,255,255,.4);
 }
 
-.slot-filled{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  padding:18px;
-  height:100%;
-}
+.slot-filled{display:flex;align-items:center;gap:18px;padding:18px;height:100%;}
 
 .slot-media{
-  width:96px;
-  height:120px;
-  flex-shrink:0;
-  border-radius:10px;
-  overflow:hidden;
-  border:1px solid var(--line-2);
-  background:var(--bg-3);
+  width:96px;height:120px;flex-shrink:0;
+  border-radius:10px;overflow:hidden;
+  border:1px solid var(--line-2);background:var(--bg-3);
 }
 
 .slot-media img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -510,117 +506,100 @@ body::after{
 .slot-info{flex:1;min-width:0;}
 
 .slot-tag{
-  display:inline-block;
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:2px;
-  padding:2px 8px;
-  border-radius:4px;
-  margin-bottom:8px;
+  display:inline-block;font-size:10px;font-weight:900;
+  letter-spacing:2px;padding:2px 8px;
+  border-radius:4px;margin-bottom:8px;
 }
 
-.slot-tag.a{background:rgba(230,36,41,.18);color:var(--red-2);}
-.slot-tag.b{background:rgba(245,197,24,.16);color:var(--gold);}
+.slot-tag.a{background:rgba(230,36,41,.2);color:var(--red-2);}
+.slot-tag.b{background:rgba(245,197,24,.18);color:var(--gold);}
 
 .slot-info h4{
-  font-size:20px;
-  font-weight:800;
-  color:#fff;
-  letter-spacing:.5px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  font-size:20px;font-weight:800;color:#fff;
+  letter-spacing:.5px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;
 }
 
 .slot-info p{
-  font-size:12px;
-  color:var(--muted);
-  letter-spacing:.5px;
-  margin-bottom:10px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  font-size:12px;color:var(--muted);
+  letter-spacing:.5px;margin-bottom:10px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 
 .slot-power{display:flex;align-items:baseline;gap:8px;}
 
 .slot-power b{
   font-family:var(--font-display);
-  font-size:30px;
-  color:#fff;
-  line-height:1;
-  letter-spacing:1px;
+  font-size:30px;color:#fff;line-height:1;letter-spacing:1px;
 }
 
 .slot-power span{font-size:11px;color:var(--muted);letter-spacing:1px;}
 
 .slot-clear{
-  position:absolute;
-  top:10px;right:10px;
-  width:26px;height:26px;
-  border-radius:50%;
+  position:absolute;top:10px;right:10px;
+  width:26px;height:26px;border-radius:50%;
   border:1px solid var(--line-2);
-  background:rgba(0,0,0,.4);
-  color:var(--muted);
-  font-size:16px;
-  line-height:1;
-  cursor:pointer;
+  background:rgba(0,0,0,.5);color:var(--muted);
+  font-size:16px;line-height:1;cursor:pointer;
   transition:.2s;
 }
 
 .slot-clear:hover{background:var(--red);color:#fff;border-color:var(--red);}
 
+.vs-zone{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:10px;position:relative;z-index:2;
+}
+
 .vs-badge{
-  display:grid;
-  place-items:center;
   font-family:var(--font-display);
-  font-size:22px;
-  letter-spacing:2px;
-  color:var(--red);
-  position:relative;
-  z-index:2;
+  font-size:22px;letter-spacing:2px;
+  color:var(--red);text-align:center;position:relative;
 }
 
-.vs-badge::before,
-.vs-badge::after{
-  content:'';
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  width:1px;
-  height:34%;
-  background:linear-gradient(to bottom, transparent, rgba(230,36,41,.5));
+.swap-btn{
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(230,36,41,.45);
+  background:rgba(230,36,41,.1);
+  color:var(--red-2);cursor:pointer;
+  display:grid;place-items:center;
+  transition:.25s;padding:0;position:relative;
 }
 
-.vs-badge::before{top:0;}
-.vs-badge::after{bottom:0;transform:translateX(-50%) rotate(180deg);}
+.swap-btn:hover{
+  background:var(--red);color:#fff;
+  border-color:var(--red);transform:rotate(180deg);
+  box-shadow:0 0 18px rgba(230,36,41,.5);
+}
 
-/* ============ 数据分析面板 ============ */
+.swap-btn:active{transform:rotate(180deg) scale(.92);}
+.swap-btn svg{width:18px;height:18px;display:block;}
+
+.swap-btn.disabled{
+  opacity:.3;pointer-events:none;
+  border-color:var(--line);background:transparent;color:var(--muted);
+}
+
+/* 分析面板 */
 .analysis{
   display:grid;
   grid-template-columns:minmax(300px,1fr) minmax(340px,1.15fr);
-  gap:26px;
-  background:var(--bg-2);
+  gap:26px;background:var(--bg-2);
   border:1px solid var(--line);
-  border-radius:16px;
-  padding:26px;
-  margin-bottom:34px;
+  border-radius:16px;padding:26px;
+  margin-bottom:22px;
 }
 
 .verdict{
   grid-column:1/-1;
-  display:flex;
-  align-items:center;
-  gap:14px;
-  flex-wrap:wrap;
-  padding:14px 18px;
+  display:flex;align-items:center;gap:14px;
+  flex-wrap:wrap;padding:14px 18px;
   border-radius:10px;
-  background:linear-gradient(90deg, rgba(230,36,41,.12), rgba(245,197,24,.10));
+  background:linear-gradient(90deg, rgba(230,36,41,.14), rgba(245,197,24,.12));
   border:1px solid var(--line);
-  font-size:13px;
-  color:var(--muted);
-  letter-spacing:.5px;
-  min-height:52px;
+  font-size:13px;color:var(--muted);
+  letter-spacing:.5px;min-height:52px;
 }
 
 .verdict strong{color:#fff;font-weight:800;}
@@ -628,10 +607,8 @@ body::after{
 .verdict .win-b{color:var(--gold);}
 
 .radar-wrap{
-  position:relative;
-  height:340px;
-  border-radius:12px;
-  background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.03), transparent 70%);
+  position:relative;height:340px;border-radius:12px;
+  background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.04), transparent 70%);
   border:1px solid var(--line);
 }
 
@@ -640,18 +617,13 @@ body::after{
 .bars{display:flex;flex-direction:column;justify-content:center;gap:15px;}
 
 .stat-compare{
-  display:grid;
-  grid-template-columns:1fr 78px 1fr;
-  align-items:center;
-  gap:12px;
+  display:grid;grid-template-columns:1fr 78px 1fr;
+  align-items:center;gap:12px;
 }
 
 .stat-compare .label{
-  text-align:center;
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:2px;
-  color:var(--muted);
+  text-align:center;font-size:12px;
+  font-weight:800;letter-spacing:2px;color:var(--muted);
 }
 
 .side{display:flex;align-items:center;gap:10px;}
@@ -659,21 +631,16 @@ body::after{
 .side.b{flex-direction:row;}
 
 .side .bar{
-  flex:1;
-  height:9px;
-  border-radius:5px;
-  background:rgba(255,255,255,.06);
-  overflow:hidden;
-  display:flex;
+  flex:1;height:9px;border-radius:5px;
+  background:rgba(255,255,255,.08);
+  overflow:hidden;display:flex;
 }
 
 .side.a .bar{justify-content:flex-end;}
 .side.b .bar{justify-content:flex-start;}
 
 .side .bar i{
-  display:block;
-  height:100%;
-  border-radius:5px;
+  display:block;height:100%;border-radius:5px;
   transition:width .55s cubic-bezier(.4,0,.2,1);
 }
 
@@ -684,109 +651,403 @@ body::after{
 .side.b .bar i.win{box-shadow:0 0 14px rgba(245,197,24,.8);}
 
 .side .val{
-  font-size:13px;
-  font-weight:800;
-  color:#fff;
-  min-width:26px;
-  font-variant-numeric:tabular-nums;
+  font-size:13px;font-weight:800;color:#fff;
+  min-width:26px;font-variant-numeric:tabular-nums;
 }
 
 .side.a .val{text-align:right;color:var(--red-2);}
 .side.b .val{text-align:left;color:var(--gold);}
 
 .bars .empty{
+  text-align:center;color:var(--muted);
+  font-size:13px;letter-spacing:1px;padding:40px 0;
+}
+
+/* 动态战报 */
+.battle-report{
+  background:var(--bg-2);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:0;
+  margin-bottom:34px;
+  overflow:hidden;
+  position:relative;
+}
+
+.battle-report::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--red),var(--gold),var(--blue));
+  opacity:.7;
+}
+
+.br-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  padding:20px 24px 16px;
+  border-bottom:1px solid var(--line);
+}
+
+.br-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:var(--red-2);
+}
+
+.br-title::before{
+  content:'';
+  width:3px;height:16px;
+  border-radius:2px;
+  background:var(--red);
+}
+
+.br-reroll{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 14px;
+  border:1px solid rgba(230,36,41,.4);
+  background:rgba(230,36,41,.08);
+  color:var(--red-2);
+  font-family:var(--font-body);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1.2px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.br-reroll:hover{
+  background:var(--red);
+  color:#fff;
+  border-color:var(--red);
+  box-shadow:0 0 18px rgba(230,36,41,.45);
+  transform:rotate(-30deg);
+}
+
+.br-reroll:active{transform:rotate(-30deg) scale(.95);}
+
+.br-reroll svg{width:13px;height:13px;display:block;}
+
+.br-body{
+  padding:22px 26px 26px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.br-segment{
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+  padding:14px 16px;
+  border-radius:10px;
+  background:rgba(255,255,255,.025);
+  border:1px solid var(--line);
+  transition:.3s;
+  animation:brFade .5s cubic-bezier(.4,0,.2,1) both;
+}
+
+@keyframes brFade{
+  from{opacity:0;transform:translateY(8px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.br-segment:nth-child(1){animation-delay:0ms;}
+.br-segment:nth-child(2){animation-delay:90ms;}
+.br-segment:nth-child(3){animation-delay:180ms;}
+.br-segment:nth-child(4){animation-delay:270ms;}
+
+.br-seg-label{
+  flex-shrink:0;
+  width:58px;
+  font-family:var(--font-display);
+  font-size:14px;
+  letter-spacing:1px;
+  text-align:center;
+  padding:4px 0;
+  border-radius:6px;
+  background:rgba(255,255,255,.05);
+  color:var(--muted);
+  border:1px solid var(--line);
+}
+
+.br-seg-label.intro{color:#8fdcff;border-color:rgba(61,139,255,.4);background:rgba(61,139,255,.1);}
+.br-seg-label.clash{color:#ffd230;border-color:rgba(245,197,24,.4);background:rgba(245,197,24,.1);}
+.br-seg-label.turn{color:#ff8a8e;border-color:rgba(230,36,41,.45);background:rgba(230,36,41,.12);}
+.br-seg-label.finish{color:#fff;border-color:rgba(255,255,255,.3);background:linear-gradient(135deg,rgba(230,36,41,.3),rgba(245,197,24,.22));}
+
+.br-seg-text{
+  flex:1;
+  font-size:13.5px;
+  line-height:1.85;
+  color:var(--text);
+  letter-spacing:.3px;
+}
+
+.br-seg-text em{
+  font-style:normal;
+  color:var(--red-2);
+  font-weight:800;
+}
+
+.br-seg-text b{
+  color:var(--gold);
+  font-weight:800;
+}
+
+.br-seg-text .skill{
+  display:inline-block;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.5px;
+  padding:1px 7px;
+  border-radius:4px;
+  margin:0 3px;
+  background:rgba(230,36,41,.16);
+  color:var(--red-2);
+  border:1px solid rgba(230,36,41,.32);
+  vertical-align:1px;
+}
+
+.br-seg-text .skill.b{
+  background:rgba(245,197,24,.16);
+  color:var(--gold);
+  border-color:rgba(245,197,24,.32);
+}
+
+.br-empty{
+  padding:44px 24px;
   text-align:center;
   color:var(--muted);
   font-size:13px;
   letter-spacing:1px;
-  padding:40px 0;
 }
 
-/* ============ 战力对比卡池搜索框 ============ */
-.roster-tools{
+.br-empty b{
+  display:block;
+  font-family:var(--font-display);
+  font-size:20px;
+  letter-spacing:3px;
+  color:rgba(255,255,255,.22);
+  margin-bottom:8px;
+}
+
+/* ============ 新增：更新日志 ============ */
+.changelog-list{
   display:flex;
-  flex-wrap:wrap;
+  flex-direction:column;
+  gap:0;
+  position:relative;
+}
+
+.cl-item{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:28px;
+  padding:22px 0;
+  border-bottom:1px solid var(--line);
+  position:relative;
+  transition:.25s;
+}
+
+.cl-item:first-child{padding-top:8px;}
+.cl-item:last-child{border-bottom:0;}
+
+.cl-item:hover{
+  background:rgba(255,255,255,.018);
+}
+
+.cl-item::before{
+  content:'';
+  position:absolute;
+  left:180px;
+  top:22px;
+  bottom:22px;
+  width:1px;
+  background:linear-gradient(180deg,transparent,var(--line),transparent);
+}
+
+.cl-left{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding-right:12px;
+}
+
+.cl-version{
+  display:inline-flex;
   align-items:center;
-  gap:12px;
-  margin-bottom:16px;
+  gap:8px;
+  font-family:var(--font-display);
+  font-size:20px;
+  letter-spacing:1.5px;
+  color:#fff;
+  line-height:1.1;
+}
+
+.cl-version .cl-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--red);
+  box-shadow:0 0 10px rgba(230,36,41,.7);
+  flex-shrink:0;
+}
+
+.cl-item.latest .cl-version .cl-dot{
+  background:var(--gold);
+  box-shadow:0 0 12px rgba(245,197,24,.7);
+  animation:pulse 1.6s infinite;
+}
+
+.cl-date{
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:1.2px;
+  font-weight:700;
+  padding-left:17px;
+}
+
+.cl-tag{
+  display:inline-block;
+  align-self:flex-start;
+  margin-left:17px;
+  margin-top:2px;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  padding:2px 8px;
+  border-radius:4px;
+  background:rgba(255,255,255,.06);
+  color:var(--muted);
+  border:1px solid var(--line);
+}
+
+.cl-item.latest .cl-tag{
+  background:linear-gradient(135deg,rgba(230,36,41,.25),rgba(245,197,24,.18));
+  color:#fff;
+  border-color:rgba(245,197,24,.4);
+}
+
+.cl-right{
+  padding-left:16px;
+}
+
+.cl-title{
+  font-size:15px;
+  font-weight:800;
+  color:#fff;
+  letter-spacing:.5px;
+  margin-bottom:10px;
+}
+
+.cl-item.latest .cl-title{
+  background:linear-gradient(90deg,#fff,var(--gold));
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.cl-items{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  list-style:none;
+}
+
+.cl-items li{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.7;
+  padding-left:18px;
+  position:relative;
+  letter-spacing:.2px;
+}
+
+.cl-items li::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:10px;
+  width:6px;
+  height:6px;
+  border-radius:2px;
+  background:var(--red);
+  opacity:.6;
+}
+
+.cl-item.latest .cl-items li::before{
+  background:var(--gold);
+  opacity:.85;
+}
+
+/* 卡池搜索 */
+.roster-tools{
+  display:flex;flex-wrap:wrap;
+  align-items:center;gap:12px;margin-bottom:16px;
 }
 
 .search-box-wrap{
-  position:relative;
-  flex:1;
-  max-width:400px;
-  min-width:200px;
+  position:relative;flex:1;
+  max-width:400px;min-width:200px;
 }
 
 .hero-search{
-  width:100%;
-  padding:11px 66px 11px 42px;
-  background:var(--bg-2);
-  border:1px solid var(--line);
-  border-radius:10px;
-  color:var(--text);
-  font-family:var(--font-body);
-  font-size:13px;
-  outline:none;
-  transition:.25s;
-  letter-spacing:.3px;
+  width:100%;padding:11px 66px 11px 42px;
+  background:var(--bg-2);border:1px solid var(--line);
+  border-radius:10px;color:var(--text);
+  font-family:var(--font-body);font-size:13px;
+  outline:none;transition:.25s;letter-spacing:.3px;
 }
 
 .hero-search:focus{
-  border-color:rgba(230,36,41,.5);
-  box-shadow:0 0 0 3px rgba(230,36,41,.1);
-  background:rgba(255,255,255,.02);
+  border-color:rgba(230,36,41,.55);
+  box-shadow:0 0 0 3px rgba(230,36,41,.12);
+  background:rgba(255,255,255,.03);
 }
 
 .hero-search::placeholder{color:var(--muted);}
 
 .search-icon{
-  position:absolute;
-  left:15px;
-  top:50%;
-  transform:translateY(-50%);
-  color:var(--muted);
-  pointer-events:none;
-  display:grid;
-  place-items:center;
-  transition:.25s;
+  position:absolute;left:15px;top:50%;
+  transform:translateY(-50%);color:var(--muted);
+  pointer-events:none;display:grid;place-items:center;transition:.25s;
 }
 
 .hero-search:focus ~ .search-icon{color:var(--red-2);}
 
 .search-clear{
-  position:absolute;
-  right:11px;
-  top:50%;
+  position:absolute;right:11px;top:50%;
   transform:translateY(-50%);
-  width:22px;height:22px;
-  border-radius:50%;
-  border:0;
-  background:rgba(255,255,255,.1);
-  color:var(--muted);
-  font-size:14px;
-  cursor:pointer;
-  display:none;
-  place-items:center;
-  line-height:1;
-  padding:0;
-  transition:.2s;
+  width:22px;height:22px;border-radius:50%;
+  border:0;background:rgba(255,255,255,.12);
+  color:var(--muted);font-size:14px;
+  cursor:pointer;display:none;place-items:center;
+  line-height:1;padding:0;transition:.2s;
 }
 
 .search-clear:hover{background:var(--red);color:#fff;}
 .search-clear.visible{display:grid;}
 
 .result-count{
-  font-size:12px;
-  color:var(--muted);
-  letter-spacing:1px;
-  font-weight:600;
-  white-space:nowrap;
+  font-size:12px;color:var(--muted);
+  letter-spacing:1px;font-weight:600;white-space:nowrap;
 }
 
 .result-count b{color:var(--red-2);font-weight:800;}
 
-/* ============ 角色卡池 ============ */
+/* 角色卡池 */
 .roster{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(168px,1fr));
@@ -794,126 +1055,91 @@ body::after{
 }
 
 .roster-empty{
-  grid-column:1/-1;
-  padding:56px 24px;
-  text-align:center;
-  border:1px dashed rgba(255,255,255,.12);
-  border-radius:14px;
-  color:var(--muted);
-  font-size:13px;
-  letter-spacing:1px;
-  background:rgba(255,255,255,.012);
+  grid-column:1/-1;padding:56px 24px;
+  text-align:center;border:1px dashed rgba(255,255,255,.14);
+  border-radius:14px;color:var(--muted);
+  font-size:13px;letter-spacing:1px;
+  background:rgba(255,255,255,.018);
 }
 
 .roster-empty b{
-  display:block;
-  font-family:var(--font-display);
-  font-size:22px;
-  letter-spacing:3px;
-  color:rgba(255,255,255,.18);
-  margin-bottom:8px;
+  display:block;font-family:var(--font-display);
+  font-size:22px;letter-spacing:3px;
+  color:rgba(255,255,255,.22);margin-bottom:8px;
 }
 
 .char-card{
-  position:relative;
-  background:var(--bg-2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  overflow:hidden;
-  cursor:pointer;
+  position:relative;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:14px;
+  overflow:hidden;cursor:pointer;
   transition:transform .28s cubic-bezier(.4,0,.2,1), border-color .28s, box-shadow .28s;
 }
 
 .char-card:hover{
   transform:translateY(-6px);
-  border-color:rgba(230,36,41,.5);
-  box-shadow:0 16px 36px rgba(0,0,0,.55), 0 0 0 1px rgba(230,36,41,.25);
+  border-color:rgba(230,36,41,.55);
+  box-shadow:0 16px 36px rgba(0,0,0,.55), 0 0 0 1px rgba(230,36,41,.28);
 }
 
 .card-media{
-  position:relative;
-  aspect-ratio:4/5;
-  background:var(--bg-3);
-  overflow:hidden;
+  position:relative;aspect-ratio:4/5;
+  background:var(--bg-3);overflow:hidden;
 }
 
 .card-media img{
-  width:100%;height:100%;
-  object-fit:cover;
-  display:block;
-  transition:transform .5s;
-  filter:saturate(.85);
+  width:100%;height:100%;object-fit:cover;
+  display:block;transition:transform .5s;
+  filter:saturate(.88);
 }
 
-.char-card:hover .card-media img{transform:scale(1.07);filter:saturate(1.1);}
+.char-card:hover .card-media img{transform:scale(1.07);filter:saturate(1.12);}
 
 .card-media::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to top, rgba(16,16,20,.96) 4%, rgba(16,16,20,.15) 48%, transparent 70%);
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(24,24,31,.96) 4%, rgba(24,24,31,.15) 48%, transparent 70%);
 }
 
 .tier{
-  position:absolute;
-  top:9px;left:9px;
-  z-index:2;
-  font-family:var(--font-display);
-  font-size:13px;
-  letter-spacing:1px;
-  padding:2px 9px;
-  border-radius:5px;
-  background:rgba(0,0,0,.65);
-  border:1px solid rgba(255,255,255,.16);
-  color:#fff;
+  position:absolute;top:9px;left:9px;z-index:2;
+  font-family:var(--font-display);font-size:13px;
+  letter-spacing:1px;padding:2px 9px;
+  border-radius:5px;background:rgba(0,0,0,.68);
+  border:1px solid rgba(255,255,255,.18);color:#fff;
 }
 
-.tier.t5{color:#8a8a99;border-color:rgba(138,138,153,.4);background:rgba(138,138,153,.12);}
-.tier.t4{color:#7fd4ff;border-color:rgba(61,139,255,.4);background:rgba(61,139,255,.12);}
-.tier.t3{color:#28e07a;border-color:rgba(40,224,122,.4);background:rgba(40,224,122,.10);}
-.tier.t2{color:#c084fc;border-color:rgba(168,85,247,.4);background:rgba(168,85,247,.10);}
-.tier.t15{color:#f5c518;border-color:rgba(245,197,24,.45);background:rgba(245,197,24,.10);}
-.tier.t1{color:#ff4b50;border-color:rgba(255,75,80,.45);background:rgba(255,75,80,.10);}
-.tier.t05{color:#ff7a7e;border-color:rgba(230,36,41,.55);background:rgba(230,36,41,.18);}
-.tier.t0{color:#fff;border-color:rgba(245,197,24,.55);background:linear-gradient(135deg,rgba(230,36,41,.3),rgba(245,197,24,.2));}
+.tier.t5{color:#a8a8b6;border-color:rgba(138,138,153,.45);background:rgba(138,138,153,.15);}
+.tier.t4{color:#8fdcff;border-color:rgba(61,139,255,.45);background:rgba(61,139,255,.15);}
+.tier.t3{color:#3eeb8b;border-color:rgba(40,224,122,.45);background:rgba(40,224,122,.13);}
+.tier.t2{color:#c894ff;border-color:rgba(168,85,247,.45);background:rgba(168,85,247,.13);}
+.tier.t15{color:#ffd230;border-color:rgba(245,197,24,.5);background:rgba(245,197,24,.13);}
+.tier.t1{color:#ff6a6e;border-color:rgba(255,75,80,.5);background:rgba(255,75,80,.13);}
+.tier.t05{color:#ff8a8e;border-color:rgba(230,36,41,.6);background:rgba(230,36,41,.2);}
+.tier.t0{color:#fff;border-color:rgba(245,197,24,.6);background:linear-gradient(135deg,rgba(230,36,41,.35),rgba(245,197,24,.22));}
 
 .card-body{padding:12px 13px 14px;}
 
 .card-body h4{
-  font-size:15px;
-  font-weight:800;
-  color:#fff;
-  letter-spacing:.5px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  font-size:15px;font-weight:800;color:#fff;
+  letter-spacing:.5px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;
 }
 
 .card-body p{
-  font-size:11px;
-  color:var(--muted);
-  letter-spacing:.6px;
-  margin-bottom:9px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  font-size:11px;color:var(--muted);
+  letter-spacing:.6px;margin-bottom:9px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 
 .power-row{
-  display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  padding-top:9px;
-  border-top:1px solid var(--line);
+  display:flex;align-items:baseline;justify-content:space-between;
+  padding-top:9px;border-top:1px solid var(--line);
 }
 
 .power-row span{font-size:10px;letter-spacing:1.5px;color:var(--muted);}
 
 .power-row b{
   font-family:var(--font-display);
-  font-size:20px;
-  letter-spacing:1px;
-  color:var(--red-2);
+  font-size:20px;letter-spacing:1px;color:var(--red-2);
 }
 
 .char-card.picked-a{
@@ -927,54 +1153,37 @@ body::after{
 }
 
 .char-card.picked-a .card-media img,
-.char-card.picked-b .card-media img{filter:saturate(1.15) brightness(1.05);}
+.char-card.picked-b .card-media img{filter:saturate(1.18) brightness(1.06);}
 
 .char-card.picked-a::after,
 .char-card.picked-b::after{
-  position:absolute;
-  top:9px;right:9px;
-  z-index:3;
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:1px;
-  padding:3px 8px;
-  border-radius:5px;
-  color:#fff;
+  position:absolute;top:9px;right:9px;z-index:3;
+  font-size:10px;font-weight:900;letter-spacing:1px;
+  padding:3px 8px;border-radius:5px;color:#fff;
 }
 
 .char-card.picked-a::after{content:'A 方';background:var(--red);}
 .char-card.picked-b::after{content:'B 方';background:var(--gold);color:#241c00;}
 
-/* ============ 英雄库 / 战力矩阵 ============ */
+/* 英雄库 */
 .library-controls{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:12px;
-  margin-bottom:20px;
+  display:flex;flex-wrap:wrap;
+  align-items:center;gap:12px;margin-bottom:20px;
 }
 
 .filter-chip{
-  padding:7px 16px;
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:1px;
-  border-radius:20px;
-  border:1px solid var(--line);
-  background:transparent;
-  color:var(--muted);
-  cursor:pointer;
-  transition:.25s;
+  padding:7px 16px;font-size:12px;font-weight:700;
+  letter-spacing:1px;border-radius:20px;
+  border:1px solid var(--line);background:transparent;
+  color:var(--muted);cursor:pointer;transition:.25s;
   font-family:var(--font-body);
 }
 
-.filter-chip:hover{border-color:rgba(255,255,255,.25);color:var(--text);}
+.filter-chip:hover{border-color:rgba(255,255,255,.3);color:var(--text);}
 
 .filter-chip.active{
-  background:var(--red);
-  border-color:var(--red);
-  color:#fff;
-  box-shadow:0 0 16px rgba(230,36,41,.4);
+  background:var(--red);border-color:var(--red);
+  color:#fff;box-shadow:0 0 16px rgba(230,36,41,.4);
 }
 
 .filter-chip[data-tier="t5"].active{background:#8a8a99;border-color:#8a8a99;box-shadow:0 0 16px rgba(138,138,153,.4);}
@@ -986,66 +1195,46 @@ body::after{
 .filter-chip[data-tier="t05"].active{background:linear-gradient(135deg,var(--red),var(--red-dark));border-color:var(--red);}
 .filter-chip[data-tier="t0"].active{background:linear-gradient(135deg,var(--red),var(--gold));border-color:var(--gold);color:#fff;box-shadow:0 0 20px rgba(245,197,24,.5);}
 
-/* 搜索行 */
 .search-row{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  margin-bottom:24px;
-  flex-wrap:wrap;
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:24px;flex-wrap:wrap;
 }
 
-/* 战力矩阵 */
 .matrix-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
-  gap:12px;
-  margin-bottom:28px;
+  gap:12px;margin-bottom:28px;
 }
 
 .matrix-tile{
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  padding:22px 12px;
-  border-radius:14px;
-  border:1px solid var(--line);
-  background:var(--bg-2);
+  position:relative;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;
+  padding:22px 12px;border-radius:14px;
+  border:1px solid var(--line);background:var(--bg-2);
   cursor:pointer;
   transition:transform .3s cubic-bezier(.4,0,.2,1), border-color .3s, box-shadow .3s;
-  overflow:hidden;
-  min-height:130px;
+  overflow:hidden;min-height:130px;
 }
 
 .matrix-tile::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  opacity:0;
+  content:'';position:absolute;inset:0;opacity:0;
   transition:opacity .3s;
-  background:radial-gradient(circle at 50% 0%, rgba(230,36,41,.15), transparent 70%);
+  background:radial-gradient(circle at 50% 0%, rgba(230,36,41,.18), transparent 70%);
 }
 
 .matrix-tile:hover{
   transform:translateY(-5px) scale(1.02);
-  border-color:rgba(230,36,41,.55);
-  box-shadow:0 14px 34px rgba(0,0,0,.5), 0 0 0 1px rgba(230,36,41,.3);
+  border-color:rgba(230,36,41,.6);
+  box-shadow:0 14px 34px rgba(0,0,0,.5), 0 0 0 1px rgba(230,36,41,.32);
   z-index:5;
 }
 
 .matrix-tile:hover::before{opacity:1;}
 
 .matrix-tile .tile-avatar{
-  width:52px;height:52px;
-  border-radius:50%;
-  overflow:hidden;
-  border:2px solid rgba(255,255,255,.15);
-  background:var(--bg-3);
-  flex-shrink:0;
-  transition:.3s;
+  width:52px;height:52px;border-radius:50%;
+  overflow:hidden;border:2px solid rgba(255,255,255,.18);
+  background:var(--bg-3);flex-shrink:0;transition:.3s;
 }
 
 .matrix-tile:hover .tile-avatar{
@@ -1056,192 +1245,246 @@ body::after{
 .matrix-tile .tile-avatar img{width:100%;height:100%;object-fit:cover;display:block;}
 
 .matrix-tile .tile-name{
-  font-size:13px;
-  font-weight:800;
-  color:#fff;
-  letter-spacing:.5px;
-  text-align:center;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  max-width:100%;
+  font-size:13px;font-weight:800;color:#fff;
+  letter-spacing:.5px;text-align:center;
+  white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;max-width:100%;
 }
 
 .matrix-tile .tile-tier-tag{
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:1.5px;
-  padding:2px 10px;
-  border-radius:4px;
+  font-size:10px;font-weight:900;
+  letter-spacing:1.5px;padding:2px 10px;border-radius:4px;
 }
 
 .matrix-tile .tile-power{
   font-family:var(--font-display);
-  font-size:18px;
-  color:var(--red-2);
-  letter-spacing:1px;
+  font-size:18px;color:var(--red-2);letter-spacing:1px;
 }
 
 .matrix-tile .tile-tooltip{
-  position:absolute;
-  bottom:calc(100% + 10px);
-  left:50%;
-  transform:translateX(-50%) translateY(6px);
-  background:rgba(8,8,10,.96);
-  border:1px solid var(--line-2);
-  border-radius:10px;
-  padding:10px 14px;
-  font-size:12px;
-  color:var(--text);
-  white-space:nowrap;
-  opacity:0;
-  pointer-events:none;
-  transition:.25s;
-  z-index:20;
-  box-shadow:0 10px 30px rgba(0,0,0,.6);
+  position:absolute;bottom:calc(100% + 10px);
+  left:50%;transform:translateX(-50%) translateY(6px);
+  background:rgba(24,24,31,.97);
+  border:1px solid var(--line-2);border-radius:10px;
+  padding:10px 14px;font-size:12px;color:var(--text);
+  white-space:nowrap;opacity:0;pointer-events:none;
+  transition:.25s;z-index:20;
+  box-shadow:0 10px 30px rgba(0,0,0,.65);
   backdrop-filter:blur(10px);
 }
 
 .matrix-tile .tile-tooltip::after{
-  content:'';
-  position:absolute;
-  top:100%;left:50%;
+  content:'';position:absolute;top:100%;left:50%;
   transform:translateX(-50%);
   border:6px solid transparent;
-  border-top-color:rgba(8,8,10,.96);
+  border-top-color:rgba(24,24,31,.97);
 }
 
 .matrix-tile:hover .tile-tooltip{opacity:1;transform:translateX(-50%) translateY(0);}
 .matrix-tile .tile-tooltip b{color:var(--red-2);font-weight:800;}
 .matrix-tile .tile-tooltip span{color:var(--muted);}
 
-/* 英雄库表格 */
 .library-table-wrap{
-  overflow-x:auto;
-  border-radius:14px;
-  border:1px solid var(--line);
-  background:var(--bg-2);
+  overflow-x:auto;border-radius:14px;
+  border:1px solid var(--line);background:var(--bg-2);
 }
 
 .library-table{width:100%;border-collapse:collapse;min-width:720px;}
 
 .library-table thead th{
-  text-align:left;
-  font-size:11px;
-  letter-spacing:2px;
-  font-weight:800;
-  color:var(--muted);
-  padding:14px 18px;
-  background:rgba(255,255,255,.03);
+  text-align:left;font-size:11px;letter-spacing:2px;
+  font-weight:800;color:var(--muted);
+  padding:14px 18px;background:rgba(255,255,255,.04);
   border-bottom:1px solid var(--line);
-  white-space:nowrap;
-  position:sticky;
-  top:0;
-  z-index:2;
+  white-space:nowrap;position:sticky;top:0;z-index:2;
 }
 
 .library-table tbody td{
   padding:12px 18px;
-  border-bottom:1px solid rgba(255,255,255,.045);
-  font-size:13px;
-  vertical-align:middle;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  font-size:13px;vertical-align:middle;
 }
 
 .library-table tbody tr:last-child td{border-bottom:0;}
 .library-table tbody tr{transition:background .2s;cursor:pointer;}
-.library-table tbody tr:hover{background:rgba(230,36,41,.07);}
+.library-table tbody tr:hover{background:rgba(230,36,41,.08);}
 
 .lib-name{display:flex;align-items:center;gap:12px;}
 
 .lib-name img{
-  width:36px;height:44px;
-  object-fit:cover;
-  border-radius:7px;
-  border:1px solid var(--line-2);
-  flex-shrink:0;
+  width:36px;height:44px;object-fit:cover;
+  border-radius:7px;border:1px solid var(--line-2);flex-shrink:0;
 }
 
 .lib-name b{display:block;font-size:13px;color:#fff;font-weight:800;}
 .lib-name span{font-size:11px;color:var(--muted);}
 
 .lib-tier{
-  display:inline-block;
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:1px;
-  padding:3px 10px;
-  border-radius:5px;
+  display:inline-block;font-size:11px;font-weight:900;
+  letter-spacing:1px;padding:3px 10px;border-radius:5px;
 }
 
-.lib-tier.t5{background:rgba(138,138,153,.15);color:#8a8a99;border:1px solid rgba(138,138,153,.3);}
-.lib-tier.t4{background:rgba(61,139,255,.12);color:#7fd4ff;border:1px solid rgba(61,139,255,.3);}
-.lib-tier.t3{background:rgba(40,224,122,.10);color:#28e07a;border:1px solid rgba(40,224,122,.3);}
-.lib-tier.t2{background:rgba(168,85,247,.10);color:#c084fc;border:1px solid rgba(168,85,247,.3);}
-.lib-tier.t15{background:rgba(245,197,24,.10);color:#f5c518;border:1px solid rgba(245,197,24,.35);}
-.lib-tier.t1{background:rgba(255,75,80,.10);color:#ff4b50;border:1px solid rgba(255,75,80,.35);}
-.lib-tier.t05{background:rgba(230,36,41,.18);color:#ff7a7e;border:1px solid rgba(230,36,41,.5);}
-.lib-tier.t0{background:linear-gradient(135deg,rgba(230,36,41,.3),rgba(245,197,24,.2));color:#fff;border:1px solid rgba(245,197,24,.5);}
+.lib-tier.t5{background:rgba(138,138,153,.18);color:#a8a8b6;border:1px solid rgba(138,138,153,.35);}
+.lib-tier.t4{background:rgba(61,139,255,.15);color:#8fdcff;border:1px solid rgba(61,139,255,.35);}
+.lib-tier.t3{background:rgba(40,224,122,.13);color:#3eeb8b;border:1px solid rgba(40,224,122,.35);}
+.lib-tier.t2{background:rgba(168,85,247,.13);color:#c894ff;border:1px solid rgba(168,85,247,.35);}
+.lib-tier.t15{background:rgba(245,197,24,.13);color:#ffd230;border:1px solid rgba(245,197,24,.4);}
+.lib-tier.t1{background:rgba(255,75,80,.13);color:#ff6a6e;border:1px solid rgba(255,75,80,.4);}
+.lib-tier.t05{background:rgba(230,36,41,.2);color:#ff8a8e;border:1px solid rgba(230,36,41,.55);}
+.lib-tier.t0{background:linear-gradient(135deg,rgba(230,36,41,.35),rgba(245,197,24,.22));color:#fff;border:1px solid rgba(245,197,24,.55);}
 
 .lib-power{
   font-family:var(--font-display);
-  font-size:18px;
-  color:var(--red-2);
-  letter-spacing:1px;
+  font-size:18px;color:var(--red-2);letter-spacing:1px;
 }
 
 .lib-bar{
-  height:7px;
-  border-radius:4px;
-  background:rgba(255,255,255,.07);
-  overflow:hidden;
-  min-width:80px;
+  height:7px;border-radius:4px;
+  background:rgba(255,255,255,.09);
+  overflow:hidden;min-width:80px;
 }
 
 .lib-bar i{
-  display:block;
-  height:100%;
-  border-radius:4px;
+  display:block;height:100%;border-radius:4px;
   background:linear-gradient(90deg,var(--red-dark),var(--red),#ff7a7e);
   transition:width .5s;
 }
 
-/* ============ 关系网 ============ */
-.relation-canvas-wrap{
-  position:relative;
-  border-radius:16px;
-  border:1px solid var(--line);
+/* 综合总榜 */
+.rank-table{
+  width:100%;border-collapse:collapse;
   background:var(--bg-2);
-  overflow:hidden;
-  min-height:400px;
+  border:1px solid var(--line);
+  border-radius:14px;overflow:hidden;
+}
+
+.rank-table thead th{
+  text-align:left;font-size:11px;
+  letter-spacing:2px;font-weight:800;
+  color:var(--muted);padding:14px 18px;
+  background:rgba(255,255,255,.04);
+  border-bottom:1px solid var(--line);
+  white-space:nowrap;
+}
+
+.rank-table tbody td{
+  padding:12px 18px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  font-size:14px;vertical-align:middle;
+}
+
+.rank-table tbody tr:last-child td{border-bottom:0;}
+.rank-table tbody tr{transition:background .2s;}
+.rank-table tbody tr:hover{background:rgba(230,36,41,.07);}
+
+.rank-empty{
+  padding:56px 24px !important;
+  text-align:center;color:var(--muted);
+  font-size:13px;letter-spacing:1px;
+}
+
+.rank-empty b{
+  display:block;font-family:var(--font-display);
+  font-size:22px;letter-spacing:3px;
+  color:rgba(255,255,255,.22);margin-bottom:8px;
+}
+
+.rank-no{
+  display:grid;place-items:center;
+  width:26px;height:26px;border-radius:7px;
+  font-family:var(--font-display);font-size:14px;
+  background:rgba(255,255,255,.07);color:var(--muted);
+}
+
+.rank-no.top1{background:linear-gradient(135deg,#f5c518,#b8860b);color:#241c00;box-shadow:0 0 18px rgba(245,197,24,.4);}
+.rank-no.top2{background:linear-gradient(135deg,#c9ced6,#7d858f);color:#1a1a1a;}
+.rank-no.top3{background:linear-gradient(135deg,#cd7f32,#8a5522);color:#fff;}
+
+.rank-name{display:flex;align-items:center;gap:10px;}
+
+.rank-name img{
+  width:26px;height:32px;object-fit:cover;
+  border-radius:5px;border:1px solid var(--line-2);flex-shrink:0;
+}
+
+.rank-name b{
+  display:block;font-size:13px;color:#fff;
+  font-weight:800;letter-spacing:.4px;line-height:1.25;
+}
+
+.rank-name span{font-size:10px;color:var(--muted);letter-spacing:.4px;line-height:1.3;}
+
+.tier-chip{
+  display:inline-block;font-size:11px;
+  letter-spacing:1px;font-weight:700;
+  padding:3px 10px;border-radius:20px;
+  background:rgba(255,255,255,.08);
+  color:var(--muted);border:1px solid var(--line);
+}
+
+.rank-table .num{
+  font-family:var(--font-display);
+  font-size:19px;color:var(--red-2);letter-spacing:1px;
+}
+
+.rank-bar{
+  height:7px;border-radius:4px;
+  background:rgba(255,255,255,.08);
+  overflow:hidden;min-width:120px;
+}
+
+.rank-bar i{
+  display:block;height:100%;border-radius:4px;
+  background:linear-gradient(90deg,var(--red-dark),var(--red),#ff7a7e);
+  transition:width .6s cubic-bezier(.4,0,.2,1);
+}
+
+.random-btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:10px 20px;border:1px solid rgba(230,36,41,.5);
+  background:linear-gradient(135deg, rgba(230,36,41,.16), rgba(245,197,24,.1));
+  color:#fff;font-family:var(--font-body);
+  font-size:12px;font-weight:800;
+  letter-spacing:1.5px;border-radius:10px;
+  cursor:pointer;transition:.25s;white-space:nowrap;
+}
+
+.random-btn:hover{
+  background:linear-gradient(135deg, rgba(230,36,41,.28), rgba(245,197,24,.18));
+  border-color:var(--red);
+  box-shadow:0 0 22px rgba(230,36,41,.35);
+  transform:translateY(-2px);
+}
+
+.random-btn:active{transform:translateY(0) scale(.97);}
+
+.random-btn svg{width:15px;height:15px;display:block;}
+
+.random-btn.disabled{opacity:.35;pointer-events:none;}
+
+/* 关系网 */
+.relation-canvas-wrap{
+  position:relative;border-radius:16px;
+  border:1px solid var(--line);
+  background:var(--bg-2);overflow:hidden;min-height:400px;
 }
 
 .relation-canvas-wrap canvas{
-  width:100%;
-  height:440px;
-  display:block;
-  cursor:default;
+  width:100%;height:440px;display:block;cursor:default;
 }
 
 .relation-legend{
-  display:flex;
-  flex-wrap:wrap;
-  gap:18px;
-  padding:16px 22px;
-  border-top:1px solid var(--line);
-  font-size:11px;
-  color:var(--muted);
-  letter-spacing:.5px;
-  background:rgba(0,0,0,.25);
+  display:flex;flex-wrap:wrap;gap:18px;
+  padding:16px 22px;border-top:1px solid var(--line);
+  font-size:11px;color:var(--muted);
+  letter-spacing:.5px;background:rgba(0,0,0,.28);
 }
 
 .relation-legend span{display:flex;align-items:center;gap:8px;}
 
 .relation-legend i{
-  width:26px;
-  height:3px;
-  border-radius:2px;
-  display:inline-block;
-  flex-shrink:0;
+  width:26px;height:3px;border-radius:2px;
+  display:inline-block;flex-shrink:0;
 }
 
 .relation-legend i.r-ally{background:#28e07a;}
@@ -1255,30 +1498,21 @@ body::after{
   background:repeating-linear-gradient(90deg,#f5c518 0,#f5c518 8px,transparent 8px,transparent 10px,#f5c518 10px,#f5c518 12px,transparent 12px,transparent 16px);
 }
 
-/* ============ 角色详情弹窗 ============ */
+/* 弹窗 */
 .modal-overlay{
-  position:fixed;
-  inset:0;
-  z-index:200;
-  background:rgba(0,0,0,.75);
+  position:fixed;inset:0;z-index:200;
+  background:rgba(0,0,0,.72);
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-  opacity:0;
-  transition:opacity .3s;
+  display:none;align-items:center;justify-content:center;
+  padding:24px;opacity:0;transition:opacity .3s;
 }
 
 .modal-overlay.open{display:flex;opacity:1;}
 
 .modal{
-  width:100%;
-  max-width:720px;
-  max-height:90vh;
-  overflow-y:auto;
-  background:var(--bg-2);
+  width:100%;max-width:720px;max-height:90vh;
+  overflow-y:auto;background:var(--bg-2);
   border:1px solid var(--line-2);
   border-radius:20px;
   box-shadow:0 40px 80px rgba(0,0,0,.7);
@@ -1289,43 +1523,64 @@ body::after{
 .modal-overlay.open .modal{transform:translateY(0) scale(1);}
 
 .modal-header{
-  position:relative;
-  padding:28px 28px 20px;
+  position:relative;padding:28px 28px 20px;
   border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:flex-start;
-  gap:22px;
+  display:flex;align-items:flex-start;gap:22px;
 }
 
 .modal-header::before{
-  content:'';
-  position:absolute;
-  top:0;left:0;right:0;
-  height:3px;
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
   background:linear-gradient(90deg,var(--red),var(--gold),var(--blue));
   border-radius:20px 20px 0 0;
 }
 
+.modal-avatar-wrap{
+  position:relative;width:110px;height:130px;flex-shrink:0;
+}
+
 .modal-avatar{
-  width:100px;height:120px;
-  flex-shrink:0;
-  border-radius:12px;
-  overflow:hidden;
-  border:2px solid var(--line-2);
-  background:var(--bg-3);
+  width:100px;height:120px;border-radius:12px;
+  overflow:hidden;border:2px solid var(--line-2);
+  background:var(--bg-3);position:absolute;
+  top:5px;left:5px;z-index:2;
 }
 
 .modal-avatar img{width:100%;height:100%;object-fit:cover;display:block;}
+
+.power-ring{
+  position:absolute;top:0;left:0;
+  width:110px;height:130px;
+  pointer-events:none;z-index:3;
+}
+
+.power-ring svg{width:100%;height:100%;overflow:visible;}
+
+.power-ring .ring-bg{
+  fill:none;stroke:rgba(255,255,255,.1);stroke-width:3;
+}
+
+.power-ring .ring-fill{
+  fill:none;stroke-width:3;stroke-linecap:round;
+  transition:stroke-dashoffset .8s cubic-bezier(.4,0,.2,1);
+}
+
+.power-ring .ring-label{
+  position:absolute;bottom:-4px;left:50%;
+  transform:translateX(-50%);
+  font-family:var(--font-display);
+  font-size:15px;letter-spacing:1px;
+  padding:2px 9px;border-radius:5px;
+  background:rgba(24,24,31,.92);
+  border:1px solid var(--line-2);
+  white-space:nowrap;z-index:4;
+}
 
 .modal-title{flex:1;min-width:0;padding-top:4px;}
 
 .modal-title h3{
   font-family:var(--font-display);
-  font-size:28px;
-  letter-spacing:2px;
-  color:#fff;
-  line-height:1.1;
-  margin-bottom:4px;
+  font-size:28px;letter-spacing:2px;
+  color:#fff;line-height:1.1;margin-bottom:4px;
 }
 
 .modal-title .en{font-size:13px;color:var(--muted);letter-spacing:1px;margin-bottom:12px;}
@@ -1333,30 +1588,19 @@ body::after{
 .modal-title .meta-row{display:flex;flex-wrap:wrap;gap:8px;}
 
 .modal-title .meta-chip{
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:1px;
-  padding:3px 10px;
-  border-radius:5px;
-  border:1px solid var(--line);
-  color:var(--muted);
-  background:rgba(255,255,255,.04);
+  font-size:11px;font-weight:700;letter-spacing:1px;
+  padding:3px 10px;border-radius:5px;
+  border:1px solid var(--line);color:var(--muted);
+  background:rgba(255,255,255,.05);
 }
 
 .modal-close{
-  position:absolute;
-  top:16px;right:16px;
-  width:32px;height:32px;
-  border-radius:50%;
+  position:absolute;top:16px;right:16px;
+  width:32px;height:32px;border-radius:50%;
   border:1px solid var(--line-2);
-  background:rgba(0,0,0,.4);
-  color:var(--muted);
-  font-size:18px;
-  cursor:pointer;
-  display:grid;
-  place-items:center;
-  transition:.2s;
-  line-height:1;
+  background:rgba(0,0,0,.5);color:var(--muted);
+  font-size:18px;cursor:pointer;
+  display:grid;place-items:center;transition:.2s;line-height:1;
 }
 
 .modal-close:hover{background:var(--red);color:#fff;border-color:var(--red);}
@@ -1364,99 +1608,69 @@ body::after{
 .modal-body{padding:24px 28px 28px;}
 
 .modal-section-title{
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:2px;
-  color:var(--red-2);
-  margin-bottom:12px;
-  display:flex;
-  align-items:center;
-  gap:8px;
+  font-size:12px;font-weight:900;letter-spacing:2px;
+  color:var(--red-2);margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
 }
 
 .modal-section-title::before{
-  content:'';
-  width:3px;height:14px;
-  border-radius:2px;
-  background:var(--red);
+  content:'';width:3px;height:14px;border-radius:2px;background:var(--red);
 }
 
 .modal-reason{
-  font-size:13px;
-  color:var(--muted);
-  line-height:1.8;
-  margin-bottom:22px;
-  padding:14px 18px;
-  border-radius:10px;
-  background:rgba(255,255,255,.025);
+  font-size:13px;color:var(--muted);line-height:1.8;
+  margin-bottom:22px;padding:14px 18px;
+  border-radius:10px;background:rgba(255,255,255,.03);
   border:1px solid var(--line);
 }
 
 .modal-stats-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
-  gap:10px;
-  margin-bottom:22px;
+  gap:10px;margin-bottom:22px;
 }
 
 .modal-stat-item{
-  padding:12px 14px;
-  border-radius:10px;
-  background:rgba(255,255,255,.03);
+  padding:12px 14px;border-radius:10px;
+  background:rgba(255,255,255,.04);
   border:1px solid var(--line);
 }
 
 .modal-stat-item .ms-label{
-  font-size:10px;
-  letter-spacing:1.5px;
-  color:var(--muted);
-  margin-bottom:6px;
+  font-size:10px;letter-spacing:1.5px;color:var(--muted);margin-bottom:6px;
 }
 
 .modal-stat-item .ms-val{
   font-family:var(--font-display);
-  font-size:22px;
-  letter-spacing:1px;
-  color:#fff;
+  font-size:22px;letter-spacing:1px;color:#fff;
 }
 
 .modal-stat-item .ms-bar{
-  height:4px;
-  border-radius:2px;
-  background:rgba(255,255,255,.07);
-  margin-top:8px;
-  overflow:hidden;
+  height:4px;border-radius:2px;
+  background:rgba(255,255,255,.09);
+  margin-top:8px;overflow:hidden;
 }
 
 .modal-stat-item .ms-bar i{
-  display:block;
-  height:100%;
-  border-radius:2px;
+  display:block;height:100%;border-radius:2px;
   background:linear-gradient(90deg,var(--red-dark),var(--red));
 }
 
 .modal-relations{display:flex;flex-wrap:wrap;gap:8px;}
 
 .rel-chip{
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:.5px;
-  padding:5px 12px;
-  border-radius:20px;
-  border:1px solid var(--line);
-  color:var(--muted);
-  background:rgba(255,255,255,.03);
-  transition:.2s;
-  cursor:default;
+  font-size:11px;font-weight:700;letter-spacing:.5px;
+  padding:5px 12px;border-radius:20px;
+  border:1px solid var(--line);color:var(--muted);
+  background:rgba(255,255,255,.04);transition:.2s;cursor:default;
 }
 
-.rel-chip:hover{border-color:rgba(255,255,255,.25);color:var(--text);}
-.rel-chip.ally{border-color:rgba(40,224,122,.4);color:#28e07a;background:rgba(40,224,122,.07);}
-.rel-chip.enemy{border-color:rgba(255,75,80,.4);color:#ff4b50;background:rgba(255,75,80,.07);}
-.rel-chip.team{border-color:rgba(61,139,255,.4);color:#7fd4ff;background:rgba(61,139,255,.07);}
-.rel-chip.family{border-color:rgba(245,197,24,.4);color:#f5c518;background:rgba(245,197,24,.07);}
+.rel-chip:hover{border-color:rgba(255,255,255,.3);color:var(--text);}
+.rel-chip.ally{border-color:rgba(40,224,122,.45);color:#3eeb8b;background:rgba(40,224,122,.09);}
+.rel-chip.enemy{border-color:rgba(255,75,80,.45);color:#ff6a6e;background:rgba(255,75,80,.09);}
+.rel-chip.team{border-color:rgba(61,139,255,.45);color:#8fdcff;background:rgba(61,139,255,.09);}
+.rel-chip.family{border-color:rgba(245,197,24,.45);color:#ffd230;background:rgba(245,197,24,.09);}
 
-/* ============ 关于 ============ */
 .about-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -1464,78 +1678,61 @@ body::after{
 }
 
 .about-card{
-  padding:24px;
-  background:var(--bg-2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  transition:.28s;
+  padding:24px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:14px;transition:.28s;
 }
 
-.about-card:hover{border-color:rgba(230,36,41,.42);transform:translateY(-4px);}
+.about-card:hover{border-color:rgba(230,36,41,.45);transform:translateY(-4px);}
 
 .about-card h4{
-  font-size:16px;
-  color:#fff;
-  font-weight:800;
-  letter-spacing:1px;
-  margin-bottom:10px;
-  display:flex;
-  align-items:center;
-  gap:9px;
+  font-size:16px;color:#fff;font-weight:800;
+  letter-spacing:1px;margin-bottom:10px;
+  display:flex;align-items:center;gap:9px;
 }
 
 .about-card h4::before{
-  content:'';
-  width:4px;height:16px;
-  border-radius:2px;
-  background:var(--red);
+  content:'';width:4px;height:16px;border-radius:2px;background:var(--red);
 }
 
 .about-card p{font-size:13px;color:var(--muted);line-height:1.75;}
 
-/* ============ 页脚 ============ */
 .footer{
-  position:relative;
-  z-index:1;
-  margin-top:60px;
-  padding:34px 0;
+  position:relative;z-index:1;
+  margin-top:60px;padding:34px 0;
   border-top:1px solid var(--line);
-  background:rgba(0,0,0,.35);
+  background:rgba(0,0,0,.3);
 }
 
 .footer-inner{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:0 24px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-  flex-wrap:wrap;
-  font-size:12px;
-  color:var(--muted);
-  letter-spacing:.5px;
+  max-width:var(--max);margin:0 auto;
+  padding:0 24px;display:flex;
+  align-items:center;justify-content:space-between;
+  gap:18px;flex-wrap:wrap;
+  font-size:12px;color:var(--muted);letter-spacing:.5px;
 }
 
 .footer-inner .dots{display:flex;gap:6px;}
 
 .footer-inner .dots i{
-  width:18px;height:4px;
-  border-radius:2px;
-  background:rgba(255,255,255,.14);
+  width:18px;height:4px;border-radius:2px;
+  background:rgba(255,255,255,.16);
 }
 
 .footer-inner .dots i:nth-child(1){background:var(--red);}
 .footer-inner .dots i:nth-child(2){background:var(--gold);}
 .footer-inner .dots i:nth-child(3){background:var(--blue);}
 
-/* ============ 响应式 ============ */
 @media (max-width:980px){
   .analysis{grid-template-columns:1fr;}
   .radar-wrap{height:300px;}
   .nav-links{display:none;}
   .modal-header{flex-direction:column;align-items:center;text-align:center;}
   .modal-title .meta-row{justify-content:center;}
+  .cl-item{grid-template-columns:1fr;gap:10px;padding:18px 0;}
+  .cl-item::before{display:none;}
+  .cl-left{padding-right:0;}
+  .cl-date, .cl-tag{padding-left:0;margin-left:17px;}
+  .cl-right{padding-left:0;}
 }
 
 @media (max-width:760px){
@@ -1543,7 +1740,7 @@ body::after{
   .slot:first-child,
   .slot:last-child,
   .slot{border-radius:14px;}
-  .vs-badge{height:34px;}
+  .vs-zone{height:auto;padding:8px 0;flex-direction:row;}
   .vs-badge::before,
   .vs-badge::after{display:none;}
   .banner{padding:56px 0 40px;}
@@ -1556,6 +1753,11 @@ body::after{
   .tier-badge{width:56px;font-size:16px;}
   .matrix-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));}
   .search-box-wrap{max-width:100%;}
+  .td-stack{height:36px;}
+  .td-segment span{font-size:12px;}
+  .br-body{padding:18px 18px 22px;}
+  .br-segment{flex-direction:column;gap:8px;padding:12px;}
+  .br-seg-label{width:auto;padding:3px 10px;}
 }
 
 @media (max-width:520px){
@@ -1571,15 +1773,25 @@ body::after{
   .modal{padding:0;}
   .modal-header{padding:22px 20px 16px;}
   .modal-body{padding:20px;}
-  .modal-avatar{width:80px;height:96px;}
+  .modal-avatar-wrap{width:90px;height:108px;}
+  .modal-avatar{width:82px;height:100px;}
+  .power-ring{width:90px;height:108px;}
   .modal-title h3{font-size:22px;}
+  .td-legend{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));}
+  .br-seg-text{font-size:13px;}
 }
 </style>
 </head>
 <body>
 
-<!-- ============ 水印 ============ -->
 <div class="watermark" aria-hidden="true"></div>
+
+<button class="scroll-top" id="scroll-top" title="回到顶部">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19 V5"/>
+    <path d="M5 12 L12 5 L19 12"/>
+  </svg>
+</button>
 
 <header class="nav">
   <div class="nav-inner">
@@ -1593,6 +1805,7 @@ body::after{
       <a href="#library">英雄库</a>
       <a href="#ranking">综合总榜</a>
       <a href="#relations">关系网</a>
+      <a href="#changelog">更新日志</a>
       <a href="#about">评测体系</a>
     </nav>
     <div class="nav-actions">
@@ -1611,7 +1824,7 @@ body::after{
       英雄分为漫画表现与电影表现两套独立评分体系，互不干扰。
     </p>
     <div class="banner-stats">
-      <div><b id="stat-heroes">7</b><span>收录角色</span></div>
+      <div><b id="stat-heroes">13</b><span>收录角色</span></div>
       <div><b id="stat-gears">0</b><span>装备神器</span></div>
       <div><b id="stat-dims">13</b><span>评测维度</span></div>
       <div><b id="stat-systems">2</b><span>表现体系</span></div>
@@ -1619,7 +1832,6 @@ body::after{
   </div>
 </section>
 
-<!-- ============ 等级体系 ============ -->
 <section class="section" id="tier-system">
   <div class="wrap">
     <div class="section-head">
@@ -1630,12 +1842,11 @@ body::after{
   </div>
 </section>
 
-<!-- ============ 英雄战力对比 ============ -->
 <section class="section" id="heroes">
   <div class="wrap">
     <div class="section-head">
       <h2><span class="num">01</span> 英雄战力对比</h2>
-      <p class="section-desc">选择两名角色进入对战台，系统将生成雷达图与属性对比。</p>
+      <p class="section-desc">选择两名角色进入对战台，系统将生成雷达图、属性对比与动态战报。</p>
     </div>
 
     <div class="mode-switch" data-section="hero">
@@ -1645,7 +1856,15 @@ body::after{
 
     <div class="arena">
       <div class="slot" id="hero-slot-a"></div>
-      <div class="vs-badge">VS</div>
+      <div class="vs-zone">
+        <div class="vs-badge">VS</div>
+        <button class="swap-btn disabled" id="hero-swap" title="交换 A / B">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 4 L7 20 M7 4 L4 7 M7 4 L10 7"/>
+            <path d="M17 20 L17 4 M17 20 L14 17 M17 20 L20 17"/>
+          </svg>
+        </button>
+      </div>
       <div class="slot" id="hero-slot-b"></div>
     </div>
 
@@ -1653,6 +1872,22 @@ body::after{
       <div class="verdict" id="hero-verdict"></div>
       <div class="radar-wrap"><canvas id="hero-radar"></canvas></div>
       <div class="bars" id="hero-bars"></div>
+    </div>
+
+    <div class="battle-report" id="hero-battle-report">
+      <div class="br-head">
+        <div class="br-title">动态战报 · 漫画表现</div>
+        <button class="br-reroll" id="hero-battle-reroll" title="重掷战斗过程">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12a9 9 0 1 1-3-6.7"/>
+            <path d="M21 4v5h-5"/>
+          </svg>
+          重掷
+        </button>
+      </div>
+      <div class="br-body" id="hero-battle-body">
+        <div class="br-empty"><b>WAITING</b>请先选择两名对比对象</div>
+      </div>
     </div>
 
     <div class="roster-tools">
@@ -1673,7 +1908,6 @@ body::after{
   </div>
 </section>
 
-<!-- ============ 装备战力对比 ============ -->
 <section class="section" id="gears">
   <div class="wrap">
     <div class="section-head">
@@ -1688,7 +1922,15 @@ body::after{
 
     <div class="arena">
       <div class="slot" id="gear-slot-a"></div>
-      <div class="vs-badge">VS</div>
+      <div class="vs-zone">
+        <div class="vs-badge">VS</div>
+        <button class="swap-btn disabled" id="gear-swap" title="交换 A / B">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 4 L7 20 M7 4 L4 7 M7 4 L10 7"/>
+            <path d="M17 20 L17 4 M17 20 L14 17 M17 20 L20 17"/>
+          </svg>
+        </button>
+      </div>
       <div class="slot" id="gear-slot-b"></div>
     </div>
 
@@ -1696,6 +1938,22 @@ body::after{
       <div class="verdict" id="gear-verdict"></div>
       <div class="radar-wrap"><canvas id="gear-radar"></canvas></div>
       <div class="bars" id="gear-bars"></div>
+    </div>
+
+    <div class="battle-report" id="gear-battle-report">
+      <div class="br-head">
+        <div class="br-title">动态战报 · 装备对决</div>
+        <button class="br-reroll" id="gear-battle-reroll" title="重掷战斗过程">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12a9 9 0 1 1-3-6.7"/>
+            <path d="M21 4v5h-5"/>
+          </svg>
+          重掷
+        </button>
+      </div>
+      <div class="br-body" id="gear-battle-body">
+        <div class="br-empty"><b>WAITING</b>请先选择两件装备</div>
+      </div>
     </div>
 
     <div class="roster-tools">
@@ -1716,12 +1974,20 @@ body::after{
   </div>
 </section>
 
-<!-- ============ 英雄库 · 战力矩阵 ============ -->
 <section class="section" id="library">
   <div class="wrap">
     <div class="section-head">
       <h2><span class="num">03</span> 英雄库 · 战力矩阵</h2>
       <p class="section-desc">点击任意英雄进入详细分析。悬停可查看等级与战力。支持搜索与等级筛选。</p>
+    </div>
+
+    <div class="tier-distribution" id="tier-distribution">
+      <div class="td-head">
+        <div class="td-title">战力等级分布</div>
+        <div class="td-total">共 <b id="td-total-count">0</b> 位英雄 · 点击色块或图例可筛选</div>
+      </div>
+      <div class="td-stack" id="td-stack"></div>
+      <div class="td-legend" id="td-legend"></div>
     </div>
 
     <div class="library-controls" id="library-filters">
@@ -1747,7 +2013,7 @@ body::after{
         </span>
         <button class="search-clear" id="search-clear" type="button" title="清除搜索">×</button>
       </div>
-      <span class="result-count" id="result-count">显示 <b>7</b> / 7 位英雄</span>
+      <span class="result-count" id="result-count">显示 <b>13</b> / 13 位英雄</span>
     </div>
 
     <div class="matrix-grid" id="matrix-grid"></div>
@@ -1769,12 +2035,23 @@ body::after{
   </div>
 </section>
 
-<!-- ============ 综合总榜 ============ -->
 <section class="section" id="ranking">
   <div class="wrap">
     <div class="section-head">
       <h2><span class="num">04</span> 综合总榜</h2>
-      <p class="section-desc">榜单与「英雄战力」模式联动，切换漫画 / 电影后自动重排。</p>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <p class="section-desc" style="margin:0;">榜单与「英雄战力」模式联动，切换漫画 / 电影后自动重排。</p>
+        <button class="random-btn" id="random-battle" title="随机挑选两位英雄进入对战台">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 3h5v5"/>
+            <path d="M4 20L21 3"/>
+            <path d="M21 16v5h-5"/>
+            <path d="M15 15l6 6"/>
+            <path d="M4 4l5 5"/>
+          </svg>
+          随机对决
+        </button>
+      </div>
     </div>
     <table class="rank-table">
       <thead>
@@ -1791,7 +2068,6 @@ body::after{
   </div>
 </section>
 
-<!-- ============ 关系网 ============ -->
 <section class="section" id="relations">
   <div class="wrap">
     <div class="section-head">
@@ -1810,11 +2086,21 @@ body::after{
   </div>
 </section>
 
-<!-- ============ 评测体系 ============ -->
+<!-- ============ 新增：更新日志 ============ -->
+<section class="section" id="changelog">
+  <div class="wrap">
+    <div class="section-head">
+      <h2><span class="num">06</span> 更新日志</h2>
+      <p class="section-desc">记录本站从初始框架到当前版本的每一次功能迭代与调整。</p>
+    </div>
+    <div class="changelog-list" id="changelog-list"></div>
+  </div>
+</section>
+
 <section class="section" id="about">
   <div class="wrap">
     <div class="section-head">
-      <h2><span class="num">06</span> 评测体系</h2>
+      <h2><span class="num">07</span> 评测体系</h2>
       <p class="section-desc">此处为体系说明区，具体文字内容可随时替换。</p>
     </div>
     <div class="about-grid">
@@ -1831,8 +2117,8 @@ body::after{
         <p>装备强度不计入角色本体，单独成榜，用于区分「本体强」与「靠装备强」两类角色。</p>
       </div>
       <div class="about-card">
-        <h4>持续更新</h4>
-        <p>随着新刊与新片上映，数据将持续修订。英雄库与关系网会随条目增加自动更新。</p>
+        <h4>动态战报</h4>
+        <p>根据双方招牌技能与十三维差值自动生成四段式战斗描述，每次对决都不重复。</p>
       </div>
     </div>
   </div>
@@ -1842,16 +2128,24 @@ body::after{
   <div class="footer-inner">
     <span>MARVEL POWER RANK · 非官方粉丝向数据站</span>
     <span class="dots"><i></i><i></i><i></i></span>
-    <span>Data Version 1.2.0 · by hjy</span>
+    <span>Data Version 1.6.1 · by hjy</span>
   </div>
 </footer>
 
-<!-- ============ 角色详情弹窗 ============ -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal" id="modal">
     <div class="modal-header">
       <button class="modal-close" id="modal-close">×</button>
-      <div class="modal-avatar"><img id="modal-img" src="" alt=""></div>
+      <div class="modal-avatar-wrap">
+        <div class="modal-avatar"><img id="modal-img" src="" alt=""></div>
+        <div class="power-ring">
+          <svg viewBox="0 0 110 130">
+            <path class="ring-bg" d="M 55 8 A 47 47 0 0 0 55 122 A 47 47 0 0 0 55 8" />
+            <path class="ring-fill" id="ring-fill" d="M 55 8 A 47 47 0 0 0 55 122 A 47 47 0 0 0 55 8" />
+          </svg>
+          <div class="ring-label" id="ring-label">0</div>
+        </div>
+      </div>
       <div class="modal-title">
         <h3 id="modal-name"></h3>
         <p class="en" id="modal-en"></p>
@@ -1861,6 +2155,8 @@ body::after{
     <div class="modal-body">
       <div class="modal-section-title">评级理由</div>
       <div class="modal-reason" id="modal-reason"></div>
+      <div class="modal-section-title">招牌技能</div>
+      <div class="modal-stats-grid" id="modal-signature"></div>
       <div class="modal-section-title">能力维度</div>
       <div class="modal-stats-grid" id="modal-stats"></div>
       <div class="modal-section-title">角色关系</div>
@@ -1871,40 +2167,131 @@ body::after{
 
 <script>
 /* =========================================================
-   等级体系定义
+   等级体系
    ========================================================= */
 const TIERS = [
-  { key:'t5',  code:'T5',   name:'凡人级',   desc:'顶尖特工 / 战术专家 / 无超能力加持', color:'#8a8a99' },
-  { key:'t4',  code:'T4',   name:'超凡级',   desc:'超级士兵 / 人类极限以上 / 未突破星球阈值', color:'#3d8bff' },
-  { key:'t3',  code:'T3',   name:'星球级',   desc:'物理破坏力可达摧毁城市级别', color:'#28e07a' },
-  { key:'t2',  code:'T2',   name:'星域级',   desc:'可影响行星系统 / 星际尺度战力', color:'#a855f7' },
-  { key:'t15', code:'T1.5', name:'宇宙级',   desc:'单体宇宙级战力 / 可操控宇宙能量', color:'#f5c518' },
-  { key:'t1',  code:'T1',   name:'史诗级',   desc:'多元宇宙级 / 可改写现实规则', color:'#ff4b50' },
-  { key:'t05', code:'T0.5', name:'传说级',   desc:'超越多元宇宙 / 影响整个漫威宇宙', color:'#e62429' },
+  { key:'t5',  code:'T5',   name:'凡人级',   desc:'顶尖特工 / 战术专家 / 无超能力加持', color:'#a8a8b6' },
+  { key:'t4',  code:'T4',   name:'超凡级',   desc:'超级士兵 / 人类极限以上 / 未突破星球阈值', color:'#8fdcff' },
+  { key:'t3',  code:'T3',   name:'星球级',   desc:'物理破坏力可达摧毁城市级别', color:'#3eeb8b' },
+  { key:'t2',  code:'T2',   name:'星域级',   desc:'可影响行星系统 / 星际尺度战力', color:'#c894ff' },
+  { key:'t15', code:'T1.5', name:'宇宙级',   desc:'单体宇宙级战力 / 可操控宇宙能量', color:'#ffd230' },
+  { key:'t1',  code:'T1',   name:'史诗级',   desc:'多元宇宙级 / 可改写现实规则', color:'#ff6a6e' },
+  { key:'t05', code:'T0.5', name:'传说级',   desc:'超越多元宇宙 / 影响整个漫威宇宙', color:'#ff8a8e' },
   { key:'t0',  code:'T0',   name:'神话级',   desc:'全能宇宙级 / 与生命法庭同级或以上', color:'#f5c518' }
 ];
 
-/* =========================================================
-   能力维度
-   ========================================================= */
 const STAT_KEYS = ['战商', '智力', '力量', '防御', '装备', '速度', '耐力', '体质', '技能', '格斗', '射击', '黑客', '神力'];
 
 /* =========================================================
-   数据注入区
+   更新日志数据
+   ========================================================= */
+const CHANGELOG = [
+  {
+    version: 'v1.6.1',
+    date: '当前版本',
+    tag: 'CURRENT',
+    latest: true,
+    title: '修复战报名称显示异常 & 新增更新日志',
+    items: [
+      '修复动态战报中英雄名称显示为 [object Object] 的 bug',
+      '优化战报文字生成逻辑，所有对象取值统一改为英雄名称',
+      '新增本「更新日志」板块，完整记录从初始框架到当前版本的每一次迭代'
+    ]
+  },
+  {
+    version: 'v1.6.0',
+    date: '初始版本',
+    tag: 'INITIAL',
+    title: '动态战斗描述',
+    items: [
+      '每位英雄新增 2~3 条招牌技能，绑定主维度',
+      '实现对战台下方四段式战报：开场 / 交锋 / 转折 / 结论',
+      '战报根据双方招牌技能与十三维差值动态生成，每次对决都不重复',
+      '支持「重掷」按钮，一键刷新战斗过程'
+    ]
+  },
+  {
+    version: 'v1.5.0',
+    date: '初始版本',
+    tag: 'INITIAL',
+    title: '交互增强与视觉升级',
+    items: [
+      '整体画面调亮一档，提升长时间浏览的舒适度',
+      '综合总榜头像缩小，行高更紧凑',
+      '新增 A/B 交换按钮，一键互换对战双方',
+      '新增弹窗战力环，以半圆弧展示角色综合战力',
+      '新增「随机对决」与「回到顶部」按钮'
+    ]
+  },
+  {
+    version: 'v1.4.0',
+    date: '初始版本',
+    tag: 'INITIAL',
+    title: '等级分布与搜索扩展',
+    items: [
+      '新增「战力等级分布」可视化组件，堆叠色条 + 图例网格',
+      '英雄战力对比区、装备战力对比区、英雄库三处均支持实时搜索',
+      '关系网线条样式细化：盟友实线、敌对对线、队友点线、亲属点划线',
+      '收录尚气、女武神、幻视，英雄数量增至 9 位'
+    ]
+  },
+  {
+    version: 'v1.3.0',
+    date: '初始版本',
+    tag: 'INITIAL',
+    title: '英雄库与关系网',
+    items: [
+      '新增「英雄库·战力矩阵」板块，英雄以卡片形式呈现',
+      '新增角色关系网，以 Canvas 绘制节点与连线',
+      '新增综合总榜，与英雄模式联动自动排序',
+      '收录奇异博士、火箭浣熊，英雄数量增至 6 位'
+    ]
+  },
+  {
+    version: 'v1.2.0',
+    date: '初始版本',
+    tag: 'INITIAL',
+    title: '首批英雄与等级体系',
+    items: [
+      '确立 T5 凡人级至 T0 神话级共八个战力等级',
+      '收录首批 5 位英雄：黑寡妇、鹰眼、美国队长、绿巨人、雷神',
+      '实现英雄战力对比台，支持漫画 / 电影双模式切换',
+      '对战台自动生成雷达图、属性对比条与文字结论'
+    ]
+  },
+  {
+    version: 'v1.0.0',
+    date: '初始版本',
+    tag: 'INITIAL',
+    title: '网站框架搭建',
+    items: [
+      '搭建漫威主题的网站基础结构，包含导航、横幅、区块划分',
+      '确立深色主题、红色/金色配色方案与字体体系',
+      '预留英雄战力、装备战力、排行榜等核心模块位置'
+    ]
+  }
+];
+
+/* =========================================================
+   数据区
    ========================================================= */
 const DB = {
   hero: {
     comic: [
-      /* ---------- T5 凡人级 ---------- */
       {
         id: 'h-c-blackwidow',
         name: '黑寡妇',
         sub: 'Natasha Romanoff',
         tag: '复仇者',
         tier: 't5',
-        power: 58,
+        power: 52,
         img: 'https://placehold.co/400x500/1a1a20/e62429?text=Black+Widow',
-        stats: { 战商: 88, 智力: 78, 力量: 52, 防御: 48, 装备: 45, 速度: 68, 耐力: 55, 体质: 50, 技能: 92, 格斗: 90, 射击: 82, 黑客: 75, 神力: 0 },
+        stats: { 战商: 86, 智力: 76, 力量: 48, 防御: 44, 装备: 42, 速度: 64, 耐力: 52, 体质: 46, 技能: 90, 格斗: 88, 射击: 80, 黑客: 72, 神力: 0 },
+        signature: [
+          { name: '间谍诡计', stat: '战商' },
+          { name: '电击之刃', stat: '装备' },
+          { name: '近身锁技', stat: '格斗' }
+        ],
         reason: '黑寡妇是顶尖特工，但无超能力或神力加持，依赖格斗、间谍技巧和战术智商。战商与智力：擅长情报获取、心理战和团队协调，在《复联1》中说服班纳加入团队，并在《美队3》中化解钢铁侠与美队矛盾。格斗与速度：近战能力极强，曾单挑冬兵和鹰眼，但对抗超人类时劣势明显。装备与短板：仅有电击武器和轻型枪械，防御力和力量远低于超能力者。',
         relations: [
           { name:'鹰眼', type:'ally', label:'盟友' },
@@ -1912,7 +2299,10 @@ const DB = {
           { name:'冬兵', type:'ally', label:'旧识' },
           { name:'浩克', type:'team', label:'队友' },
           { name:'钢铁侠', type:'team', label:'队友' },
-          { name:'绯红女巫', type:'team', label:'队友' }
+          { name:'绯红女巫', type:'team', label:'队友' },
+          { name:'奇异博士', type:'team', label:'队友' },
+          { name:'女武神', type:'team', label:'队友' },
+          { name:'幻视', type:'team', label:'队友' }
         ]
       },
       {
@@ -1921,9 +2311,14 @@ const DB = {
         sub: 'Clint Barton',
         tag: '复仇者',
         tier: 't5',
-        power: 55,
+        power: 49,
         img: 'https://placehold.co/400x500/1a1a20/3d8bff?text=Hawkeye',
-        stats: { 战商: 82, 智力: 70, 力量: 48, 防御: 42, 装备: 72, 速度: 62, 耐力: 50, 体质: 45, 技能: 88, 格斗: 65, 射击: 99, 黑客: 55, 神力: 0 },
+        stats: { 战商: 80, 智力: 68, 力量: 44, 防御: 38, 装备: 70, 速度: 58, 耐力: 48, 体质: 42, 技能: 86, 格斗: 62, 射击: 98, 黑客: 52, 神力: 0 },
+        signature: [
+          { name: '多重箭矢', stat: '射击' },
+          { name: '战术预判', stat: '战商' },
+          { name: '精准狙杀', stat: '射击' }
+        ],
         reason: '与黑寡妇同为凡人级，依赖弓箭技术和战术意识。射击与敏捷：精准度极高，能灵活使用多功能箭头（爆炸、声波等），但近战能力较弱。战商与团队作用：在《复联1》中破解红女巫的精神控制，但缺乏应对大规模战场的能力。局限性：面对高防御或高速敌人（如绿巨人、灭霸）时作用有限。',
         relations: [
           { name:'黑寡妇', type:'ally', label:'搭档' },
@@ -1931,7 +2326,8 @@ const DB = {
           { name:'雷神', type:'team', label:'队友' },
           { name:'浩克', type:'team', label:'队友' },
           { name:'钢铁侠', type:'team', label:'队友' },
-          { name:'绯红女巫', type:'team', label:'队友' }
+          { name:'绯红女巫', type:'team', label:'队友' },
+          { name:'幻视', type:'team', label:'队友' }
         ]
       },
       {
@@ -1940,9 +2336,14 @@ const DB = {
         sub: 'James Rhodes',
         tag: '复仇者 / 军方',
         tier: 't5',
-        power: 62,
+        power: 56,
         img: 'https://placehold.co/400x500/1a1a20/8a8a99?text=War+Machine',
-        stats: { 战商: 72, 智力: 68, 力量: 78, 防御: 80, 装备: 82, 速度: 70, 耐力: 75, 体质: 60, 技能: 65, 格斗: 55, 射击: 85, 黑客: 45, 神力: 0 },
+        stats: { 战商: 70, 智力: 66, 力量: 74, 防御: 78, 装备: 80, 速度: 66, 耐力: 72, 体质: 58, 技能: 62, 格斗: 52, 射击: 84, 黑客: 42, 神力: 0 },
+        signature: [
+          { name: '火力覆盖', stat: '装备' },
+          { name: '导弹齐射', stat: '装备' },
+          { name: '装甲冲撞', stat: '力量' }
+        ],
         reason: '战争机器本质为强化版凡人，依赖斯塔克科技，但缺乏独立研发能力，战斗力受限于军方需求和装备迭代。装备局限：战甲多为斯塔克早期技术（如Mark 2改造），武器以常规导弹和机枪为主，缺乏纳米技术或能量武器升级。战斗表现：《复联2》中对抗奥创哨兵有效，但《美队3》因幻视误击致残，凸显防御短板。电影中始终落后于钢铁侠战甲，如《复联4》未获纳米技术支援。战术价值：团队中承担火力支援角色，但单兵作战能力有限。',
         relations: [
           { name:'钢铁侠', type:'ally', label:'挚友' },
@@ -1952,17 +2353,43 @@ const DB = {
           { name:'浩克', type:'team', label:'队友' }
         ]
       },
-
-      /* ---------- T4 超凡级 ---------- */
+      {
+        id: 'h-c-rocket',
+        name: '火箭浣熊',
+        sub: 'Rocket Raccoon',
+        tag: '银河护卫队',
+        tier: 't5',
+        power: 47,
+        img: 'https://placehold.co/400x500/1a1a20/8a6d3b?text=Rocket',
+        stats: { 战商: 88, 智力: 92, 力量: 22, 防御: 32, 装备: 90, 速度: 66, 耐力: 42, 体质: 28, 技能: 90, 格斗: 38, 射击: 95, 黑客: 88, 神力: 0 },
+        signature: [
+          { name: '重型军火', stat: '装备' },
+          { name: '陷阱爆破', stat: '智力' },
+          { name: '战术撤离', stat: '战商' }
+        ],
+        reason: '火箭浣熊虽为基因改造生物，但本质仍属凡人范畴，依赖科技装备和战术智商，无超自然能力或神力加持。战斗技能与装备：精通各类枪械和爆炸物设计，电影中曾协助制造反浩克装甲和量子隧道设备（《复联4》）。敏捷性和战术策划能力突出，如《银河护卫队》系列中多次制定逃生或突袭计划。生理与弱点：身体强度仅略高于普通浣熊，力量评级为1（较弱），耐力普通。依赖外部装备，如未携带武器则战斗力大幅下降。团队价值：作为银河护卫队的「军师」，负责技术支援和飞船驾驶，但单兵作战能力有限。',
+        relations: [
+          { name:'黑寡妇', type:'team', label:'终局之战队友' },
+          { name:'钢铁侠', type:'team', label:'终局之战队友' },
+          { name:'美国队长', type:'team', label:'终局之战队友' },
+          { name:'雷神', type:'team', label:'终局之战队友' },
+          { name:'浩克', type:'team', label:'终局之战队友' }
+        ]
+      },
       {
         id: 'h-c-captain',
         name: '美国队长',
         sub: 'Steve Rogers',
         tag: '复仇者',
         tier: 't4',
-        power: 72,
+        power: 66,
         img: 'https://placehold.co/400x500/1a1a20/28e07a?text=Captain+America',
-        stats: { 战商: 95, 智力: 82, 力量: 78, 防御: 75, 装备: 88, 速度: 72, 耐力: 85, 体质: 80, 技能: 85, 格斗: 96, 射击: 78, 黑客: 40, 神力: 0 },
+        stats: { 战商: 94, 智力: 80, 力量: 74, 防御: 72, 装备: 86, 速度: 68, 耐力: 82, 体质: 78, 技能: 84, 格斗: 95, 射击: 76, 黑客: 38, 神力: 0 },
+        signature: [
+          { name: '盾牌投掷', stat: '装备' },
+          { name: '战阵指挥', stat: '战商' },
+          { name: '近战盾击', stat: '格斗' }
+        ],
         reason: '超级士兵血清强化使其达到人类极限以上，但未突破星球级阈值。力量与耐力：可手拉直升机（拉力约42,354N），卧推545公斤，耐力远超常人。格斗与战商：盾牌格斗术登峰造极，曾与灭霸短暂抗衡，战术指挥能力为复联核心。防御与装备：振金盾牌可抵御能量攻击，但本体防御仍弱于超人类。',
         relations: [
           { name:'黑寡妇', type:'team', label:'队友' },
@@ -1971,20 +2398,48 @@ const DB = {
           { name:'雷神', type:'team', label:'队友' },
           { name:'冬兵', type:'ally', label:'挚友' },
           { name:'钢铁侠', type:'team', label:'理念冲突' },
-          { name:'战争机器', type:'team', label:'队友' }
+          { name:'战争机器', type:'team', label:'队友' },
+          { name:'火箭浣熊', type:'team', label:'终局之战队友' },
+          { name:'尚气', type:'team', label:'队友' }
         ]
       },
-
-      /* ---------- T3 星球级 ---------- */
+      {
+        id: 'h-c-shangchi',
+        name: '尚气',
+        sub: 'Xu Shang-Chi',
+        tag: '复仇者 / 十环',
+        tier: 't4',
+        power: 68,
+        img: 'https://placehold.co/400x500/1a1a20/e6a13b?text=Shang-Chi',
+        stats: { 战商: 82, 智力: 72, 力量: 72, 防御: 70, 装备: 88, 速度: 78, 耐力: 74, 体质: 70, 技能: 94, 格斗: 96, 射击: 55, 黑客: 28, 神力: 58 },
+        signature: [
+          { name: '十环之力', stat: '装备' },
+          { name: '太极化劲', stat: '格斗' },
+          { name: '气之流转', stat: '神力' }
+        ],
+        reason: '尚气作为新晋超级英雄，综合实力介于人类极限与超自然能力之间，依赖十环神器和武术造诣。力量与技能：十环赋予其远超常人的战斗能力，可进行高速移动、能量投射和物理强化。电影中展示的十环力量疑似来自外星或更高维度，尚气尚未完全掌握其潜力。武术造诣登峰造极，结合塔罗村的「气」训练，可对抗超人类敌人（如噬魂兽）。装备与局限性：十环的材质和来源仍不明确（班纳和惊奇队长均未识别），但实战中可压制常规超能力者。缺乏大规模破坏能力，定位更接近战术型战士，与美队类似但略强。',
+        relations: [
+          { name:'美国队长', type:'team', label:'队友' },
+          { name:'雷神', type:'team', label:'队友' },
+          { name:'浩克', type:'team', label:'队友' },
+          { name:'钢铁侠', type:'team', label:'队友' },
+          { name:'奇异博士', type:'team', label:'队友' }
+        ]
+      },
       {
         id: 'h-c-hulk',
         name: '绿巨人',
         sub: 'Bruce Banner / Hulk',
         tag: '复仇者',
         tier: 't3',
-        power: 88,
+        power: 80,
         img: 'https://placehold.co/400x500/1a1a20/28e07a?text=Hulk',
-        stats: { 战商: 55, 智力: 72, 力量: 99, 防御: 96, 装备: 20, 速度: 72, 耐力: 98, 体质: 99, 技能: 45, 格斗: 70, 射击: 10, 黑客: 60, 神力: 25 },
+        stats: { 战商: 52, 智力: 70, 力量: 98, 防御: 95, 装备: 18, 速度: 68, 耐力: 97, 体质: 98, 技能: 42, 格斗: 68, 射击: 8, 黑客: 58, 神力: 22 },
+        signature: [
+          { name: '伽马爆发', stat: '力量' },
+          { name: '雷霆拍击', stat: '力量' },
+          { name: '自愈再生', stat: '体质' }
+        ],
         reason: '愤怒驱动的无限力量增长，物理破坏力可达摧毁城市级别。力量与体质：常态下可压制雷神，暴怒时力量无上限，自愈能力极强。防御与弱点：皮肤抗打击能力接近无敌，但精神不稳定可能被控制（如《复联2》反浩克装甲战）。漫画表现：在《恐惧本源》中即使被天锤限制仍能与雷神对抗，但神力加持反削弱其潜力。',
         relations: [
           { name:'雷神', type:'ally', label:'亦敌亦友' },
@@ -1992,20 +2447,72 @@ const DB = {
           { name:'黑寡妇', type:'team', label:'队友' },
           { name:'鹰眼', type:'team', label:'队友' },
           { name:'钢铁侠', type:'enemy', label:'被针对' },
+          { name:'战争机器', type:'team', label:'队友' },
+          { name:'火箭浣熊', type:'team', label:'终局之战队友' },
+          { name:'尚气', type:'team', label:'队友' }
+        ]
+      },
+      {
+        id: 'h-c-valkyrie',
+        name: '女武神',
+        sub: 'Brunnhilde / Valkyrie',
+        tag: '阿斯加德 / 新王',
+        tier: 't3',
+        power: 76,
+        img: 'https://placehold.co/400x500/1a1a20/d4a24e?text=Valkyrie',
+        stats: { 战商: 78, 智力: 70, 力量: 84, 防御: 82, 装备: 85, 速度: 82, 耐力: 86, 体质: 84, 技能: 80, 格斗: 84, 射击: 48, 黑客: 14, 神力: 64 },
+        signature: [
+          { name: '龙牙斩', stat: '装备' },
+          { name: '飞马突袭', stat: '速度' },
+          { name: '神族体魄', stat: '防御' }
+        ],
+        reason: '阿斯加德女武神军团领袖，拥有神族体质和魔法装备，战斗力可影响星球级战场。力量与耐力：漫画中力量评级为6级（约85-100吨），耐力接近不朽，可承受高强度物理攻击。电影宇宙中曾单挑海拉召唤的亡灵军团，并参与终结灭霸的最终战。装备与战术：手持魔法剑「龙牙」和骑乘飞马阿拉贡，具备空中机动性和魔法攻击能力。在《雷神3》中展现领导力，重组阿斯加德难民并成为新国王。',
+        relations: [
+          { name:'雷神', type:'ally', label:'战友 / 新阿斯加德' },
+          { name:'浩克', type:'ally', label:'萨卡星战友' },
+          { name:'黑寡妇', type:'team', label:'队友' },
+          { name:'美国队长', type:'team', label:'队友' },
+          { name:'钢铁侠', type:'team', label:'队友' }
+        ]
+      },
+      {
+        id: 'h-c-vision',
+        name: '幻视',
+        sub: 'Vision',
+        tag: '复仇者 / 生化人',
+        tier: 't3',
+        power: 78,
+        img: 'https://placehold.co/400x500/1a1a20/b23a5f?text=Vision',
+        stats: { 战商: 76, 智力: 88, 力量: 82, 防御: 88, 装备: 82, 速度: 72, 耐力: 80, 体质: 86, 技能: 78, 格斗: 62, 射击: 68, 黑客: 72, 神力: 78 },
+        signature: [
+          { name: '密度操控', stat: '体质' },
+          { name: '心灵光束', stat: '神力' },
+          { name: '振金壁垒', stat: '防御' }
+        ],
+        reason: '振金躯体与心灵宝石的结合使其具备理论上的星球级战力，但实战表现受剧情限制较多。防御与能量：振金身体理论上近乎无敌，但电影中亡刃将军的「绝世之刃」可突破其防御（武器设定为原子级切割）。心灵宝石提供能量攻击和精神干扰能力，但宝石的不稳定削弱了幻视的持续战斗力。高光与弱点：漫画中幻视可分离身体部件、操控密度，甚至短暂对抗奥创和灭霸。电影中因宝石被灭霸追踪而全程被动，最终牺牲成为剧情推动点。',
+        relations: [
+          { name:'绯红女巫', type:'ally', label:'爱人' },
+          { name:'钢铁侠', type:'team', label:'队友 / 创造者' },
+          { name:'美国队长', type:'team', label:'队友' },
+          { name:'黑寡妇', type:'team', label:'队友' },
+          { name:'鹰眼', type:'team', label:'队友' },
           { name:'战争机器', type:'team', label:'队友' }
         ]
       },
-
-      /* ---------- T1.5 宇宙级 ---------- */
       {
         id: 'h-c-thor',
         name: '雷神',
         sub: 'Thor Odinson',
         tag: '阿斯加德',
         tier: 't15',
-        power: 94,
+        power: 86,
         img: 'https://placehold.co/400x500/1a1a20/f5c518?text=Thor',
-        stats: { 战商: 78, 智力: 75, 力量: 96, 防御: 92, 装备: 95, 速度: 88, 耐力: 94, 体质: 95, 技能: 82, 格斗: 80, 射击: 40, 黑客: 20, 神力: 98 },
+        stats: { 战商: 76, 智力: 73, 力量: 94, 防御: 90, 装备: 93, 速度: 85, 耐力: 92, 体质: 93, 技能: 80, 格斗: 78, 射击: 38, 黑客: 18, 神力: 96 },
+        signature: [
+          { name: '雷霆之怒', stat: '神力' },
+          { name: '暴风战斧', stat: '装备' },
+          { name: '彩虹桥传送', stat: '速度' }
+        ],
         reason: '阿斯加德神族血统 + 雷霆之力 + 暴风战斧，具备单体宇宙级战力。神力与装备：觉醒后无需雷神之锤即可操控闪电，暴风战斧可召唤彩虹桥、劈开星球。防御与耐力：神体抗性极高，曾承受中子星能量锻造战斧，近乎不死。高光表现：《雷神3》中觉醒雷霆之力击败海拉召唤的巨狼芬里尔，《复联3》以暴风战斧重创满宝石灭霸。',
         relations: [
           { name:'浩克', type:'ally', label:'亦敌亦友' },
@@ -2013,7 +2520,11 @@ const DB = {
           { name:'黑寡妇', type:'team', label:'队友' },
           { name:'鹰眼', type:'team', label:'队友' },
           { name:'钢铁侠', type:'team', label:'队友' },
-          { name:'绯红女巫', type:'team', label:'队友' }
+          { name:'绯红女巫', type:'team', label:'队友' },
+          { name:'奇异博士', type:'team', label:'队友' },
+          { name:'火箭浣熊', type:'team', label:'终局之战队友' },
+          { name:'女武神', type:'ally', label:'战友 / 新阿斯加德' },
+          { name:'尚气', type:'team', label:'队友' }
         ]
       },
       {
@@ -2022,9 +2533,14 @@ const DB = {
         sub: 'Tony Stark',
         tag: '复仇者 / 斯塔克工业',
         tier: 't15',
-        power: 92,
+        power: 84,
         img: 'https://placehold.co/400x500/1a1a20/e62429?text=Iron+Man',
-        stats: { 战商: 92, 智力: 100, 力量: 85, 防御: 82, 装备: 98, 速度: 85, 耐力: 78, 体质: 65, 技能: 90, 格斗: 72, 射击: 78, 黑客: 98, 神力: 15 },
+        stats: { 战商: 91, 智力: 100, 力量: 82, 防御: 80, 装备: 97, 速度: 82, 耐力: 76, 体质: 62, 技能: 88, 格斗: 70, 射击: 76, 黑客: 98, 神力: 12 },
+        signature: [
+          { name: '纳米战甲', stat: '装备' },
+          { name: '能量脉冲', stat: '神力' },
+          { name: '全息分析', stat: '智力' }
+        ],
         reason: '钢铁侠的战斗力高度依赖战甲技术，常态为星球级（T3），但在特殊装备加持下可跃升至宇宙级。弑神者战甲：古老种族为对抗天神组制造的战甲，单次攻击可毁灭星球，逻辑上达到多元宇宙级门槛。石中剑融合：平行宇宙中融合亚瑟王石中剑，获得多元宇宙级力量，可操控时空。吞星使者：短暂成为行星吞噬者的使者，获得单体宇宙级能量，但需依赖外部赋予。MCU表现：纳米战甲（如Mark 85）在《复联4》中可短暂抗衡灭霸，但依赖团队配合和战术智商。',
         relations: [
           { name:'美国队长', type:'team', label:'理念冲突' },
@@ -2033,20 +2549,27 @@ const DB = {
           { name:'雷神', type:'team', label:'队友' },
           { name:'黑寡妇', type:'team', label:'队友' },
           { name:'鹰眼', type:'team', label:'队友' },
-          { name:'绯红女巫', type:'team', label:'被精神影响' }
+          { name:'绯红女巫', type:'team', label:'被精神影响' },
+          { name:'奇异博士', type:'team', label:'队友' },
+          { name:'火箭浣熊', type:'team', label:'终局之战队友' },
+          { name:'幻视', type:'team', label:'队友 / 创造者' },
+          { name:'尚气', type:'team', label:'队友' }
         ]
       },
-
-      /* ---------- T0.5 传说级 ---------- */
       {
         id: 'h-c-wanda',
         name: '绯红女巫',
         sub: 'Wanda Maximoff',
         tag: '复仇者 / 变种人',
         tier: 't05',
-        power: 96,
+        power: 90,
         img: 'https://placehold.co/400x500/1a1a20/b23a5f?text=Scarlet+Witch',
-        stats: { 战商: 72, 智力: 80, 力量: 60, 防御: 70, 装备: 55, 速度: 75, 耐力: 78, 体质: 62, 技能: 88, 格斗: 45, 射击: 30, 黑客: 25, 神力: 99 },
+        stats: { 战商: 70, 智力: 78, 力量: 58, 防御: 68, 装备: 52, 速度: 72, 耐力: 76, 体质: 60, 技能: 86, 格斗: 42, 射击: 28, 黑客: 22, 神力: 98 },
+        signature: [
+          { name: '混沌魔法', stat: '神力' },
+          { name: '现实修改', stat: '神力' },
+          { name: '心灵操控', stat: '智力' }
+        ],
         reason: '绯红女巫的混沌魔法在漫画巅峰时期（如《M氏家族》事件）达到全能宇宙级，可修改现实、重启多元宇宙，甚至剥夺全地球超能力者的能力。混沌魔法：巅峰时期可凭意识瞬间抹杀变种人能力，创造新现实，其力量与凤凰之力齐名。高光表现：《M氏家族》中因精神崩溃引发混沌之力暴走，直接改写现实，导致变种人几乎灭绝。在漫画中可对抗无限手套灭霸，但无法击败宇宙之心灭霸。电影削弱：MCU中仅展现部分魔法能力（如心灵控制、能量操纵），但《复联4》暴走状态仍能短暂压制灭霸。',
         relations: [
           { name:'黑寡妇', type:'team', label:'队友' },
@@ -2054,7 +2577,34 @@ const DB = {
           { name:'美国队长', type:'team', label:'队友' },
           { name:'浩克', type:'team', label:'队友' },
           { name:'雷神', type:'team', label:'队友' },
-          { name:'钢铁侠', type:'team', label:'精神影响' }
+          { name:'钢铁侠', type:'team', label:'精神影响' },
+          { name:'奇异博士', type:'enemy', label:'多元宇宙对抗' },
+          { name:'幻视', type:'ally', label:'爱人' }
+        ]
+      },
+      {
+        id: 'h-c-strange',
+        name: '奇异博士',
+        sub: 'Stephen Strange',
+        tag: '至尊法师 / 复仇者',
+        tier: 't05',
+        power: 92,
+        img: 'https://placehold.co/400x500/1a1a20/28a0e0?text=Doctor+Strange',
+        stats: { 战商: 90, 智力: 94, 力量: 42, 防御: 68, 装备: 96, 速度: 72, 耐力: 74, 体质: 56, 技能: 92, 格斗: 44, 射击: 26, 黑客: 32, 神力: 99 },
+        signature: [
+          { name: '时间宝石', stat: '装备' },
+          { name: '维度放逐', stat: '神力' },
+          { name: '镜像空间', stat: '智力' }
+        ],
+        reason: '奇异博士作为至尊法师，其魔法能力在漫威宇宙中属于顶尖层次，尤其在漫画中多次展现多元宇宙级别的干涉能力，甚至能与宇宙实体抗衡。魔法与神力：操纵时间、维度旅行、修改现实等能力，曾暂停全球时间（《奇异博士》电影）。召唤维山帝、多玛暮等神秘实体的力量，在漫画中击败生命法庭、永恒等宇宙级存在，甚至摧毁过整个维度。在《奇异博士2》中对抗混沌魔法暴走的绯红女巫，并通过智慧看穿其幻术弱点。装备与战术：阿迦莫多之眼（时间宝石）和悬浮斗篷极大增强其战力，可观测多元宇宙并防御致命攻击。在《复联3》中通过时间宝石预演1400万种未来，制定击败灭霸的唯一计划。高光表现：漫画中曾吸收恶魔力量暴打绿殇浩克，但需谨慎控制。电影中利用多元宇宙规则，将旺达的混沌魔法限制在特定维度。',
+        relations: [
+          { name:'钢铁侠', type:'team', label:'队友' },
+          { name:'雷神', type:'team', label:'队友' },
+          { name:'黑寡妇', type:'team', label:'队友' },
+          { name:'美国队长', type:'team', label:'队友' },
+          { name:'绯红女巫', type:'enemy', label:'多元宇宙对抗' },
+          { name:'浩克', type:'team', label:'队友' },
+          { name:'尚气', type:'team', label:'队友' }
         ]
       }
     ],
@@ -2066,27 +2616,23 @@ const DB = {
   }
 };
 
-/* =========================================================
-   配置
-   ========================================================= */
 const COLOR_A = '#e62429';
 const COLOR_B = '#f5c518';
 
 const State = {
-  hero: { mode: 'comic', a: null, b: null, search: '' },
-  gear: { mode: 'comic', a: null, b: null, search: '' }
+  hero: { mode: 'comic', a: null, b: null, search: '', reportSeed: 0 },
+  gear: { mode: 'comic', a: null, b: null, search: '', reportSeed: 0 }
 };
 
 let activeTierFilter = 'all';
 let librarySearchQuery = '';
 
-/* 关系网交互状态 */
 let hoveredNodeId = null;
 let relationRenderData = null;
 let relationRafId = null;
 
 /* =========================================================
-   工具函数
+   工具
    ========================================================= */
 function hexToRgba(hex, alpha) {
   const r = parseInt(hex.slice(1, 3), 16);
@@ -2107,7 +2653,12 @@ function findItem(section, mode, id) {
 }
 
 function getTierInfo(tierKey) {
-  return TIERS.find(t => t.key === tierKey) || { code:'—', name:'未知', color:'#8a8a99' };
+  return TIERS.find(t => t.key === tierKey) || { code:'—', name:'未知', color:'#9a9aab' };
+}
+
+function getTierIndex(tierKey) {
+  const i = TIERS.findIndex(t => t.key === tierKey);
+  return i === -1 ? 99 : i;
 }
 
 function getAllHeroes() {
@@ -2115,16 +2666,12 @@ function getAllHeroes() {
   const all = [];
   ['comic', 'movie'].forEach(mode => {
     DB.hero[mode].forEach(h => {
-      if (!seen.has(h.id)) {
-        seen.add(h.id);
-        all.push(h);
-      }
+      if (!seen.has(h.id)) { seen.add(h.id); all.push(h); }
     });
   });
   return all;
 }
 
-/* 通用搜索匹配：匹配 name / sub / tag / id */
 function matchSearch(item, query) {
   if (!query) return true;
   const q = query.toLowerCase();
@@ -2132,8 +2679,19 @@ function matchSearch(item, query) {
   return str.includes(q);
 }
 
+function seededRandom(seed) {
+  let x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
+
+function pickBySeed(arr, seed) {
+  if (!arr || !arr.length) return '';
+  const i = Math.floor(seededRandom(seed) * arr.length) % arr.length;
+  return arr[i];
+}
+
 /* =========================================================
-   雷达图绘制
+   雷达图
    ========================================================= */
 function drawRadar(canvas, labels, series) {
   const rect = canvas.getBoundingClientRect();
@@ -2166,16 +2724,15 @@ function drawRadar(canvas, labels, series) {
     ctx.beginPath();
     for (let i = 0; i < n; i++) {
       const [x, y] = point(i, r);
-      if (i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
     }
     ctx.closePath();
-    ctx.strokeStyle = g === 4 ? 'rgba(255,255,255,.20)' : 'rgba(255,255,255,.07)';
+    ctx.strokeStyle = g === 4 ? 'rgba(255,255,255,.24)' : 'rgba(255,255,255,.09)';
     ctx.lineWidth = 1;
     ctx.stroke();
   }
 
-  ctx.strokeStyle = 'rgba(255,255,255,.07)';
+  ctx.strokeStyle = 'rgba(255,255,255,.09)';
   ctx.lineWidth = 1;
   for (let i = 0; i < n; i++) {
     const [x, y] = point(i, R);
@@ -2186,7 +2743,7 @@ function drawRadar(canvas, labels, series) {
   }
 
   ctx.font = '600 10px "Noto Sans SC", system-ui, sans-serif';
-  ctx.fillStyle = '#8a8a99';
+  ctx.fillStyle = '#9a9aab';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   for (let i = 0; i < n; i++) {
@@ -2202,11 +2759,10 @@ function drawRadar(canvas, labels, series) {
 
     ctx.beginPath();
     pts.forEach(([x, y], i) => {
-      if (i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
     });
     ctx.closePath();
-    ctx.fillStyle = hexToRgba(s.color, 0.18);
+    ctx.fillStyle = hexToRgba(s.color, 0.2);
     ctx.fill();
     ctx.strokeStyle = s.color;
     ctx.lineWidth = 2;
@@ -2218,7 +2774,7 @@ function drawRadar(canvas, labels, series) {
       ctx.arc(x, y, 3, 0, Math.PI * 2);
       ctx.fillStyle = s.color;
       ctx.fill();
-      ctx.strokeStyle = '#0a0a0c';
+      ctx.strokeStyle = '#0e0e12';
       ctx.lineWidth = 1.5;
       ctx.stroke();
     });
@@ -2226,7 +2782,336 @@ function drawRadar(canvas, labels, series) {
 }
 
 /* =========================================================
-   渲染：等级体系
+   动态战报生成器（已修复 [object Object] bug）
+   ========================================================= */
+function diffLevel(d) {
+  const a = Math.abs(d);
+  if (a >= 40) return 'crush';
+  if (a >= 22) return 'high';
+  if (a >= 10) return 'mid';
+  if (a >= 4)  return 'low';
+  return 'even';
+}
+
+function getSkillByStat(hero, stat) {
+  if (!hero || !hero.signature) return null;
+  return hero.signature.find(s => s.stat === stat) || null;
+}
+
+function getAnySkill(hero, excludeStat) {
+  if (!hero || !hero.signature || !hero.signature.length) return null;
+  const pool = hero.signature.filter(s => s.stat !== excludeStat);
+  const list = pool.length ? pool : hero.signature;
+  return list[0];
+}
+
+function wrapSkill(name, side) {
+  return '<span class="skill ' + (side === 'b' ? 'b' : '') + '">' + name + '</span>';
+}
+
+function describeAdvantage(stat, diff, side, A, B) {
+  const lvl = diffLevel(diff);
+  const heroName = side === 'a' ? A.name : B.name;
+  const who = side === 'a' ? '<em>' + heroName + '</em>' : '<b>' + heroName + '</b>';
+
+  const dict = {
+    crush: {
+      '力量':  who + '在纯粹力量层面形成碾压级差距',
+      '速度':  who + '的速度远超对手，先手权完全被掌握',
+      '防御':  who + '的防御构筑成一道无法逾越的墙',
+      '神力':  who + '释放的神力令整个战场为之扭曲',
+      '智力':  who + '的布局已经提前封锁了所有退路',
+      '装备':  who + '的装备代差让对手的武器形同虚设',
+      '战商':  who + '在战术层面完全预判了对手的每一步',
+      '耐力':  who + '的续航能力让战斗拖成了单方面的消耗',
+      '体质':  who + '的身体强度让每一次交锋都毫无悬念',
+      '技能':  who + '的技艺已经臻至化境，对手难以招架',
+      '格斗':  who + '的近战压制令对手无法组织有效反击',
+      '射击':  who + '的远程火力网覆盖了整个战场',
+      '黑客':  who + '的信息压制令对手的科技体系全面瘫痪'
+    },
+    high: {
+      '力量':  who + '在力量上明显占优，每一次撞击都在累积优势',
+      '速度':  who + '的移动节奏快出半拍，抢占主动',
+      '防御':  who + '能从容承受对手的攻击并伺机反打',
+      '神力':  who + '的能量输出稳定压制着对手的气场',
+      '智力':  who + '的战术设计正在逐步生效',
+      '装备':  who + '的装备性能更胜一筹，攻防转换更流畅',
+      '战商':  who + '的临场判断总是先行一步',
+      '耐力':  who + '的持久战力开始显出成效',
+      '体质':  who + '的身体素质在持久战中成为筹码',
+      '技能':  who + '的招牌技艺屡屡奏效',
+      '格斗':  who + '在近身缠斗中占得上风',
+      '射击':  who + '的远程打击不断累积伤害',
+      '黑客':  who + '在信息战中取得主导权'
+    },
+    mid: {
+      '力量':  who + '在力量对抗中稍占上风',
+      '速度':  who + '凭借速度差制造出几次有效切入',
+      '防御':  who + '的抗打击能力让对手感到棘手',
+      '神力':  who + '的能量层级略高一线',
+      '智力':  who + '的战术细节处理更精细',
+      '装备':  who + '的装备在某些环节更胜半筹',
+      '战商':  who + '对局势的把握更精准',
+      '耐力':  who + '能撑得更久一些',
+      '体质':  who + '的身体负荷更小',
+      '技能':  who + '的技艺细节更到位',
+      '格斗':  who + '的招式衔接更紧凑',
+      '射击':  who + '的射击精度占据优势',
+      '黑客':  who + '在系统层面取得部分优势'
+    },
+    low: {
+      '力量':  who + '在力量对比中占据微弱优势',
+      '速度':  who + '的动作稍快一线',
+      '防御':  who + '的抗击打表现略好',
+      '神力':  who + '的能量运用略占先机',
+      '智力':  who + '的算计稍微领先',
+      '装备':  who + '的装备有细微的代际优势',
+      '战商':  who + '的临场判断快了半拍',
+      '耐力':  who + '的消耗更慢',
+      '体质':  who + '的身体素质略微占优',
+      '技能':  who + '的技艺细节处理更好',
+      '格斗':  who + '在近战细节中略胜一筹',
+      '射击':  who + '的准度略高',
+      '黑客':  who + '在信息攻防中略占上风'
+    },
+    even: {
+      '力量':  '双方在力量层面难分高下',
+      '速度':  '两人的速度几乎在同一水平线',
+      '防御':  '双方都难以一击破防',
+      '神力':  '两股能量相互抵消，僵持不下',
+      '智力':  '双方的算计针锋相对',
+      '装备':  '两人的装备各有所长',
+      '战商':  '战术层面形成拉锯',
+      '耐力':  '耐久度接近，谁先失误谁先输',
+      '体质':  '身体强度接近',
+      '技能':  '技艺水准在伯仲之间',
+      '格斗':  '近战陷入缠斗',
+      '射击':  '远程对射难分高下',
+      '黑客':  '信息战僵持'
+    }
+  };
+
+  return dict[lvl][stat] || (who + '在' + stat + '层面占据上风');
+}
+
+function generateBattleReport(A, B, seed) {
+  if (!A || !B) return null;
+
+  const s = seed || 1;
+  const tierA = getTierInfo(A.tier);
+  const tierB = getTierInfo(B.tier);
+  const idxA = getTierIndex(A.tier);
+  const idxB = getTierIndex(B.tier);
+  const tierGap = Math.abs(idxA - idxB);
+
+  const powerDiff = A.power - B.power;
+  const absPowerDiff = Math.abs(powerDiff);
+  const leader = powerDiff >= 0 ? A : B;
+  const follower = powerDiff >= 0 ? B : A;
+  const leaderIsA = powerDiff >= 0;
+
+  const dims = STAT_KEYS.map(k => ({
+    stat: k,
+    a: (A.stats && A.stats[k]) || 0,
+    b: (B.stats && B.stats[k]) || 0,
+    diff: ((A.stats && A.stats[k]) || 0) - ((B.stats && B.stats[k]) || 0)
+  }));
+
+  const sortedByAbs = dims.slice().sort((x, y) => Math.abs(y.diff) - Math.abs(x.diff));
+  const dominant = sortedByAbs[0];
+  const second = sortedByAbs[1];
+
+  /* 开场 */
+  const introTemplates = [];
+
+  if (tierGap >= 2) {
+    introTemplates.push(
+      tierA.code + '级别的' + A.name + '与' + tierB.code + '级别的' + B.name + '在战场两端对峙——这是一场从一开始就不平等的交锋。',
+      '当' + A.name + '（' + tierA.code + '）的气息压迫过来时，' + B.name + '（' + tierB.code + '）感受到的是跨越级别的压迫。',
+      '等级差' + tierGap + '档。' + A.name + '与' + B.name + '之间的鸿沟，从第一秒就已经注定。'
+    );
+  } else if (tierGap === 1) {
+    introTemplates.push(
+      A.name + '（' + tierA.code + '）与' + B.name + '（' + tierB.code + '）仅差一档等级，胜负取决于谁能抓住稍纵即逝的机会。',
+      '同为大级别下的强者，' + A.name + '与' + B.name + '的对决更像是一场高水平的博弈。',
+      tierA.name + '对上' + tierB.name + '，这半档的差距正是这场对决的悬念所在。'
+    );
+  } else {
+    introTemplates.push(
+      A.name + '与' + B.name + '同属' + tierA.name + '级别，一场纯粹的技艺与意志的较量就此展开。',
+      '同为' + tierA.code + '级别，' + A.name + '与' + B.name + '之间没有明显的等级压制，一切凭实力说话。',
+      '等级相同，' + A.name + '与' + B.name + '的胜负将完全取决于临场发挥。'
+    );
+  }
+
+  const intro = pickBySeed(introTemplates, s);
+
+  /* 交锋 */
+  const domStat = dominant.stat;
+  const domDiffAbs = Math.abs(dominant.diff);
+  const domLeaderIsA = dominant.diff >= 0;
+  const domLeader = domLeaderIsA ? A : B;
+  const domFollower = domLeaderIsA ? B : A;
+  const domLeaderSkill = getSkillByStat(domLeader, domStat);
+  const domFollowerSkill = getSkillByStat(domFollower, domStat);
+
+  let clash = '';
+
+  if (domDiffAbs < 4) {
+    const aSkill = getAnySkill(A, domStat);
+    const bSkill = getAnySkill(B, domStat);
+    const sA = aSkill ? wrapSkill(aSkill.name, 'a') : '';
+    const sB = bSkill ? wrapSkill(bSkill.name, 'b') : '';
+
+    clash = '交锋首先在' + domStat + '层面展开。' + A.name + '与' + B.name + '几乎同时出招';
+    if (sA && sB) clash += '——' + sA + '对上' + sB + '，';
+    else if (sA) clash += '——' + sA + '，';
+    else if (sB) clash += '——' + sB + '，';
+
+    clash += '这一轮谁都没有占到便宜。';
+  } else {
+    clash = describeAdvantage(domStat, domDiffAbs, domLeaderIsA ? 'a' : 'b', A, B) + '。';
+
+    if (domLeaderSkill) {
+      clash += domLeader.name + '率先发动' + wrapSkill(domLeaderSkill.name, domLeaderIsA ? 'a' : 'b') + '，';
+    } else {
+      clash += domLeader.name + '抢先出手，';
+    }
+
+    if (domFollowerSkill) {
+      clash += domFollower.name + '以' + wrapSkill(domFollowerSkill.name, domLeaderIsA ? 'b' : 'a') + '勉力应对。';
+    } else {
+      clash += domFollower.name + '只能被迫转入防守。';
+    }
+  }
+
+  /* 转折 */
+  const secStat = second.stat;
+  const secDiffAbs = Math.abs(second.diff);
+  const secLeaderIsA = second.diff >= 0;
+  const secLeader = secLeaderIsA ? A : B;
+  const secFollower = secLeaderIsA ? B : A;
+  const secLeaderSkill = getSkillByStat(secLeader, secStat);
+  const secFollowerSkill = getSkillByStat(secFollower, secStat);
+
+  let turn = '';
+
+  if (secDiffAbs < 4) {
+    turn = '战局在' + secStat + '层面进入拉锯，双方你来我往，谁都未能打破平衡。';
+  } else {
+    const leaderIsSame = (secLeaderIsA === leaderIsA);
+
+    if (leaderIsSame) {
+      turn = secLeader.name + '继续在' + secStat + '层面扩大优势';
+      if (secLeaderSkill) {
+        turn += '，' + wrapSkill(secLeaderSkill.name, secLeaderIsA ? 'a' : 'b') + '的连续施压让' + secFollower.name + '几乎喘不过气。';
+      } else {
+        turn += '，' + secFollower.name + '的防线开始出现裂缝。';
+      }
+    } else {
+      turn = '然而' + secLeader.name + '在' + secStat + '层面完成了反击';
+      if (secLeaderSkill) {
+        turn += '——' + wrapSkill(secLeaderSkill.name, secLeaderIsA ? 'a' : 'b') + '撕开了对手的节奏，战局重新变得胶着。';
+      } else {
+        turn += '，战局重新变得胶着。';
+      }
+    }
+  }
+
+  /* 结论 */
+  let finish = '';
+
+  if (absPowerDiff >= 18) {
+    finish = '随着' + leader.name + '在综合战力上的绝对优势逐步兑现，' + follower.name + '的反击空间被彻底压缩。' +
+      '这场对决没有太多悬念——' + leader.name + '以' + (leaderIsA ? 'A' : 'B') + '方之姿强势收下胜利，综合战力差 ' + absPowerDiff + '。';
+  } else if (absPowerDiff >= 8) {
+    finish = leader.name + '最终胜出，但' + follower.name + '在' + secStat + '等环节上的表现足够顽强。' +
+      '综合战力差 ' + absPowerDiff + '，这不是一场轻松的胜利。';
+  } else if (absPowerDiff >= 3) {
+    finish = '这场对决极其惨烈，' + leader.name + '仅以微弱优势胜出（差 ' + absPowerDiff + '）。' +
+      '任何一个环节的微小变数，都可能改写结局。';
+  } else {
+    finish = '两人的综合战力几乎持平（差 ' + absPowerDiff + '），最终只能以平局收场。' +
+      '若换一个战场、换一种规则，胜负或将易主。';
+  }
+
+  return { intro: intro, clash: clash, turn: turn, finish: finish };
+}
+
+function renderBattleReport(section) {
+  const st = State[section];
+  const body = document.getElementById(section + '-battle-body');
+  const titleEl = document.querySelector('#' + section + '-battle-report .br-title');
+
+  if (titleEl) {
+    titleEl.textContent = '动态战报 · ' + (st.mode === 'comic' ? '漫画表现' : '电影表现');
+  }
+
+  const A = findItem(section, st.mode, st.a);
+  const B = findItem(section, st.mode, st.b);
+
+  if (!A || !B) {
+    body.innerHTML = '<div class="br-empty"><b>WAITING</b>请先选择两名对比对象</div>';
+    return;
+  }
+
+  const report = generateBattleReport(A, B, st.reportSeed);
+  if (!report) {
+    body.innerHTML = '<div class="br-empty"><b>ERROR</b>战报生成失败</div>';
+    return;
+  }
+
+  body.innerHTML =
+    '<div class="br-segment">' +
+      '<div class="br-seg-label intro">开场</div>' +
+      '<div class="br-seg-text">' + report.intro + '</div>' +
+    '</div>' +
+    '<div class="br-segment">' +
+      '<div class="br-seg-label clash">交锋</div>' +
+      '<div class="br-seg-text">' + report.clash + '</div>' +
+    '</div>' +
+    '<div class="br-segment">' +
+      '<div class="br-seg-label turn">转折</div>' +
+      '<div class="br-seg-text">' + report.turn + '</div>' +
+    '</div>' +
+    '<div class="br-segment">' +
+      '<div class="br-seg-label finish">结论</div>' +
+      '<div class="br-seg-text">' + report.finish + '</div>' +
+    '</div>';
+}
+
+function rerollBattle(section) {
+  State[section].reportSeed = Math.floor(Math.random() * 100000);
+  renderBattleReport(section);
+}
+
+/* =========================================================
+   更新日志渲染
+   ========================================================= */
+function renderChangelog() {
+  const el = document.getElementById('changelog-list');
+
+  el.innerHTML = CHANGELOG.map((item, index) => {
+    const latestCls = item.latest ? ' latest' : '';
+    return '<div class="cl-item' + latestCls + '">' +
+      '<div class="cl-left">' +
+        '<div class="cl-version"><span class="cl-dot"></span>' + item.version + '</div>' +
+        '<div class="cl-date">' + item.date + '</div>' +
+        '<span class="cl-tag">' + item.tag + '</span>' +
+      '</div>' +
+      '<div class="cl-right">' +
+        '<div class="cl-title">' + item.title + '</div>' +
+        '<ul class="cl-items">' +
+          item.items.map(line => '<li>' + line + '</li>').join('') +
+        '</ul>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+/* =========================================================
+   其他渲染
    ========================================================= */
 function renderTierSystem() {
   const el = document.getElementById('tier-list');
@@ -2236,18 +3121,52 @@ function renderTierSystem() {
     const count = allHeroes.filter(h => h.tier === t.key).length;
     return '<div class="tier-row">' +
       '<div class="tier-badge ' + t.key + '">' + t.code + '</div>' +
-      '<div class="tier-info">' +
-        '<b>' + t.name + '</b>' +
-        '<span>' + t.desc + '</span>' +
-      '</div>' +
+      '<div class="tier-info"><b>' + t.name + '</b><span>' + t.desc + '</span></div>' +
       '<div class="tier-count">' + count + '</div>' +
     '</div>';
   }).join('');
 }
 
-/* =========================================================
-   渲染：英雄卡池（支持搜索过滤）
-   ========================================================= */
+function renderTierDistribution() {
+  const allHeroes = getAllHeroes();
+  const total = allHeroes.length;
+
+  const stackEl = document.getElementById('td-stack');
+  const legendEl = document.getElementById('td-legend');
+  const totalEl = document.getElementById('td-total-count');
+
+  totalEl.textContent = total;
+
+  if (total === 0) {
+    stackEl.innerHTML = '<div style="display:grid;place-items:center;width:100%;color:var(--muted);font-size:12px;letter-spacing:1px;">暂无数据</div>';
+    legendEl.innerHTML = '';
+    return;
+  }
+
+  const counts = {};
+  TIERS.forEach(t => counts[t.key] = 0);
+  allHeroes.forEach(h => { if (counts[h.tier] !== undefined) counts[h.tier]++; });
+
+  const visibleTiers = TIERS.filter(t => counts[t.key] > 0);
+
+  stackEl.innerHTML = visibleTiers.map(t => {
+    const pct = (counts[t.key] / total) * 100;
+    const dimmed = (activeTierFilter !== 'all' && activeTierFilter !== t.key) ? ' dimmed' : '';
+    return '<div class="td-segment ' + t.key + dimmed + '" data-tier="' + t.key + '" style="width:' + pct + '%;" title="' + t.code + ' ' + t.name + ' · ' + counts[t.key] + ' 位">' +
+      '<span>' + t.code + '</span>' +
+    '</div>';
+  }).join('');
+
+  legendEl.innerHTML = TIERS.map(t => {
+    const active = activeTierFilter === t.key ? ' active' : '';
+    return '<div class="td-legend-item' + active + '" data-tier="' + t.key + '">' +
+      '<span class="td-dot" style="background:' + t.color + ';color:' + t.color + ';"></span>' +
+      '<span>' + t.code + ' ' + t.name + '</span>' +
+      '<b>' + counts[t.key] + '</b>' +
+    '</div>';
+  }).join('');
+}
+
 function renderRoster(section) {
   const st = State[section];
   const fullList = getList(section, st.mode);
@@ -2256,28 +3175,17 @@ function renderRoster(section) {
   const countEl = document.getElementById(section + '-roster-count');
 
   if (countEl) {
-    if (st.search) {
-      countEl.innerHTML = '匹配 <b>' + list.length + '</b> / ' + fullList.length + ' 项';
-    } else {
-      countEl.innerHTML = '共 <b>' + fullList.length + '</b> 项';
-    }
+    if (st.search) countEl.innerHTML = '匹配 <b>' + list.length + '</b> / ' + fullList.length + ' 项';
+    else countEl.innerHTML = '共 <b>' + fullList.length + '</b> 项';
   }
 
   if (!fullList.length) {
-    el.innerHTML =
-      '<div class="roster-empty">' +
-        '<b>NO DATA</b>' +
-        '该分类尚未录入任何条目，等待数据注入。' +
-      '</div>';
+    el.innerHTML = '<div class="roster-empty"><b>NO DATA</b>该分类尚未录入任何条目，等待数据注入。</div>';
     return;
   }
 
   if (!list.length) {
-    el.innerHTML =
-      '<div class="roster-empty">' +
-        '<b>NO MATCH</b>' +
-        '没有匹配「' + st.search + '」的条目，请调整关键词。' +
-      '</div>';
+    el.innerHTML = '<div class="roster-empty"><b>NO MATCH</b>没有匹配「' + st.search + '」的条目，请调整关键词。</div>';
     return;
   }
 
@@ -2289,15 +3197,10 @@ function renderRoster(section) {
     if (pickedB) cls += ' picked-b';
 
     const tierInfo = getTierInfo(item.tier);
-    const media = item.img
-      ? '<img src="' + item.img + '" alt="' + item.name + '" loading="lazy">'
-      : '';
+    const media = item.img ? '<img src="' + item.img + '" alt="' + item.name + '" loading="lazy">' : '';
 
     return '<article class="' + cls + '" data-id="' + item.id + '">' +
-      '<div class="card-media">' +
-        media +
-        '<span class="tier ' + item.tier + '">' + tierInfo.code + '</span>' +
-      '</div>' +
+      '<div class="card-media">' + media + '<span class="tier ' + item.tier + '">' + tierInfo.code + '</span></div>' +
       '<div class="card-body">' +
         '<h4>' + (item.name || '未命名') + '</h4>' +
         '<p>' + (item.sub || '—') + '</p>' +
@@ -2307,9 +3210,6 @@ function renderRoster(section) {
   }).join('');
 }
 
-/* =========================================================
-   渲染：对战槽位
-   ========================================================= */
 function renderSlots(section) {
   const st = State[section];
   const list = getList(section, st.mode);
@@ -2330,9 +3230,7 @@ function renderSlots(section) {
 
     el.classList.add('filled');
     const tierInfo = getTierInfo(item.tier);
-    const media = item.img
-      ? '<img src="' + item.img + '" alt="' + item.name + '">'
-      : '';
+    const media = item.img ? '<img src="' + item.img + '" alt="' + item.name + '">' : '';
 
     el.innerHTML =
       '<div class="slot-filled">' +
@@ -2346,11 +3244,14 @@ function renderSlots(section) {
         '<button class="slot-clear" data-section="' + section + '" data-side="' + side + '" title="移除">×</button>' +
       '</div>';
   });
+
+  const swapBtn = document.getElementById(section + '-swap');
+  if (swapBtn) {
+    if (st.a && st.b) swapBtn.classList.remove('disabled');
+    else swapBtn.classList.add('disabled');
+  }
 }
 
-/* =========================================================
-   渲染：属性对比条
-   ========================================================= */
 const BARS_KEYS = ['战商', '智力', '力量', '防御', '装备', '速度', '耐力', '神力'];
 
 function renderBars(section, A, B) {
@@ -2381,9 +3282,6 @@ function renderBars(section, A, B) {
   }).join('');
 }
 
-/* =========================================================
-   渲染：文字结论
-   ========================================================= */
 function renderVerdict(section, A, B) {
   const el = document.getElementById(section + '-verdict');
 
@@ -2421,9 +3319,6 @@ function renderVerdict(section, A, B) {
     '（差值 ' + diff + '）';
 }
 
-/* =========================================================
-   渲染：分析面板
-   ========================================================= */
 function renderAnalysis(section) {
   const st = State[section];
   const A = findItem(section, st.mode, st.a);
@@ -2438,27 +3333,18 @@ function renderAnalysis(section) {
 
   renderBars(section, A, B);
   renderVerdict(section, A, B);
+  renderBattleReport(section);
 }
 
-/* =========================================================
-   渲染：英雄库矩阵
-   ========================================================= */
 function renderLibrary() {
   let filtered = getAllHeroes();
   const totalCount = filtered.length;
 
-  if (activeTierFilter !== 'all') {
-    filtered = filtered.filter(h => h.tier === activeTierFilter);
-  }
-
-  if (librarySearchQuery) {
-    filtered = filtered.filter(h => matchSearch(h, librarySearchQuery));
-  }
+  if (activeTierFilter !== 'all') filtered = filtered.filter(h => h.tier === activeTierFilter);
+  if (librarySearchQuery) filtered = filtered.filter(h => matchSearch(h, librarySearchQuery));
 
   const countEl = document.getElementById('result-count');
-  if (countEl) {
-    countEl.innerHTML = '显示 <b>' + filtered.length + '</b> / ' + totalCount + ' 位英雄';
-  }
+  if (countEl) countEl.innerHTML = '显示 <b>' + filtered.length + '</b> / ' + totalCount + ' 位英雄';
 
   const grid = document.getElementById('matrix-grid');
 
@@ -2467,9 +3353,7 @@ function renderLibrary() {
   } else {
     grid.innerHTML = filtered.map(h => {
       const tierInfo = getTierInfo(h.tier);
-      const media = h.img
-        ? '<img src="' + h.img + '" alt="' + h.name + '" loading="lazy">'
-        : '';
+      const media = h.img ? '<img src="' + h.img + '" alt="' + h.name + '" loading="lazy">' : '';
       const statSummary = ['力量', '速度', '防御', '神力']
         .map(k => k + ' ' + (h.stats ? (h.stats[k] ?? '—') : '—'))
         .join(' · ');
@@ -2479,10 +3363,7 @@ function renderLibrary() {
         '<div class="tile-name">' + h.name + '</div>' +
         '<span class="tile-tier-tag lib-tier ' + h.tier + '">' + tierInfo.code + ' ' + tierInfo.name + '</span>' +
         '<div class="tile-power">' + (h.power ?? '—') + '</div>' +
-        '<div class="tile-tooltip">' +
-          '<b>' + h.name + '</b> · ' + tierInfo.code + '<br>' +
-          '<span>' + statSummary + '</span>' +
-        '</div>' +
+        '<div class="tile-tooltip"><b>' + h.name + '</b> · ' + tierInfo.code + '<br><span>' + statSummary + '</span></div>' +
       '</div>';
     }).join('');
   }
@@ -2500,17 +3381,10 @@ function renderLibraryTable(list) {
 
   tbody.innerHTML = list.map(h => {
     const tierInfo = getTierInfo(h.tier);
-    const media = h.img
-      ? '<img src="' + h.img + '" alt="' + h.name + '" loading="lazy">'
-      : '';
+    const media = h.img ? '<img src="' + h.img + '" alt="' + h.name + '" loading="lazy">' : '';
 
     return '<tr data-id="' + h.id + '">' +
-      '<td>' +
-        '<div class="lib-name">' +
-          media +
-          '<div><b>' + h.name + '</b><span>' + h.sub + '</span></div>' +
-        '</div>' +
-      '</td>' +
+      '<td><div class="lib-name">' + media + '<div><b>' + h.name + '</b><span>' + h.sub + '</span></div></div></td>' +
       '<td><span class="lib-tier ' + h.tier + '">' + tierInfo.code + '</span></td>' +
       '<td style="font-size:12px;color:var(--muted);">' + (h.tag || '—') + '</td>' +
       '<td><span class="lib-power">' + (h.power ?? '—') + '</span></td>' +
@@ -2519,19 +3393,12 @@ function renderLibraryTable(list) {
   }).join('');
 }
 
-/* =========================================================
-   渲染：综合总榜
-   ========================================================= */
 function renderRanking() {
   const body = document.getElementById('rank-body');
   const list = getList('hero', State.hero.mode).slice();
 
   if (!list.length) {
-    body.innerHTML =
-      '<tr><td class="rank-empty" colspan="5">' +
-        '<b>NO DATA</b>' +
-        '当前榜单暂无数据，等待英雄条目注入后自动生成。' +
-      '</td></tr>';
+    body.innerHTML = '<tr><td class="rank-empty" colspan="5"><b>NO DATA</b>当前榜单暂无数据，等待英雄条目注入后自动生成。</td></tr>';
     return;
   }
 
@@ -2544,20 +3411,12 @@ function renderRanking() {
     else if (rank === 2) rankCls += ' top2';
     else if (rank === 3) rankCls += ' top3';
 
-    const media = item.img
-      ? '<img src="' + item.img + '" alt="' + item.name + '">'
-      : '';
-
+    const media = item.img ? '<img src="' + item.img + '" alt="' + item.name + '">' : '';
     const tierInfo = getTierInfo(item.tier);
 
     return '<tr>' +
       '<td><span class="' + rankCls + '">' + rank + '</span></td>' +
-      '<td>' +
-        '<div class="rank-name">' +
-          media +
-          '<div><b>' + (item.name || '未命名') + '</b><span>' + (item.sub || '—') + '</span></div>' +
-        '</div>' +
-      '</td>' +
+      '<td><div class="rank-name">' + media + '<div><b>' + (item.name || '未命名') + '</b><span>' + (item.sub || '—') + '</span></div></div></td>' +
       '<td><span class="tier-chip">' + tierInfo.code + ' · ' + (item.tag || '—') + '</span></td>' +
       '<td class="num">' + (item.power ?? '—') + '</td>' +
       '<td><div class="rank-bar"><i style="width:' + (item.power ?? 0) + '%"></i></div></td>' +
@@ -2565,16 +3424,13 @@ function renderRanking() {
   }).join('');
 }
 
-/* =========================================================
-   关系网绘制
-   ========================================================= */
 function getEdgeStyle(type) {
   switch (type) {
     case 'ally':   return { color: '#28e07a', dash: [] };
     case 'enemy':  return { color: '#ff4b50', dash: [7, 5] };
     case 'team':   return { color: '#3d8bff', dash: [2, 4] };
     case 'family': return { color: '#f5c518', dash: [10, 3, 2, 3] };
-    default:       return { color: '#8a8a99', dash: [] };
+    default:       return { color: '#9a9aab', dash: [] };
   }
 }
 
@@ -2596,7 +3452,7 @@ function renderRelations() {
 
   const allHeroes = getAllHeroes();
   if (allHeroes.length === 0) {
-    ctx.fillStyle = '#8a8a99';
+    ctx.fillStyle = '#9a9aab';
     ctx.font = '14px "Noto Sans SC", sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -2607,7 +3463,7 @@ function renderRelations() {
 
   const cx = w / 2;
   const cy = h / 2;
-  const radius = Math.min(w, h) * 0.34;
+  const radius = Math.min(w, h) * 0.36;
 
   const nodePositions = {};
   allHeroes.forEach((hero, i) => {
@@ -2635,13 +3491,7 @@ function renderRelations() {
       const edgeKey = [hero.id, target.id].sort().join('-');
       if (drawnEdges.has(edgeKey)) return;
       drawnEdges.add(edgeKey);
-
-      edges.push({
-        from, to,
-        rel,
-        heroId: hero.id,
-        targetId: target.id
-      });
+      edges.push({ from, to, rel, heroId: hero.id, targetId: target.id });
     });
   });
 
@@ -2651,8 +3501,7 @@ function renderRelations() {
 
   edges.forEach(edge => {
     const style = getEdgeStyle(edge.rel.type);
-    const isHovered = hoveredNodeId &&
-      (edge.heroId === hoveredNodeId || edge.targetId === hoveredNodeId);
+    const isHovered = hoveredNodeId && (edge.heroId === hoveredNodeId || edge.targetId === hoveredNodeId);
     const isDimmed = hoveredNodeId && !isHovered;
 
     const dx = edge.to.x - edge.from.x;
@@ -2686,7 +3535,7 @@ function renderRelations() {
       const boxW = tw + padX * 2;
       const boxH = 14;
 
-      ctx.fillStyle = 'rgba(8,8,10,.94)';
+      ctx.fillStyle = 'rgba(24,24,31,.95)';
       ctx.fillRect(midX - boxW / 2, midY - boxH / 2, boxW, boxH);
 
       ctx.strokeStyle = hexToRgba(style.color, isHovered ? 0.85 : 0.38);
@@ -2710,7 +3559,7 @@ function renderRelations() {
 
     if (isHovered) {
       const grad = ctx.createRadialGradient(pos.x, pos.y, 8, pos.x, pos.y, 32);
-      grad.addColorStop(0, hexToRgba(tierInfo.color, 0.3));
+      grad.addColorStop(0, hexToRgba(tierInfo.color, 0.32));
       grad.addColorStop(1, hexToRgba(tierInfo.color, 0));
       ctx.beginPath();
       ctx.arc(pos.x, pos.y, 32, 0, Math.PI * 2);
@@ -2718,25 +3567,25 @@ function renderRelations() {
       ctx.fill();
     }
 
-    const r = isHovered ? 19 : 16;
+    const r = isHovered ? 19 : 15;
 
     ctx.beginPath();
     ctx.arc(pos.x, pos.y, r, 0, Math.PI * 2);
-    ctx.fillStyle = hexToRgba(tierInfo.color, isDimmed ? 0.1 : 0.4);
+    ctx.fillStyle = hexToRgba(tierInfo.color, isDimmed ? 0.1 : 0.42);
     ctx.fill();
     ctx.strokeStyle = hexToRgba(tierInfo.color, isDimmed ? 0.25 : 1);
     ctx.lineWidth = isHovered ? 3 : 2;
     ctx.stroke();
 
     ctx.fillStyle = isDimmed ? 'rgba(255,255,255,.25)' : '#fff';
-    ctx.font = '700 11px "Noto Sans SC", sans-serif';
+    ctx.font = '700 10px "Noto Sans SC", sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
-    ctx.fillText(hero.name, pos.x, pos.y + r + 6);
+    ctx.fillText(hero.name, pos.x, pos.y + r + 5);
 
-    ctx.fillStyle = isDimmed ? 'rgba(138,138,153,.3)' : tierInfo.color;
+    ctx.fillStyle = isDimmed ? 'rgba(154,154,171,.3)' : tierInfo.color;
     ctx.font = '600 9px "Noto Sans SC", sans-serif';
-    ctx.fillText(tierInfo.code, pos.x, pos.y + r + 20);
+    ctx.fillText(tierInfo.code, pos.x, pos.y + r + 18);
   });
 }
 
@@ -2748,9 +3597,6 @@ function scheduleRelationRender() {
   });
 }
 
-/* =========================================================
-   渲染：顶部统计
-   ========================================================= */
 function renderStats() {
   const heroCount = getAllHeroes().length;
   const gearCount = DB.gear.comic.length + DB.gear.movie.length;
@@ -2758,13 +3604,9 @@ function renderStats() {
   document.getElementById('stat-heroes').textContent = heroCount;
   document.getElementById('stat-gears').textContent = gearCount;
   document.getElementById('stat-dims').textContent = STAT_KEYS.length;
-  document.getElementById('stat-systems').textContent =
-    (DB.hero.comic.length || DB.hero.movie.length) ? 2 : 0;
+  document.getElementById('stat-systems').textContent = (DB.hero.comic.length || DB.hero.movie.length) ? 2 : 0;
 }
 
-/* =========================================================
-   弹窗
-   ========================================================= */
 function openModal(heroId) {
   const hero = getAllHeroes().find(h => h.id === heroId);
   if (!hero) return;
@@ -2783,6 +3625,40 @@ function openModal(heroId) {
     '<span class="meta-chip">战力 ' + (hero.power ?? '—') + '</span>';
 
   document.getElementById('modal-reason').textContent = hero.reason || '暂无评级理由。';
+
+  const sigEl = document.getElementById('modal-signature');
+  if (hero.signature && hero.signature.length) {
+    sigEl.innerHTML = hero.signature.map(sk => {
+      const val = hero.stats ? (hero.stats[sk.stat] ?? 0) : 0;
+      return '<div class="modal-stat-item">' +
+        '<div class="ms-label">' + sk.name + ' · ' + sk.stat + '</div>' +
+        '<div class="ms-val">' + val + '</div>' +
+        '<div class="ms-bar"><i style="width:' + val + '%"></i></div>' +
+      '</div>';
+    }).join('');
+  } else {
+    sigEl.innerHTML = '<span style="font-size:12px;color:var(--muted);">暂无招牌技能数据</span>';
+  }
+
+  const power = hero.power ?? 0;
+  const ringFill = document.getElementById('ring-fill');
+  const ringLabel = document.getElementById('ring-label');
+
+  const arcLen = Math.PI * 47;
+  const offset = arcLen - (arcLen * Math.min(100, power) / 100);
+
+  ringFill.style.stroke = tierInfo.color;
+  ringFill.style.strokeDasharray = arcLen;
+  ringFill.style.strokeDashoffset = arcLen;
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      ringFill.style.strokeDashoffset = offset;
+    });
+  });
+
+  ringLabel.textContent = power;
+  ringLabel.style.color = tierInfo.color;
+  ringLabel.style.borderColor = hexToRgba(tierInfo.color, 0.5);
 
   const statsEl = document.getElementById('modal-stats');
   statsEl.innerHTML = STAT_KEYS.map(k => {
@@ -2817,24 +3693,16 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-/* =========================================================
-   交互逻辑
-   ========================================================= */
 function pick(section, id) {
   const st = State[section];
 
-  if (st.a === id) {
-    st.a = null;
-  } else if (st.b === id) {
-    st.b = null;
-  } else if (!st.a) {
-    st.a = id;
-  } else if (!st.b) {
-    st.b = id;
-  } else {
-    st.a = st.b;
-    st.b = id;
-  }
+  if (st.a === id) st.a = null;
+  else if (st.b === id) st.b = null;
+  else if (!st.a) st.a = id;
+  else if (!st.b) st.b = id;
+  else { st.a = st.b; st.b = id; }
+
+  st.reportSeed = Math.floor(Math.random() * 100000);
 
   renderRoster(section);
   renderSlots(section);
@@ -2843,12 +3711,40 @@ function pick(section, id) {
 
 function clearSlot(section, side) {
   State[section][side] = null;
+  State[section].reportSeed = Math.floor(Math.random() * 100000);
   renderRoster(section);
   renderSlots(section);
   renderAnalysis(section);
 }
 
-/* 绑定单个搜索框 */
+function swapSlots(section) {
+  const st = State[section];
+  if (!st.a || !st.b) return;
+  const tmp = st.a;
+  st.a = st.b;
+  st.b = tmp;
+  st.reportSeed = Math.floor(Math.random() * 100000);
+  renderRoster(section);
+  renderSlots(section);
+  renderAnalysis(section);
+}
+
+function randomBattle() {
+  const heroes = getList('hero', State.hero.mode);
+  if (heroes.length < 2) return;
+
+  const shuffled = heroes.slice().sort(() => Math.random() - 0.5);
+  State.hero.a = shuffled[0].id;
+  State.hero.b = shuffled[1].id;
+  State.hero.reportSeed = Math.floor(Math.random() * 100000);
+
+  renderRoster('hero');
+  renderSlots('hero');
+  renderAnalysis('hero');
+
+  document.getElementById('heroes').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
 function bindSearch(inputId, clearId, onChange) {
   const input = document.getElementById(inputId);
   const clear = document.getElementById(clearId);
@@ -2868,8 +3764,16 @@ function bindSearch(inputId, clearId, onChange) {
   });
 }
 
+function setTierFilter(tierKey) {
+  activeTierFilter = tierKey;
+  document.querySelectorAll('#library-filters .filter-chip').forEach(c => {
+    c.classList.toggle('active', c.dataset.tier === tierKey);
+  });
+  renderLibrary();
+  renderTierDistribution();
+}
+
 function bindEvents() {
-  /* 卡池点击 */
   ['hero', 'gear'].forEach(section => {
     const roster = document.getElementById(section + '-roster');
     roster.addEventListener('click', e => {
@@ -2886,9 +3790,14 @@ function bindEvents() {
         clearSlot(section, btn.dataset.side);
       });
     });
+
+    const swapBtn = document.getElementById(section + '-swap');
+    if (swapBtn) swapBtn.addEventListener('click', () => swapSlots(section));
+
+    const rerollBtn = document.getElementById(section + '-battle-reroll');
+    if (rerollBtn) rerollBtn.addEventListener('click', () => rerollBattle(section));
   });
 
-  /* 英雄 / 装备卡池搜索框 */
   bindSearch('hero-roster-search', 'hero-roster-search-clear', val => {
     State.hero.search = val;
     renderRoster('hero');
@@ -2899,13 +3808,11 @@ function bindEvents() {
     renderRoster('gear');
   });
 
-  /* 英雄库搜索框 */
   bindSearch('hero-search', 'search-clear', val => {
     librarySearchQuery = val.toLowerCase();
     renderLibrary();
   });
 
-  /* 模式切换 */
   document.querySelectorAll('.mode-switch').forEach(switcher => {
     switcher.addEventListener('click', e => {
       const btn = e.target.closest('.mode-btn');
@@ -2920,6 +3827,7 @@ function bindEvents() {
       State[section].mode = btn.dataset.mode;
       State[section].a = null;
       State[section].b = null;
+      State[section].reportSeed = Math.floor(Math.random() * 100000);
 
       renderRoster(section);
       renderSlots(section);
@@ -2929,34 +3837,48 @@ function bindEvents() {
     });
   });
 
-  /* 等级筛选 */
   document.getElementById('library-filters').addEventListener('click', e => {
     const chip = e.target.closest('.filter-chip');
     if (!chip) return;
-
-    document.querySelectorAll('#library-filters .filter-chip').forEach(c => {
-      c.classList.toggle('active', c === chip);
-    });
-
-    activeTierFilter = chip.dataset.tier;
-    renderLibrary();
+    setTierFilter(chip.dataset.tier);
   });
 
-  /* 英雄库矩阵点击 */
+  document.getElementById('tier-distribution').addEventListener('click', e => {
+    const seg = e.target.closest('.td-segment');
+    const leg = e.target.closest('.td-legend-item');
+
+    if (seg) {
+      const tier = seg.dataset.tier;
+      setTierFilter(activeTierFilter === tier ? 'all' : tier);
+    } else if (leg) {
+      const tier = leg.dataset.tier;
+      setTierFilter(activeTierFilter === tier ? 'all' : tier);
+    }
+  });
+
   document.getElementById('matrix-grid').addEventListener('click', e => {
     const tile = e.target.closest('.matrix-tile');
     if (!tile) return;
     openModal(tile.dataset.id);
   });
 
-  /* 英雄库表格行点击 */
   document.getElementById('library-tbody').addEventListener('click', e => {
     const row = e.target.closest('tr');
     if (!row || !row.dataset.id) return;
     openModal(row.dataset.id);
   });
 
-  /* 弹窗关闭 */
+  document.getElementById('random-battle').addEventListener('click', randomBattle);
+
+  const scrollTopBtn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', () => {
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 600);
+  }, { passive:true });
+
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
+
   document.getElementById('modal-close').addEventListener('click', closeModal);
   document.getElementById('modal-overlay').addEventListener('click', e => {
     if (e.target === e.currentTarget) closeModal();
@@ -2965,7 +3887,6 @@ function bindEvents() {
     if (e.key === 'Escape') closeModal();
   });
 
-  /* 关系网交互 */
   const relationCanvas = document.getElementById('relation-canvas');
 
   relationCanvas.addEventListener('mousemove', e => {
@@ -3013,7 +3934,6 @@ function bindEvents() {
     });
   });
 
-  /* 窗口 resize */
   let resizeTimer = null;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
@@ -3024,7 +3944,6 @@ function bindEvents() {
     }, 160);
   });
 
-  /* 导航高亮 */
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
       document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
@@ -3033,9 +3952,6 @@ function bindEvents() {
   });
 }
 
-/* =========================================================
-   初始化
-   ========================================================= */
 function init() {
   renderTierSystem();
   ['hero', 'gear'].forEach(section => {
@@ -3044,9 +3960,11 @@ function init() {
     renderAnalysis(section);
   });
   renderLibrary();
+  renderTierDistribution();
   renderRanking();
   renderStats();
   renderRelations();
+  renderChangelog();
   bindEvents();
 }
 
