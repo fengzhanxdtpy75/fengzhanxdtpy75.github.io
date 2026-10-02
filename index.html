@@ -212,6 +212,11 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .action-btn.share{border-color:rgba(40,224,122,.4);color:#3eeb8b;background:rgba(40,224,122,.07);}
 .action-btn.share:hover{background:rgba(40,224,122,.18);border-color:#3eeb8b;color:#fff;box-shadow:0 0 16px rgba(40,224,122,.3);}
 .action-btn.share.disabled{opacity:.4;pointer-events:none;}
+.action-btn.match{border-color:rgba(168,85,247,.4);color:#c084fc;background:rgba(168,85,247,.07);}
+.action-btn.match:hover{background:rgba(168,85,247,.18);border-color:#c084fc;color:#fff;box-shadow:0 0 16px rgba(168,85,247,.35);transform:translateY(-2px);}
+.action-btn.match.disabled{opacity:.4;pointer-events:none;}
+.action-btn.match.pulse{animation:matchPulse 1.2s ease-in-out infinite;}
+@keyframes matchPulse{0%,100%{box-shadow:0 0 0 0 rgba(168,85,247,.4);}50%{box-shadow:0 0 0 8px rgba(168,85,247,0);}}
 .action-btn svg{width:13px;height:13px;display:block;flex-shrink:0;}
 
 .history-box{background:var(--bg-2);border:1px solid var(--line);border-radius:14px;padding:0;margin-bottom:34px;overflow:hidden;}
@@ -822,6 +827,7 @@ body.ironman-effect .logo-mark{animation:gauntletGlow 1.5s ease infinite;}
 <div class="shortcut-panel" id="shortcut-panel">
   <div class="sc-title">快捷键</div>
   <div class="sc-row"><span>随机对决</span><span class="kbd">R</span></div>
+  <div class="sc-row"><span>自动匹配对手</span><span class="kbd">M</span></div>
   <div class="sc-row"><span>切换常态/巅峰</span><span class="kbd">D</span></div>
   <div class="sc-row"><span>切换音效</span><span class="kbd">S</span></div>
   <div class="sc-row"><span>聚焦搜索</span><span class="kbd">/</span></div>
@@ -880,7 +886,7 @@ body.ironman-effect .logo-mark{animation:gauntletGlow 1.5s ease infinite;}
       英雄分为常态与巅峰两套独立评分体系，共用一个简介分析。
     </p>
     <div class="banner-stats">
-      <div><b id="stat-heroes">19</b><span>收录角色</span></div>
+      <div><b id="stat-heroes">24</b><span>收录角色</span></div>
       <div><b id="stat-gears">0</b><span>装备神器</span></div>
       <div><b id="stat-dims">13</b><span>评测维度</span></div>
       <div><b id="stat-systems">2</b><span>形态体系</span></div>
@@ -926,6 +932,15 @@ body.ironman-effect .logo-mark{animation:gauntletGlow 1.5s ease infinite;}
       <div class="slot" id="hero-slot-b"></div>
     </div>
     <div class="arena-actions">
+      <button class="action-btn match disabled" id="hero-auto-match" title="为 A 方自动匹配势均力敌的对手 (M)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="8" cy="8" r="3"/>
+          <circle cx="16" cy="16" r="3"/>
+          <path d="M11 8 H21"/>
+          <path d="M13 16 H3"/>
+        </svg>
+        自动匹配对手
+      </button>
       <button class="action-btn share disabled" id="hero-share" title="分享当前对战结果">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
@@ -1087,7 +1102,7 @@ body.ironman-effect .logo-mark{animation:gauntletGlow 1.5s ease infinite;}
         </span>
         <button class="search-clear" id="search-clear" type="button" title="清除搜索">×</button>
       </div>
-      <span class="result-count" id="result-count">显示 <b>19</b> / 19 位英雄</span>
+      <span class="result-count" id="result-count">显示 <b>24</b> / 24 位英雄</span>
     </div>
     <div class="matrix-grid" id="matrix-grid"></div>
     <div class="library-table-wrap">
@@ -1177,7 +1192,7 @@ body.ironman-effect .logo-mark{animation:gauntletGlow 1.5s ease infinite;}
   <div class="footer-inner">
     <span>MARVEL POWER RANK · 非官方粉丝向数据站</span>
     <span class="dots"><i></i><i></i><i></i></span>
-    <span>Data Version 2.3.0 · by hjy</span>
+    <span>Data Version 2.4.0 · by hjy</span>
   </div>
 </footer>
 
@@ -1280,7 +1295,8 @@ const Sound = (function() {
     hulk: function() { playTone(80, 0.5, 'sawtooth', 0.22); playTone(60, 0.6, 'square', 0.15, 0.02); playNoise(0.4, 0.12, 0); playTone(120, 0.3, 'sawtooth', 0.1, 0.4); },
     wakanda: function() { playTone(120, 0.2, 'sine', 0.15); playTone(100, 0.2, 'sine', 0.15, 0.25); playTone(80, 0.4, 'sine', 0.18, 0.5); },
     stanlee: function() { playTone(1200, 0.12, 'sine', 0.08); playTone(1600, 0.18, 'sine', 0.08, 0.1); },
-    copy: function() { playTone(880, 0.06, 'sine', 0.1); playTone(1320, 0.1, 'sine', 0.1, 0.05); }
+    copy: function() { playTone(880, 0.06, 'sine', 0.1); playTone(1320, 0.1, 'sine', 0.1, 0.05); },
+    match: function() { playTone(600, 0.06, 'sine', 0.1); playTone(800, 0.06, 'sine', 0.1, 0.05); playTone(1000, 0.1, 'sine', 0.12, 0.1); }
   };
 })();
 
@@ -1340,7 +1356,17 @@ const TIERS = [
 const STAT_KEYS = ['战商','智力','力量','防御','装备','速度','耐力','体质','技能','格斗','射击','黑客','神力'];
 
 const CHANGELOG = [
-  { version:'v2.3.0', date:'当前版本', tag:'CURRENT', latest:true,
+  { version:'v2.4.0', date:'当前版本', tag:'CURRENT', latest:true,
+    title:'自动匹配对手 + 5 位新英雄',
+    items:[
+      '新增 5 位英雄：红骷髅（T3）、洛基（T4）、海拉（T1.5）、灭霸（T0.5）、模仿大师（T5）',
+      '新增「自动匹配对手」功能：选定 A 方后一键匹配战力最接近的 B 方（快捷键 M）',
+      '匹配按钮在 A 已选、B 未选时自动脉动提示，匹配成功后弹出战力差提示',
+      '灭霸巅峰形态为「无限手套」，达到 T0.5 传说级，为当前最高战力之一',
+      '海拉巅峰形态为「阿斯加德完全体」，可匹敌奥丁达到 T1 史诗级',
+      '洛基、红骷髅、模仿大师均配备常态与巅峰双形态'
+    ]},
+  { version:'v2.3.0', date:'初始版本', tag:'INITIAL',
     title:'丰富动画 + 6 位新英雄',
     items:[
       '新增 6 位英雄：8-Ball（T5）、猎鹰（T5）、勇度（T4）、蜘蛛侠托比版（T3）、快银（T3）、奥创（T2）',
@@ -1384,8 +1410,7 @@ const CHANGELOG = [
       '新增移动端快捷导航条，替代被隐藏的桌面端导航',
       '关系网触摸交互优化：点击节点高亮关系，再次点击打开详情',
       '卡池在移动端改为紧凑列表布局，一屏可显示更多角色',
-      '英雄库矩阵在移动端改为 3 列紧凑网格，信息密度提升',
-      '弹窗在移动端改为底部上滑全屏样式'
+      '英雄库矩阵在移动端改为 3 列紧凑网格，信息密度提升'
     ]},
   { version:'v1.6.0', date:'初始版本', tag:'INITIAL',
     title:'动态战斗描述',
@@ -1429,6 +1454,73 @@ const CHANGELOG = [
 const DB = {
   hero: {
     comic: [
+      /* ========== 新增：红骷髅 ========== */
+      { id:'h-c-redskull', name:'红骷髅', sub:'Johann Schmidt', tag:'九头蛇',
+        normalTier:'t3', peakTier:'t2', normalPower:48, peakPower:60, peakForm:'善恶轴心·X教授大脑',
+        img:'https://placehold.co/400x500/1a1a20/9e1414?text=Red+Skull',
+        stats:{ 战商:88, 智力:85, 力量:48, 防御:45, 装备:55, 速度:52, 耐力:55, 体质:50, 技能:70, 格斗:62, 射击:55, 黑客:30, 神力:35 },
+        peakStats:{ 战商:92, 智力:95, 力量:55, 防御:60, 装备:72, 速度:55, 耐力:65, 体质:58, 技能:78, 格斗:65, 射击:55, 黑客:40, 神力:88 },
+        signature:[{name:'九头蛇战术',stat:'战商'},{name:'强化体格',stat:'体质'},{name:'宇宙魔方研究',stat:'智力'}],
+        peakSignature:[{name:'X教授大脑·心灵控制',stat:'神力'},{name:'全球奴役波',stat:'神力'},{name:'九头蛇网络',stat:'黑客'}],
+        reason:'红骷髅的综合实力因版本差异较大，但漫画中的高光表现使其达到星球级威胁。心灵控制与战术：在漫画《善恶轴心》中，红骷髅通过融合X教授大脑获得心灵控制能力，一度奴役复联和X战警成员（如巫毒博士、黄蜂女），甚至操控美队成为「蛇队」。电影中沦为灵魂宝石看守者，但漫画中展现的战略智商和资源整合能力使其具备影响全球战局的能力。局限性：依赖外部装备或能力赋予（如宇宙魔方、X教授大脑），本体防御与力量仅略高于强化人类。巅峰形态：融合X教授大脑后，红骷髅拥有了地球最强心灵控制能力。',
+        relations:[
+          {name:'美国队长',type:'enemy',label:'宿敌'},{name:'钢铁侠',type:'enemy',label:'敌对'},
+          {name:'黑寡妇',type:'enemy',label:'敌对'},{name:'奥创',type:'enemy',label:'争夺九头蛇资源'}
+        ]},
+      /* ========== 新增：洛基 ========== */
+      { id:'h-c-loki', name:'洛基', sub:'Loki Laufeyson', tag:'阿斯加德 / 冰霜巨人',
+        normalTier:'t4', peakTier:'t4', normalPower:40, peakPower:52, peakForm:'时间管理局适应者',
+        img:'https://placehold.co/400x500/1a1a20/2d5a3a?text=Loki',
+        stats:{ 战商:88, 智力:85, 力量:55, 防御:48, 装备:72, 速度:58, 耐力:52, 体质:50, 技能:82, 格斗:62, 射击:48, 黑客:55, 神力:68 },
+        peakStats:{ 战商:92, 智力:90, 力量:60, 防御:55, 装备:88, 速度:65, 耐力:60, 体质:55, 技能:88, 格斗:68, 射击:48, 黑客:60, 神力:82 },
+        signature:[{name:'幻象术',stat:'技能'},{name:'寒冰魔法',stat:'神力'},{name:'诡计之舌',stat:'战商'}],
+        peakSignature:[{name:'宇宙魔方操控',stat:'装备'},{name:'时间管理局适应',stat:'智力'},{name:'时间溜脱',stat:'速度'}],
+        reason:'洛基的战斗力依赖魔法与诡计，定位为战术型超凡级反派。魔法与幻术：可制造大规模幻象（如《雷神1》中伪装奥丁），使用冰霜巨人血统的寒冰魔法，但攻击力有限。电影中短暂持有宇宙魔方（《复联1》），但未完全开发其空间操控潜力。高光与弱点：在剧集《洛基》中展现时间管理局适应性，但本体防御薄弱，曾被灭霸轻易掐死（《复联3》）。漫画中曾短暂持有现实宝石，但依赖外部神器提升战力。巅峰形态：在时间管理局的适应经历使洛基对时间线的理解达到新的高度。',
+        relations:[
+          {name:'雷神',type:'family',label:'哥哥'},{name:'灭霸',type:'enemy',label:'被杀'},
+          {name:'女武神',type:'enemy',label:'敌对'},{name:'奇异博士',type:'enemy',label:'敌对'}
+        ]},
+      /* ========== 新增：海拉 ========== */
+      { id:'h-c-hela', name:'海拉', sub:'Hela', tag:'阿斯加德 / 死亡女神',
+        normalTier:'t15', peakTier:'t1', normalPower:62, peakPower:78, peakForm:'阿斯加德完全体',
+        img:'https://placehold.co/400x500/1a1a20/2a2a2a?text=Hela',
+        stats:{ 战商:82, 智力:75, 力量:92, 防御:90, 装备:88, 速度:78, 耐力:90, 体质:92, 技能:78, 格斗:82, 射击:35, 黑客:20, 神力:90 },
+        peakStats:{ 战商:88, 智力:80, 力量:96, 防御:95, 装备:94, 速度:82, 耐力:95, 体质:96, 技能:84, 格斗:86, 射击:35, 黑客:20, 神力:96 },
+        signature:[{name:'死亡之刃',stat:'装备'},{name:'阿斯加德之力',stat:'神力'},{name:'永生之体',stat:'体质'}],
+        peakSignature:[{name:'阿斯加德巅峰',stat:'神力'},{name:'死亡军团',stat:'装备'},{name:'宿命之力',stat:'耐力'}],
+        reason:'海拉的力量源自阿斯加德，电影中展现准天父级实力，接近宇宙级阈值。力量与防御：单手捏碎雷神之锤（《雷神3》），免疫雷电攻击，身体近乎不朽（被长剑贯穿后瞬间自愈）。力量随阿斯加德存在时间增长，巅峰时期可匹敌奥丁（需依赖仙宫能量增幅）。弱点与终结：被火焰巨人苏尔特尔「剧情杀」（《雷神3》），因宿命设定而非实力差距陨落。巅峰形态：在阿斯加德完全体状态下，海拉的力量接近奥丁天父级水准。',
+        relations:[
+          {name:'雷神',type:'family',label:'姐姐'},{name:'洛基',type:'family',label:'姐姐'},
+          {name:'女武神',type:'enemy',label:'屠杀女武神军团'},{name:'浩克',type:'enemy',label:'敌对'}
+        ]},
+      /* ========== 新增：灭霸 ========== */
+      { id:'h-c-thanos', name:'灭霸', sub:'Thanos', tag:'泰坦 / 反派',
+        normalTier:'t15', peakTier:'t05', normalPower:62, peakPower:88, peakForm:'无限手套',
+        img:'https://placehold.co/400x500/1a1a20/6b2da8?text=Thanos',
+        stats:{ 战商:95, 智力:92, 力量:90, 防御:88, 装备:65, 速度:72, 耐力:88, 体质:90, 技能:82, 格斗:88, 射击:55, 黑客:55, 神力:60 },
+        peakStats:{ 战商:98, 智力:95, 力量:96, 防御:94, 装备:100, 速度:82, 耐力:94, 体质:96, 技能:88, 格斗:90, 射击:60, 黑客:70, 神力:99 },
+        signature:[{name:'泰坦体格',stat:'体质'},{name:'战略布局',stat:'战商'},{name:'圣殿二号舰队',stat:'装备'}],
+        peakSignature:[{name:'无限手套',stat:'装备'},{name:'六宝石全开',stat:'神力'},{name:'响指抹除',stat:'神力'}],
+        reason:'常态灭霸接近天父级，但无限手套加持下达到传说级战力。无限宝石与战略：电影中集齐六颗宝石后修改现实、抹杀半数生命（《复联3》），但手套限制宝石威力（如被雷神暴风战斧重伤）。漫画中常态灭霸可单挑奥丁，持有宇宙之心时达到多元宇宙级。智力与科技：圣殿二号舰队科技碾压瓦坎达，战略布局能力为漫威反派顶尖。巅峰形态「无限手套」：集齐六颗无限宝石的灭霸，一个响指即可抹除宇宙半数生命，是漫威电影宇宙最强反派之一。',
+        relations:[
+          {name:'洛基',type:'enemy',label:'亲手杀死'},{name:'钢铁侠',type:'enemy',label:'宿敌'},
+          {name:'雷神',type:'enemy',label:'宿敌'},{name:'奇异博士',type:'enemy',label:'泰坦星之战'},
+          {name:'蜘蛛侠',type:'enemy',label:'敌对'},{name:'美国队长',type:'enemy',label:'敌对'},
+          {name:'绯红女巫',type:'enemy',label:'敌对'},{name:'浩克',type:'enemy',label:'敌对'}
+        ]},
+      /* ========== 新增：模仿大师 ========== */
+      { id:'h-c-taskmaster', name:'模仿大师', sub:'Tony Masters', tag:'雇佣兵 / 红房子',
+        normalTier:'t5', peakTier:'t5', normalPower:32, peakPower:42, peakForm:'完全模仿模式',
+        img:'https://placehold.co/400x500/1a1a20/bb6633?text=Taskmaster',
+        stats:{ 战商:82, 智力:70, 力量:58, 防御:55, 装备:78, 速度:62, 耐力:62, 体质:56, 技能:88, 格斗:88, 射击:80, 黑客:40, 神力:0 },
+        peakStats:{ 战商:86, 智力:72, 力量:62, 防御:60, 装备:85, 速度:68, 耐力:68, 体质:60, 技能:94, 格斗:94, 射击:85, 黑客:40, 神力:0 },
+        signature:[{name:'动作模仿',stat:'技能'},{name:'变形武器战衣',stat:'装备'},{name:'战术分析',stat:'战商'}],
+        peakSignature:[{name:'完美模仿',stat:'技能'},{name:'全武器精通',stat:'格斗'},{name:'战术预测',stat:'战商'}],
+        reason:'模仿大师依赖血清强化的格斗模仿能力，无超自然力量或大规模破坏手段。技能与装备：复制美队盾牌格斗术、鹰眼射术等（《黑寡妇》电影），但无法模仿超能力或能量攻击。战衣可变形武器（如弓箭、棍棒），但防御力普通（电影中被红色卫兵压制）。关联与局限：常作为雇佣兵为九头蛇或红房子服务，威胁等级限于街头犯罪（如对抗黑寡妇、蜘蛛侠）。巅峰形态：完全模仿模式下，模仿大师能短暂预测对手的所有动作。',
+        relations:[
+          {name:'黑寡妇',type:'enemy',label:'敌对'},{name:'鹰眼',type:'enemy',label:'模仿对象'},
+          {name:'美国队长',type:'enemy',label:'模仿对象'},{name:'蜘蛛侠',type:'enemy',label:'敌对'}
+        ]},
       /* ========== 原有英雄 ========== */
       { id:'h-c-blackwidow', name:'黑寡妇', sub:'Natasha Romanoff', tag:'复仇者',
         normalTier:'t5', peakTier:'t5', normalPower:30, peakPower:42, peakForm:'女雷神形态',
@@ -1485,7 +1577,6 @@ const DB = {
           {name:'美国队长',type:'team',label:'终局之战队友'},{name:'雷神',type:'team',label:'终局之战队友'},
           {name:'浩克',type:'team',label:'终局之战队友'}
         ]},
-      /* ========== 新增：8-Ball ========== */
       { id:'h-c-8ball', name:'8-Ball', sub:'Jeff Hagees', tag:'邪恶六人组',
         normalTier:'t5', peakTier:'t5', normalPower:22, peakPower:32, peakForm:'台球炸弹全开',
         img:'https://placehold.co/400x500/1a1a20/444444?text=8-Ball',
@@ -1493,11 +1584,10 @@ const DB = {
         peakStats:{ 战商:72, 智力:80, 力量:48, 防御:42, 装备:82, 速度:56, 耐力:50, 体质:44, 技能:72, 格斗:60, 射击:66, 黑客:55, 神力:0 },
         signature:[{name:'千倍台球杆',stat:'装备'},{name:'台球炸弹',stat:'装备'},{name:'弹力球发射',stat:'力量'}],
         peakSignature:[{name:'飞行台球车',stat:'装备'},{name:'台球间谍眼',stat:'智力'},{name:'千倍力全开',stat:'力量'}],
-        reason:'8-Ball是漫威漫画中依赖科技装备的反派角色，无超能力或神力加持，主要依靠台球主题的武器和战术智商进行犯罪活动。台球主题武器：使用特制台球（可爆炸或释放能量）、台球杆形激光枪及装甲车等装备。战术策划：擅长利用环境布置陷阱，例如在台球厅或赌场中设置机关。防御与弱点：身体强度与普通人类无异，依赖轻型护甲。巅峰形态：全副武装状态下，飞行台球车与间谍台球配合使用，可在城市中制造混乱。',
+        reason:'8-Ball是漫威漫画中依赖科技装备的反派角色，无超能力或神力加持，主要依靠台球主题的武器和战术智商进行犯罪活动。台球主题武器：使用特制台球（可爆炸或释放能量）、台球杆形激光枪及装甲车等装备。战术策划：擅长利用环境布置陷阱。防御与弱点：身体强度与普通人类无异，依赖轻型护甲。巅峰形态：全副武装状态下，飞行台球车与间谍台球配合使用。',
         relations:[
           {name:'鹰眼',type:'enemy',label:'敌对'},{name:'美国队长',type:'enemy',label:'敌对'}
         ]},
-      /* ========== 新增：猎鹰 ========== */
       { id:'h-c-falcon', name:'猎鹰', sub:'Sam Wilson', tag:'复仇者',
         normalTier:'t5', peakTier:'t5', normalPower:32, peakPower:48, peakForm:'美国队长形态',
         img:'https://placehold.co/400x500/1a1a20/3d8bff?text=Falcon',
@@ -1505,12 +1595,11 @@ const DB = {
         peakStats:{ 战商:88, 智力:78, 力量:68, 防御:68, 装备:92, 速度:82, 耐力:72, 体质:66, 技能:88, 格斗:82, 射击:76, 黑客:52, 神力:0 },
         signature:[{name:'飞行翼突袭',stat:'速度'},{name:'红翼侦察',stat:'战商'},{name:'空对地打击',stat:'装备'}],
         peakSignature:[{name:'振金翼展',stat:'装备'},{name:'鸟群沟通',stat:'战商'},{name:'盾牌战术',stat:'格斗'}],
-        reason:'猎鹰依赖科技装备（如飞行翼和战术无人机），但无超能力或体质强化，战斗定位为空中支援与侦察。装备与战术：飞行翼提供机动性，搭配微型导弹和无人机，但火力有限。战术智商较高，曾协助美队制定反注册派战略，但单兵作战能力远低于超人类。局限性：防御力与普通人类无异，电影中曾被幻视误击致残。巅峰形态：继承美国队长身份后配备振金翅膀，拥有与鸟类心灵感应的能力。',
+        reason:'猎鹰依赖科技装备（如飞行翼和战术无人机），但无超能力或体质强化，战斗定位为空中支援与侦察。装备与战术：飞行翼提供机动性，搭配微型导弹和无人机，但火力有限。战术智商较高，曾协助美队制定反注册派战略。局限性：防御力与普通人类无异。巅峰形态：继承美国队长身份后配备振金翅膀，拥有与鸟类心灵感应的能力。',
         relations:[
           {name:'美国队长',type:'ally',label:'挚友'},{name:'黑寡妇',type:'team',label:'队友'},
           {name:'鹰眼',type:'team',label:'队友'},{name:'战争机器',type:'team',label:'队友'}
         ]},
-      /* ========== 新增：勇度 ========== */
       { id:'h-c-yondu', name:'勇度', sub:'Yondu Udonta', tag:'掠夺者 / 银河护卫队',
         normalTier:'t4', peakTier:'t4', normalPower:38, peakPower:50, peakForm:'飞箭全力解放',
         img:'https://placehold.co/400x500/1a1a20/1a6a3a?text=Yondu',
@@ -1522,7 +1611,6 @@ const DB = {
         relations:[
           {name:'火箭浣熊',type:'ally',label:'掠夺者旧识'},{name:'雷神',type:'ally',label:'临时合作'}
         ]},
-      /* ========== 新增：蜘蛛侠（托比版） ========== */
       { id:'h-c-spiderman-tobey', name:'蜘蛛侠', sub:'Peter Parker (Tobey)', tag:'复仇者',
         normalTier:'t3', peakTier:'t3', normalPower:52, peakPower:62, peakForm:'毒液共生体',
         img:'https://placehold.co/400x500/1a1a20/cc0000?text=Spider-Man',
@@ -1530,11 +1618,10 @@ const DB = {
         peakStats:{ 战商:82, 智力:72, 力量:90, 防御:84, 装备:78, 速度:90, 耐力:90, 体质:88, 技能:90, 格斗:88, 射击:52, 黑客:58, 神力:8 },
         signature:[{name:'蜘蛛感应',stat:'战商'},{name:'蛛丝飞荡',stat:'速度'},{name:'超级力量',stat:'力量'}],
         peakSignature:[{name:'毒液共生体',stat:'力量'},{name:'黑色蜘蛛战衣',stat:'装备'},{name:'狂暴模式',stat:'格斗'}],
-        reason:'托比·马奎尔版蜘蛛侠通过纯变异能力赋予远超常人的力量与敏捷，可对抗高威胁反派并影响城市级战场。力量与耐力：手拉失控列车（《蜘蛛侠2》）、硬抗沙人攻击，力量评级约15-20吨，耐力接近超人类。自愈能力与反应速度极强，蜘蛛感应可预判危险。战斗智商：独立击败绿魔、章鱼博士等反派，战术灵活性与格斗技巧顶尖。巅峰形态：被毒液共生体附身后的黑色蜘蛛侠，力量与速度大幅提升，但性格变得暴戾。',
+        reason:'托比·马奎尔版蜘蛛侠通过纯变异能力赋予远超常人的力量与敏捷，可对抗高威胁反派并影响城市级战场。力量与耐力：手拉失控列车（《蜘蛛侠2》）、硬抗沙人攻击，力量评级约15-20吨，耐力接近超人类。自愈能力与反应速度极强，蜘蛛感应可预判危险。战斗智商：独立击败绿魔、章鱼博士等反派，战术灵活性与格斗技巧顶尖。巅峰形态：被毒液共生体附身后的黑色蜘蛛侠，力量与速度大幅提升。',
         relations:[
           {name:'钢铁侠',type:'ally',label:'导师 / 队友'},{name:'美国队长',type:'ally',label:'队友'}
         ]},
-      /* ========== 新增：快银 ========== */
       { id:'h-c-quicksilver', name:'快银', sub:'Pietro Maximoff', tag:'复仇者 / 变种人',
         normalTier:'t3', peakTier:'t3', normalPower:54, peakPower:64, peakForm:'时间穿越极速',
         img:'https://placehold.co/400x500/1a1a20/7fd4ff?text=Quicksilver',
@@ -1547,7 +1634,6 @@ const DB = {
           {name:'绯红女巫',type:'family',label:'双胞胎姐姐'},{name:'美国队长',type:'team',label:'队友'},
           {name:'钢铁侠',type:'team',label:'队友'},{name:'浩克',type:'team',label:'队友'}
         ]},
-      /* ========== 新增：奥创 ========== */
       { id:'h-c-ultron', name:'奥创', sub:'Ultron', tag:'反派 / AI',
         normalTier:'t2', peakTier:'t2', normalPower:66, peakPower:78, peakForm:'终极奥创',
         img:'https://placehold.co/400x500/1a1a20/888888?text=Ultron',
@@ -1555,13 +1641,12 @@ const DB = {
         peakStats:{ 战商:98, 智力:100, 力量:94, 防御:98, 装备:98, 速度:88, 耐力:99, 体质:96, 技能:90, 格斗:68, 射击:82, 黑客:100, 神力:56 },
         signature:[{name:'艾德曼合金躯体',stat:'防御'},{name:'自我进化AI',stat:'智力'},{name:'全球机械控制',stat:'黑客'}],
         peakSignature:[{name:'无限升级',stat:'装备'},{name:'奥创军团',stat:'黑客'},{name:'能量射线',stat:'神力'}],
-        reason:'奥创拥有艾德曼合金躯体+自我进化AI，具备摧毁国家甚至威胁星球的战略级破坏力。能力与威胁：无限升级机体，可控制全球机械。艾德曼合金防御近乎无敌，仅少数武器可突破。高光表现：漫画中多次毁灭国家，并制造幻视等强力子嗣。巅峰形态：终极奥创形态下，奥创接管了克里哨兵军团，形成一个巨大的战斗躯体，准备消灭所有入侵者。',
+        reason:'奥创拥有艾德曼合金躯体+自我进化AI，具备摧毁国家甚至威胁星球的战略级破坏力。能力与威胁：无限升级机体，可控制全球机械。艾德曼合金防御近乎无敌，仅少数武器可突破。高光表现：漫画中多次毁灭国家，并制造幻视等强力子嗣。巅峰形态：终极奥创形态下，奥创接管了克里哨兵军团，形成一个巨大的战斗躯体。',
         relations:[
           {name:'钢铁侠',type:'enemy',label:'创造者 / 敌对'},{name:'幻视',type:'family',label:'子嗣'},
           {name:'绯红女巫',type:'enemy',label:'敌对'},{name:'快银',type:'enemy',label:'敌对'},
           {name:'美国队长',type:'enemy',label:'敌对'}
         ]},
-      /* ========== 原有英雄继续 ========== */
       { id:'h-c-captain', name:'美国队长', sub:'Steve Rogers', tag:'复仇者',
         normalTier:'t4', peakTier:'t4', normalPower:42, peakPower:58, peakForm:'雷神之锤形态',
         img:'https://placehold.co/400x500/1a1a20/28e07a?text=Captain+America',
@@ -1647,7 +1732,8 @@ const DB = {
           {name:'钢铁侠',type:'team',label:'队友'},{name:'绯红女巫',type:'team',label:'队友'},
           {name:'奇异博士',type:'team',label:'队友'},{name:'火箭浣熊',type:'team',label:'终局之战队友'},
           {name:'女武神',type:'ally',label:'战友 / 新阿斯加德'},{name:'尚气',type:'team',label:'队友'},
-          {name:'勇度',type:'ally',label:'临时合作'}
+          {name:'勇度',type:'ally',label:'临时合作'},{name:'洛基',type:'family',label:'弟弟'},
+          {name:'海拉',type:'family',label:'姐姐'},{name:'灭霸',type:'enemy',label:'宿敌'}
         ]},
       { id:'h-c-ironman', name:'钢铁侠', sub:'Tony Stark', tag:'复仇者 / 斯塔克工业',
         normalTier:'t15', peakTier:'t1', normalPower:58, peakPower:80, peakForm:'弑神者战甲',
@@ -1664,7 +1750,8 @@ const DB = {
           {name:'绯红女巫',type:'team',label:'被精神影响'},{name:'奇异博士',type:'team',label:'队友'},
           {name:'火箭浣熊',type:'team',label:'终局之战队友'},{name:'幻视',type:'team',label:'队友 / 创造者'},
           {name:'尚气',type:'team',label:'队友'},{name:'蜘蛛侠',type:'ally',label:'导师'},
-          {name:'奥创',type:'enemy',label:'创造者 / 敌对'}
+          {name:'奥创',type:'enemy',label:'创造者 / 敌对'},{name:'灭霸',type:'enemy',label:'宿敌'},
+          {name:'红骷髅',type:'enemy',label:'敌对'}
         ]},
       { id:'h-c-wanda', name:'绯红女巫', sub:'Wanda Maximoff', tag:'复仇者 / 变种人',
         normalTier:'t05', peakTier:'t0', normalPower:68, peakPower:95, peakForm:'HOM混沌之战',
@@ -1679,7 +1766,8 @@ const DB = {
           {name:'美国队长',type:'team',label:'队友'},{name:'浩克',type:'team',label:'队友'},
           {name:'雷神',type:'team',label:'队友'},{name:'钢铁侠',type:'team',label:'精神影响'},
           {name:'奇异博士',type:'enemy',label:'多元宇宙对抗'},{name:'幻视',type:'ally',label:'爱人'},
-          {name:'快银',type:'family',label:'双胞胎弟弟'},{name:'奥创',type:'enemy',label:'敌对'}
+          {name:'快银',type:'family',label:'双胞胎弟弟'},{name:'奥创',type:'enemy',label:'敌对'},
+          {name:'灭霸',type:'enemy',label:'敌对'}
         ]},
       { id:'h-c-strange', name:'奇异博士', sub:'Stephen Strange', tag:'至尊法师 / 复仇者',
         normalTier:'t05', peakTier:'t05', normalPower:72, peakPower:85, peakForm:'吞星使者至尊法师',
@@ -1693,7 +1781,8 @@ const DB = {
           {name:'钢铁侠',type:'team',label:'队友'},{name:'雷神',type:'team',label:'队友'},
           {name:'黑寡妇',type:'team',label:'队友'},{name:'美国队长',type:'team',label:'队友'},
           {name:'绯红女巫',type:'enemy',label:'多元宇宙对抗'},{name:'浩克',type:'team',label:'队友'},
-          {name:'尚气',type:'team',label:'队友'}
+          {name:'尚气',type:'team',label:'队友'},{name:'灭霸',type:'enemy',label:'泰坦星之战'},
+          {name:'洛基',type:'enemy',label:'敌对'}
         ]}
     ],
     movie: []
@@ -2168,6 +2257,17 @@ function renderSlots(section) {
     if (st.a && st.b) shareBtn.classList.remove('disabled');
     else shareBtn.classList.add('disabled');
   }
+  /* 自动匹配按钮状态 */
+  const matchBtn = document.getElementById(section+'-auto-match');
+  if (matchBtn) {
+    if (st.a && !st.b) {
+      matchBtn.classList.remove('disabled');
+      matchBtn.classList.add('pulse');
+    } else {
+      matchBtn.classList.add('disabled');
+      matchBtn.classList.remove('pulse');
+    }
+  }
 }
 const BARS_KEYS = ['战商','智力','力量','防御','装备','速度','耐力','神力'];
 function renderBars(section, A, B) {
@@ -2495,6 +2595,33 @@ function rerollBattle(section) {
   renderBattleReport(section, true);
 }
 
+/* 新功能：自动匹配对手 */
+function autoMatchOpponent(section) {
+  const st = State[section];
+  if (!st.a) { showCopyToast('请先选择 A 方', true); return; }
+  if (st.b) { showCopyToast('B 方已存在，请先清空', true); return; }
+  const A = findItem(section, st.mode, st.a);
+  if (!A) return;
+  const ap = getHeroPower(A, st.form);
+  const list = getList(section, st.mode).filter(h => h.id !== A.id);
+  if (!list.length) { showCopyToast('没有其他可匹配对象', true); return; }
+  let best = null, bestDiff = Infinity;
+  list.forEach(h => {
+    const p = getHeroPower(h, st.form);
+    const d = Math.abs(p - ap);
+    if (d < bestDiff) { bestDiff = d; best = h; }
+  });
+  if (best) {
+    Sound.match();
+    st.b = best.id;
+    st.reportSeed = Math.floor(Math.random() * 100000);
+    renderRoster(section);
+    renderSlots(section);
+    renderAnalysis(section);
+    showCopyToast('✓ 已匹配：' + best.name + '（战力差 ' + bestDiff + '）');
+  }
+}
+
 function shareBattle(section) {
   const st = State[section];
   const A = findItem(section, st.mode, st.a);
@@ -2808,6 +2935,9 @@ function bindShortcuts() {
     if (e.key === 'r' || e.key === 'R') {
       if (!e.ctrlKey && !e.metaKey) { e.preventDefault(); randomBattle(); }
     }
+    else if (e.key === 'm' || e.key === 'M') {
+      if (!e.ctrlKey && !e.metaKey) { e.preventDefault(); autoMatchOpponent('hero'); }
+    }
     else if (e.key === 's' || e.key === 'S') {
       if (!e.ctrlKey && !e.metaKey) {
         e.preventDefault();
@@ -2897,6 +3027,8 @@ function bindEvents() {
     if (rerollBtn) rerollBtn.addEventListener('click', () => rerollBattle(section));
     const shareBtn = document.getElementById(section+'-share');
     if (shareBtn) shareBtn.addEventListener('click', () => shareBattle(section));
+    const matchBtn = document.getElementById(section+'-auto-match');
+    if (matchBtn) matchBtn.addEventListener('click', () => autoMatchOpponent(section));
   });
 
   document.getElementById('hero-history-list').addEventListener('click', e => {
