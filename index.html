@@ -21,7 +21,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-he
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 12% 6%, rgba(230,36,41,.18), transparent 42%),radial-gradient(circle at 88% 88%, rgba(245,197,24,.10), transparent 45%),radial-gradient(circle at 50% 120%, rgba(61,139,255,.09), transparent 50%);animation:bgPulse 12s ease-in-out infinite;}
 @keyframes bgPulse{0%,100%{opacity:1;}50%{opacity:.7;}}
 body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.22;background-image:linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);background-size:64px 64px;mask-image:radial-gradient(circle at 50% 30%, #000 20%, transparent 78%);}
-.watermark{position:fixed;bottom:24px;right:28px;z-index:9999;font-family:var(--font-display);font-size:28px;letter-spacing:4px;color:rgba(230,36,41,.22);pointer-events:none;user-select:none;text-shadow:0 0 20px rgba(230,36,41,.15);transform:rotate(-6deg);cursor:pointer;animation:watermarkFloat 6s ease-in-out infinite;}
+.watermark{position:fixed;bottom:24px;right:28px;z-index:9999;font-family:var(--font-display);font-size:28px;letter-spacing:4px;color:rgba(230,36,41,.22);pointer-events:auto;user-select:none;text-shadow:0 0 20px rgba(230,36,41,.15);transform:rotate(-6deg);cursor:pointer;animation:watermarkFloat 6s ease-in-out infinite;transition:color .3s,text-shadow .3s;}
+.watermark:hover{color:rgba(230,36,41,.55);text-shadow:0 0 26px rgba(230,36,41,.45);}
+body.modal-open .watermark{opacity:0;pointer-events:none;}
 @keyframes watermarkFloat{0%,100%{transform:rotate(-6deg) translateY(0);}50%{transform:rotate(-6deg) translateY(-6px);}}
 .watermark::before{content:'hjy';}
 .scroll-top{position:fixed;bottom:28px;left:28px;z-index:999;width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);background:rgba(24,24,31,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--muted);cursor:pointer;display:grid;place-items:center;opacity:0;pointer-events:none;transform:translateY(16px);transition:.3s cubic-bezier(.4,0,.2,1);box-shadow:0 10px 30px rgba(0,0,0,.5);padding:0;}
@@ -859,20 +861,251 @@ body.ironman-effect .logo-mark{animation:gauntletGlow 1.5s ease infinite;}
   .sort-row::-webkit-scrollbar{display:none;}
   .sort-btn{flex-shrink:0;}
 }
+
+/* =========================================================
+   彩蛋系统 · 视觉特效
+   ========================================================= */
+.fx-layer{position:fixed;inset:0;z-index:99997;pointer-events:none;overflow:hidden;}
+.fx-flash{position:fixed;inset:0;z-index:99996;pointer-events:none;background:#fff;opacity:0;}
+.fx-flash.fire{animation:fxFlash .75s ease-out forwards;}
+.fx-flash.red{background:#e62429;}
+.fx-flash.green{background:#28e07a;}
+.fx-flash.gold{background:#f5c518;}
+.fx-flash.cyan{background:#3dc8ff;}
+@keyframes fxFlash{0%{opacity:0;}7%{opacity:.9;}100%{opacity:0;}}
+.fx-gray{position:fixed;inset:0;z-index:99994;pointer-events:none;background:#8a8a99;mix-blend-mode:saturation;opacity:0;transition:opacity .5s;}
+.fx-gray.fire{opacity:.72;transition:opacity .35s;}
+.fx-vignette{position:fixed;inset:0;z-index:99995;pointer-events:none;opacity:0;transition:opacity .4s;}
+.fx-vignette.fire{opacity:1;}
+.fx-vignette.green{background:radial-gradient(circle at 50% 50%, transparent 30%, rgba(40,224,122,.42) 100%);}
+.fx-vignette.red{background:radial-gradient(circle at 50% 50%, transparent 34%, rgba(230,36,41,.4) 100%);}
+.fx-vignette.purple{background:radial-gradient(circle at 50% 90%, transparent 26%, rgba(168,85,247,.42) 100%);}
+.fx-vignette.cyan{background:radial-gradient(circle at 50% 55%, transparent 32%, rgba(61,200,255,.34) 100%);}
+.fx-ring{position:fixed;border-radius:50%;pointer-events:none;z-index:99996;border:2px solid rgba(255,255,255,.9);}
+.fx-ring.fire{animation:fxRing 1.15s cubic-bezier(.15,.75,.25,1) forwards;}
+@keyframes fxRing{0%{transform:scale(.05);opacity:.95;}70%{opacity:.35;}100%{transform:scale(1);opacity:0;}}
+.dust-p{position:fixed;border-radius:50%;pointer-events:none;z-index:99997;}
+.dust-p.fire{animation:dustUp var(--dur,1.9s) cubic-bezier(.25,.6,.4,1) forwards;}
+@keyframes dustUp{0%{transform:translate(0,0) scale(1);opacity:1;}100%{transform:translate(var(--dx),var(--dy)) scale(.15);opacity:0;}}
+.shard{position:fixed;height:3px;border-radius:2px;pointer-events:none;z-index:99997;}
+.shard.fire{animation:shardFly .85s cubic-bezier(.12,.8,.3,1) forwards;}
+@keyframes shardFly{0%{transform:translate(0,0) rotate(var(--rot)) scaleX(1);opacity:1;}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scaleX(.25);opacity:0;}}
+
+/* —— 无限宝石进度（灭霸彩蛋） —— */
+.gem-track{position:absolute;left:50%;top:calc(100% + 6px);transform:translateX(-50%);display:flex;gap:4px;opacity:0;transition:opacity .3s;pointer-events:none;}
+.gem-track.show{opacity:1;}
+.gem-pip{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);transition:.3s;}
+.gem-pip.lit{transform:scale(1.25);border-color:transparent;}
+.gem-pip.lit:nth-child(1){background:#a855f7;box-shadow:0 0 10px #a855f7;}
+.gem-pip.lit:nth-child(2){background:#3d8bff;box-shadow:0 0 10px #3d8bff;}
+.gem-pip.lit:nth-child(3){background:#e62429;box-shadow:0 0 10px #e62429;}
+.gem-pip.lit:nth-child(4){background:#ff9d3d;box-shadow:0 0 10px #ff9d3d;}
+.gem-pip.lit:nth-child(5){background:#28e07a;box-shadow:0 0 10px #28e07a;}
+.gem-pip.lit:nth-child(6){background:#f5c518;box-shadow:0 0 10px #f5c518;}
+.logo{position:relative;}
+.logo-mark.charging{animation:gemCharge .35s ease;}
+@keyframes gemCharge{0%{transform:scale(1);}45%{transform:scale(1.22) rotate(-8deg);}100%{transform:scale(1);}}
+
+/* —— 灭霸打响指 —— */
+body.snap-effect .char-card,body.snap-effect .matrix-tile,body.snap-effect .rank-table tbody tr,
+body.snap-effect .slot-media,body.snap-effect .rank-name img,body.snap-effect .history-item{
+  animation:snapDust 1.5s cubic-bezier(.4,0,.65,1) .45s forwards;}
+@keyframes snapDust{0%{opacity:1;filter:blur(0);transform:scale(1);}
+  55%{opacity:.55;filter:blur(2.5px) saturate(.5);transform:scale(.97) translateY(-6px);}
+  100%{opacity:0;filter:blur(9px);transform:scale(.78) translateY(-24px);}}
+body.blip-effect .char-card,body.blip-effect .matrix-tile,body.blip-effect .rank-table tbody tr,
+body.blip-effect .slot-media,body.blip-effect .history-item{animation:blipBack 1.15s cubic-bezier(.2,.8,.3,1) both;}
+@keyframes blipBack{0%{opacity:0;filter:blur(9px) brightness(1.6);transform:scale(.82);}
+  55%{opacity:1;filter:blur(0) brightness(1.25);}
+  100%{opacity:1;filter:none;transform:scale(1);}}
+
+/* —— 钢铁侠 HUD —— */
+.ironman-hud{position:fixed;inset:0;z-index:99993;pointer-events:none;opacity:0;transition:opacity .45s;}
+.ironman-hud.show{opacity:1;}
+.ironman-hud .hud-tint{position:absolute;inset:0;background:radial-gradient(circle at 50% 62%, rgba(61,200,255,.12), transparent 68%);}
+.ironman-hud .hud-corner{position:absolute;width:76px;height:76px;border:2px solid rgba(61,208,255,.85);box-shadow:0 0 18px rgba(61,208,255,.45);}
+.ironman-hud .hud-corner.tl{top:16px;left:16px;border-right:0;border-bottom:0;border-radius:10px 0 0 0;}
+.ironman-hud .hud-corner.tr{top:16px;right:16px;border-left:0;border-bottom:0;border-radius:0 10px 0 0;}
+.ironman-hud .hud-corner.bl{bottom:16px;left:16px;border-right:0;border-top:0;border-radius:0 0 0 10px;}
+.ironman-hud .hud-corner.br{bottom:16px;right:16px;border-left:0;border-top:0;border-radius:0 0 10px 0;}
+.ironman-hud .hud-scan{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(61,220,255,.85),transparent);box-shadow:0 0 26px rgba(61,220,255,.8);animation:hudScan 1.7s linear infinite;}
+@keyframes hudScan{0%{top:2%;}100%{top:98%;}}
+.ironman-hud .hud-reticle{position:absolute;left:50%;top:50%;width:190px;height:190px;margin:-95px 0 0 -95px;border:1px dashed rgba(61,208,255,.45);border-radius:50%;animation:hudSpin 9s linear infinite;}
+.ironman-hud .hud-reticle::before{content:'';position:absolute;inset:26px;border:1px solid rgba(61,208,255,.3);border-radius:50%;}
+@keyframes hudSpin{to{transform:rotate(360deg);}}
+body.ironman-effect .watermark{color:rgba(61,208,255,.85);text-shadow:0 0 26px rgba(61,208,255,.8);}
+.watermark.hot{color:rgba(245,197,24,.75);text-shadow:0 0 24px rgba(245,197,24,.6);}
+
+/* —— HULK SMASH —— */
+body.hulk-effect .nav,body.hulk-effect .banner,body.hulk-effect .section,body.hulk-effect .footer{
+  animation:hulkShake .5s cubic-bezier(.36,.07,.19,.97) 3;}
+@keyframes hulkShake{10%,90%{transform:translate3d(-5px,2px,0) rotate(-.35deg);}
+  20%,80%{transform:translate3d(8px,-3px,0) rotate(.45deg);}
+  30%,50%,70%{transform:translate3d(-12px,3px,0) rotate(-.6deg);}
+  40%,60%{transform:translate3d(12px,-3px,0) rotate(.6deg);}}
+.egg-hulk-toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.4) rotate(-8deg);z-index:99999;padding:22px 46px;border-radius:16px;background:linear-gradient(135deg,rgba(40,224,122,.94),rgba(21,150,72,.97));border:2px solid #3eeb8b;color:#fff;font-family:var(--font-display);font-size:40px;letter-spacing:5px;text-shadow:0 3px 0 rgba(0,0,0,.35),0 0 26px rgba(62,235,139,.9);box-shadow:0 30px 80px rgba(40,224,122,.55),inset 0 0 40px rgba(255,255,255,.16);opacity:0;transition:all .34s cubic-bezier(.2,1.5,.4,1);pointer-events:none;text-align:center;}
+.egg-hulk-toast.show{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-2deg);}
+.egg-hulk-toast small{display:block;font-family:var(--font-body);font-size:12px;letter-spacing:1px;font-weight:400;opacity:.9;margin-top:8px;}
+.vs-badge.hulk-charge{color:#3eeb8b;text-shadow:0 0 20px rgba(40,224,122,.9);transform:scale(1.15);}
+
+/* —— WAKANDA FOREVER —— */
+.footer-inner .dots i.lit{background:#a855f7;box-shadow:0 0 12px #a855f7;}
+.fx-vein{position:fixed;left:0;right:0;bottom:0;height:3px;z-index:99996;pointer-events:none;background:linear-gradient(90deg,transparent,#a855f7,#c894ff,#a855f7,transparent);box-shadow:0 0 26px rgba(168,85,247,.9);transform:scaleX(0);transform-origin:left;}
+.fx-vein.fire{animation:veinSweep 1.1s cubic-bezier(.2,.8,.3,1) forwards;}
+@keyframes veinSweep{0%{transform:scaleX(0);opacity:1;}70%{transform:scaleX(1);opacity:1;}100%{transform:scaleX(1);opacity:0;}}
+.fx-salute{position:fixed;left:50%;top:52%;width:120px;height:120px;margin:-60px 0 0 -60px;z-index:99998;pointer-events:none;opacity:0;}
+.fx-salute.fire{animation:salutePop 2.4s cubic-bezier(.2,.8,.3,1) forwards;}
+.fx-salute i{position:absolute;left:50%;top:50%;width:104px;height:9px;margin:-4.5px 0 0 -52px;border-radius:5px;background:linear-gradient(90deg,#6b2da8,#c894ff,#6b2da8);box-shadow:0 0 18px rgba(168,85,247,.8);}
+.fx-salute i:nth-child(1){transform:rotate(18deg);}
+.fx-salute i:nth-child(2){transform:rotate(-18deg);}
+@keyframes salutePop{0%{opacity:0;transform:scale(.4);}18%{opacity:1;transform:scale(1);}75%{opacity:1;transform:scale(1);}100%{opacity:0;transform:scale(1.12);}}
+
+/* —— 斯坦·李客串 —— */
+.egg-stanlee{position:fixed;z-index:99998;pointer-events:none;opacity:0;transition:opacity .5s, transform 3.4s cubic-bezier(.3,.1,.4,1);}
+.egg-stanlee.show{opacity:1;}
+.egg-stanlee-inner{position:relative;display:flex;align-items:center;gap:11px;padding:11px 20px;border-radius:34px;background:rgba(20,20,26,.96);border:1px solid rgba(245,197,24,.6);box-shadow:0 14px 46px rgba(0,0,0,.7),0 0 26px rgba(245,197,24,.2);backdrop-filter:blur(10px);}
+.egg-stanlee-inner::before{content:'CAMEO';position:absolute;top:-9px;left:16px;font-size:8px;font-weight:900;letter-spacing:2.5px;padding:2px 7px;border-radius:4px;background:var(--gold);color:#241c00;}
+.egg-stanlee-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#f5c518,#b8860b);display:grid;place-items:center;font-family:var(--font-display);font-size:17px;color:#1a1400;flex-shrink:0;box-shadow:0 0 16px rgba(245,197,24,.5);}
+.egg-stanlee-text{font-size:12.5px;color:#f5c518;font-weight:700;letter-spacing:.5px;white-space:nowrap;}
+.egg-stanlee-text small{display:block;font-size:10px;color:var(--muted);font-weight:400;letter-spacing:.3px;margin-top:2px;white-space:normal;max-width:230px;}
+
+/* —— 宿命对决 —— */
+.rivalry-banner{display:none;position:relative;margin-bottom:20px;border-radius:14px;overflow:hidden;border:1px solid rgba(230,36,41,.45);background:linear-gradient(120deg,rgba(230,36,41,.16),rgba(14,14,18,.9) 45%,rgba(245,197,24,.12));padding:16px 20px;animation:rivalryIn .55s cubic-bezier(.2,.9,.3,1) both;}
+.rivalry-banner.show{display:block;}
+@keyframes rivalryIn{0%{opacity:0;transform:translateY(-14px) scale(.98);}100%{opacity:1;transform:none;}}
+.rivalry-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),var(--gold),var(--red));animation:rivalryFlow 3s linear infinite;background-size:200% 100%;}
+@keyframes rivalryFlow{to{background-position:200% 0;}}
+.rv-tag{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:900;letter-spacing:2.5px;color:#ffd230;margin-bottom:10px;}
+.rv-tag::before{content:'⚔';font-size:12px;}
+.rv-lines{display:flex;flex-direction:column;gap:9px;}
+.rv-line{display:flex;align-items:baseline;gap:10px;font-size:14px;letter-spacing:.4px;animation:rvLineIn .5s ease both;}
+.rv-line:nth-child(2){animation-delay:.35s;}
+.rv-line:nth-child(3){animation-delay:.7s;}
+@keyframes rvLineIn{0%{opacity:0;transform:translateX(-14px);}100%{opacity:1;transform:none;}}
+.rv-who{flex-shrink:0;font-size:11px;font-weight:900;letter-spacing:1px;padding:2px 9px;border-radius:5px;background:rgba(255,255,255,.08);}
+.rv-who.a{color:var(--red-2);border:1px solid rgba(230,36,41,.4);}
+.rv-who.b{color:var(--gold);border:1px solid rgba(245,197,24,.4);}
+.rv-say{color:#fff;font-weight:600;}
+.rv-note{font-size:11.5px;color:var(--muted);margin-top:10px;padding-left:2px;letter-spacing:.3px;}
+
+/* —— AVENGERS ASSEMBLE —— */
+.assemble-overlay{position:fixed;inset:0;z-index:99999;pointer-events:none;display:grid;place-items:center;opacity:0;transition:opacity .45s;}
+.assemble-overlay.show{opacity:1;}
+.assemble-overlay .ao-bg{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%, rgba(230,36,41,.42), rgba(6,6,9,.92) 72%);}
+.assemble-overlay .ao-box{position:relative;text-align:center;transform:scale(.86);transition:transform .6s cubic-bezier(.2,1.4,.4,1);}
+.assemble-overlay.show .ao-box{transform:scale(1);}
+.ao-mark{font-family:var(--font-display);font-size:96px;line-height:1;color:transparent;-webkit-text-stroke:3px var(--red);text-shadow:0 0 60px rgba(230,36,41,.6);animation:aoPulse 1.4s ease-in-out infinite;}
+@keyframes aoPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
+.ao-title{font-family:var(--font-display);font-size:clamp(30px,6vw,64px);letter-spacing:8px;color:#fff;text-shadow:0 0 40px rgba(230,36,41,.8);margin-top:6px;}
+.ao-sub{font-size:13px;letter-spacing:5px;color:var(--gold);margin-top:12px;font-weight:700;}
+.ao-line{width:0;height:2px;margin:18px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent);transition:width .9s cubic-bezier(.2,.8,.3,1) .3s;}
+.assemble-overlay.show .ao-line{width:min(460px,70vw);}
+body.assemble-effect .char-card{animation:assemblePulse 1.1s ease both;}
+@keyframes assemblePulse{0%{box-shadow:0 0 0 0 rgba(245,197,24,0);transform:scale(1);}
+  40%{box-shadow:0 0 0 3px rgba(245,197,24,.5),0 0 26px rgba(245,197,24,.5);transform:scale(1.045);}
+  100%{box-shadow:0 0 0 0 rgba(245,197,24,0);transform:scale(1);}}
+
+/* —— I am Groot —— */
+.groot-toast{position:fixed;left:50%;bottom:36px;transform:translateX(-50%) translateY(30px) scale(.9);z-index:99999;display:flex;align-items:center;gap:14px;padding:14px 22px;border-radius:16px;background:linear-gradient(135deg,rgba(24,60,38,.97),rgba(16,34,24,.97));border:1px solid rgba(90,200,130,.6);box-shadow:0 22px 60px rgba(0,0,0,.65),0 0 30px rgba(90,200,130,.25);opacity:0;transition:all .55s cubic-bezier(.2,1.2,.4,1);pointer-events:none;max-width:min(420px,88vw);}
+.groot-toast.show{opacity:1;transform:translateX(-50%) translateY(0) scale(1);}
+.groot-face{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-size:22px;background:radial-gradient(circle at 40% 35%,#6ee39a,#1d6b3f);box-shadow:0 0 18px rgba(90,200,130,.5);}
+.groot-say{font-family:var(--font-display);font-size:19px;letter-spacing:2px;color:#8ff0b5;}
+.groot-trans{font-size:11.5px;color:#b9d9c4;letter-spacing:.5px;margin-top:3px;}
+
+/* —— 彩蛋图鉴 —— */
+.eggbook-btn{display:inline-flex;align-items:center;gap:7px;padding:4px 12px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:.5px;cursor:pointer;transition:.25s;}
+.eggbook-btn:hover{color:#ffd230;border-color:rgba(245,197,24,.55);background:rgba(245,197,24,.1);}
+.eggbook-btn b{color:var(--gold);}
+.eggbook-btn.complete{border-color:rgba(245,197,24,.7);color:var(--gold);background:rgba(245,197,24,.14);box-shadow:0 0 16px rgba(245,197,24,.28);}
+.eggbook-panel{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(16px) scale(.97);z-index:9999;width:min(560px,calc(100vw - 32px));max-height:min(64vh,540px);overflow-y:auto;background:rgba(20,20,26,.98);border:1px solid var(--line-2);border-radius:16px;padding:18px 20px;box-shadow:0 34px 90px rgba(0,0,0,.75);backdrop-filter:blur(14px);opacity:0;pointer-events:none;transition:.3s cubic-bezier(.4,0,.2,1);}
+.eggbook-panel.open{opacity:1;transform:translateX(-50%) translateY(0) scale(1);pointer-events:auto;}
+.eggbook-panel::-webkit-scrollbar{width:6px;}
+.eggbook-panel::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:3px;}
+.eb-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px;}
+.eb-title{font-size:12px;font-weight:900;letter-spacing:2px;color:var(--gold);display:flex;align-items:center;gap:8px;}
+.eb-title::before{content:'';width:3px;height:14px;border-radius:2px;background:var(--gold);}
+.eb-close{border:0;background:transparent;color:var(--muted);font-size:20px;line-height:1;cursor:pointer;padding:0 4px;transition:.2s;}
+.eb-close:hover{color:#fff;}
+.eb-desc{font-size:11.5px;color:var(--muted);margin-bottom:14px;letter-spacing:.3px;}
+.eb-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:10px;}
+.eb-item{display:flex;gap:11px;padding:11px 13px;border-radius:11px;border:1px solid var(--line);background:rgba(255,255,255,.02);transition:.25s;}
+.eb-item.found{border-color:rgba(245,197,24,.4);background:linear-gradient(140deg,rgba(245,197,24,.09),rgba(255,255,255,.02));}
+.eb-icon{font-size:20px;line-height:1.2;flex-shrink:0;filter:grayscale(1) opacity(.42);}
+.eb-item.found .eb-icon{filter:none;}
+.eb-body{min-width:0;}
+.eb-name{font-size:12.5px;font-weight:800;color:var(--muted);letter-spacing:.4px;}
+.eb-item.found .eb-name{color:#fff;}
+.eb-txt{font-size:11px;color:var(--muted);line-height:1.55;margin-top:3px;}
+.eb-item.found .eb-txt{color:#c9c9d6;}
+.eb-hint{color:#ffb84d;}
+.eb-foot{margin-top:14px;font-size:11px;color:var(--muted);text-align:center;letter-spacing:.4px;}
+.eb-foot b{color:var(--gold);}
+
+@media (max-width:760px){
+  .egg-hulk-toast{font-size:26px;letter-spacing:3px;padding:16px 28px;}
+  .ao-mark{font-size:64px;}
+  .ao-title{letter-spacing:4px;}
+  .eggbook-panel{max-height:70vh;}
+  .eb-list{grid-template-columns:1fr;}
+  .ironman-hud .hud-corner{width:52px;height:52px;}
+  .ironman-hud .hud-reticle{width:140px;height:140px;margin:-70px 0 0 -70px;}
+  .egg-stanlee-text small{max-width:150px;}
+}
 </style>
 </head>
 <body>
 
-<div class="watermark" aria-hidden="true"></div>
+<!-- 彩蛋特效层 -->
+<div class="fx-flash" id="fx-flash"></div>
+<div class="fx-gray" id="fx-gray"></div>
+<div class="fx-vignette" id="fx-vignette"></div>
+<div class="fx-layer" id="fx-layer"></div>
 
-<div class="egg-snap-toast" id="egg-snap-toast">灭 霸 打 响 指<small>宇宙的一半生命……消失了</small></div>
-<div class="egg-ironman-toast" id="egg-ironman-toast">I AM IRON MAN<small>— Tony Stark</small></div>
+<div class="ironman-hud" id="ironman-hud">
+  <div class="hud-tint"></div>
+  <div class="hud-corner tl"></div><div class="hud-corner tr"></div>
+  <div class="hud-corner bl"></div><div class="hud-corner br"></div>
+  <div class="hud-scan"></div>
+  <div class="hud-reticle"></div>
+</div>
+
+<div class="assemble-overlay" id="assemble-overlay">
+  <div class="ao-bg"></div>
+  <div class="ao-box">
+    <div class="ao-mark">A</div>
+    <div class="ao-title">AVENGERS ASSEMBLE</div>
+    <div class="ao-sub">复仇者 · 集结</div>
+    <div class="ao-line"></div>
+  </div>
+</div>
+
+<div class="watermark" id="watermark" title="……"></div>
+
+<div class="egg-snap-toast" id="egg-snap-toast">灭 霸 打 响 指<small id="egg-snap-sub">宇宙的一半生命……消失了</small></div>
+<div class="egg-ironman-toast" id="egg-ironman-toast"><span id="egg-ironman-main">I AM IRON MAN</span><small id="egg-ironman-sub">— Tony Stark</small></div>
 <div class="egg-hulk-toast" id="egg-hulk-toast">HULK SMASH!<small>浩克最讨厌的……就是别人抢他镜头</small></div>
 <div class="egg-stanlee" id="egg-stanlee">
   <div class="egg-stanlee-inner">
     <div class="egg-stanlee-avatar">SL</div>
-    <div class="egg-stanlee-text">Excelsior!<small>— Stan Lee</small></div>
+    <div class="egg-stanlee-text"><span id="egg-stanlee-say">Excelsior!</span><small id="egg-stanlee-sub">— Stan Lee</small></div>
   </div>
+</div>
+<div class="groot-toast" id="groot-toast">
+  <div class="groot-face">🌱</div>
+  <div>
+    <div class="groot-say" id="groot-say">I am Groot.</div>
+    <div class="groot-trans" id="groot-trans">「我是格鲁特。」</div>
+  </div>
+</div>
+
+<div class="eggbook-panel" id="eggbook-panel">
+  <div class="eb-head">
+    <div class="eb-title">彩蛋图鉴</div>
+    <button class="eb-close" id="eggbook-close" title="关闭">×</button>
+  </div>
+  <div class="eb-desc">本站埋了 <b id="eb-total">8</b> 个漫威彩蛋。已解锁的会显示说明，未解锁的只给线索——自己找找看。</div>
+  <div class="eb-list" id="eb-list"></div>
+  <div class="eb-foot" id="eb-foot"></div>
 </div>
 
 <div class="copy-toast" id="copy-toast">已复制到剪贴板</div>
@@ -901,12 +1134,17 @@ body.ironman-effect .logo-mark{animation:gauntletGlow 1.5s ease infinite;}
   <div class="sc-row"><span>关闭弹窗</span><span class="kbd">Esc</span></div>
   <div class="sc-row"><span>跳转区块</span><span class="kbd">1 - 7</span></div>
   <div class="sc-row"><span>显示/隐藏面板</span><span class="kbd">Shift + /</span></div>
+  <div class="sc-row" style="border-top:1px dashed rgba(245,197,24,.25);margin-top:6px;padding-top:9px;"><span style="color:var(--gold);">听说输这个有惊喜</span><span class="kbd">↑↑↓↓←→←→BA</span></div>
 </div>
 
 <header class="nav">
   <div class="nav-inner">
     <a class="logo" href="#top">
       <span class="logo-mark" id="logo-mark">M</span>
+      <span class="gem-track" id="gem-track" aria-hidden="true">
+        <i class="gem-pip"></i><i class="gem-pip"></i><i class="gem-pip"></i>
+        <i class="gem-pip"></i><i class="gem-pip"></i><i class="gem-pip"></i>
+      </span>
       <span class="logo-text">POWER<em>RANK</em></span>
     </a>
     <nav class="nav-links">
@@ -1024,6 +1262,7 @@ body.ironman-effect .logo-mark{animation:gauntletGlow 1.5s ease infinite;}
         分享对战
       </button>
     </div>
+    <div class="rivalry-banner" id="rivalry-banner"></div>
     <div class="analysis">
       <div class="verdict" id="hero-verdict"></div>
       <div class="radar-wrap"><canvas id="hero-radar"></canvas></div>
@@ -1290,7 +1529,8 @@ body.ironman-effect .logo-mark{animation:gauntletGlow 1.5s ease infinite;}
 <footer class="footer">
   <div class="footer-inner">
     <span>MARVEL POWER RANK · 非官方粉丝向数据站</span>
-    <span class="dots"><i></i><i></i><i></i></span>
+    <button class="eggbook-btn" id="eggbook-btn" title="查看彩蛋收集进度">🥚 彩蛋 <b id="eggbook-count">0</b>/<span id="eggbook-total">8</span></button>
+    <span class="dots" id="footer-dots"><i></i><i></i><i></i></span>
     <span>Data Version 2.4.0 · by hjy</span>
   </div>
 </footer>
@@ -1541,7 +1781,21 @@ function weightedPower(hero, form) {
 }
 
 const CHANGELOG = [
-  { version:'v2.5.0', date:'当前版本', tag:'CURRENT', latest:true,
+  { version:'v2.6.0', date:'当前版本', tag:'CURRENT', latest:true,
+    title:'彩蛋系统全面重制 + 彩蛋图鉴',
+    items:[
+      '修复：右下角 hjy 水印被 pointer-events:none 挡住，「I am Iron Man」彩蛋此前根本无法触发',
+      '灭霸打响指：LOGO 连点会依次点亮六颗无限宝石（力量/空间/现实/灵魂/时间/心灵），响指后卡片化作飞灰飘散，五年后再「化灰回魂」',
+      'I am Iron Man：水印连点三次点火方舟反应炉，全屏史塔克 HUD（四角框 + 扫描线 + 锁定环）上线，台词逐字打出，收尾补上一个响指',
+      'HULK SMASH：VS 徽章连点七下，全屏震屏 + 绿色冲击波 + 碎块飞溅，标语砸在屏幕正中',
+      'WAKANDA FOREVER：页脚圆点连点五下，振金矿脉横扫页脚、双臂交叉礼浮现、紫色粒子上升',
+      '斯坦·李客串：改为从屏幕左侧走进来、停下说一句随机台词、再从右侧走出画面（并新增点击英雄卡时的小概率乱入）',
+      '新增彩蛋「宿命对决」：宿敌同台时自动浮现专属台词，共收录 14 组（浩克 vs 洛基、钢铁侠 vs 灭霸、美队 vs 钢铁侠、黑寡妇 vs 鹰眼……）',
+      '新增彩蛋「AVENGERS ASSEMBLE」：输入 ↑↑↓↓←→←→BA 触发全员集结，英雄卡依次点亮',
+      '新增彩蛋「I am Groot」：点开火箭浣熊的详情页，格鲁特会冒泡并随机给出一个翻译版本',
+      '新增「彩蛋图鉴」：页脚可查看收集进度，已解锁显示说明，未解锁只给线索，共 8 个'
+    ]},
+  { version:'v2.5.0', date:'上一版本', tag:'HISTORY',
     title:'全站真实头像 + 战力权重实验室',
     items:[
       '英雄头像全面替换：24 位英雄的 placehold 占位图改为本地真实角色立绘（assets/heroes/），统一裁切为 400×500 竖版',
@@ -2574,6 +2828,7 @@ function renderAnalysis(section) {
   renderBars(section, A, B);
   renderVerdict(section, A, B);
   renderBattleReport(section);
+  if (section === 'hero') renderRivalry();
 }
 function sortLibrary(list) {
   const k = librarySortKey;
@@ -3137,11 +3392,15 @@ function openModal(heroId) {
   }
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  document.body.classList.add('modal-open');
+  /* 彩蛋：点开火箭浣熊，格鲁特会冒个泡 */
+  if (hero.id === 'h-c-rocket') setTimeout(showGrootEgg, 720);
 }
 function closeModal() {
   Sound.close();
   document.getElementById('modal-overlay').classList.remove('open');
   document.body.style.overflow = '';
+  document.body.classList.remove('modal-open');
 }
 
 function pick(section, id) {
@@ -3214,97 +3473,611 @@ function setFactionFilter(faction) {
   renderLibrary();
 }
 
-let snapClickCount = 0, snapClickTimer = null;
-let ironmanClickCount = 0, ironmanClickTimer = null;
-let hulkClickCount = 0, hulkClickTimer = null;
-let stanLeeShown = false;
+/* =========================================================
+   彩蛋系统 · 基础设施（图鉴 / 特效 / 台词库）
+   ========================================================= */
+const EGGS = {
+  snap:     { icon:'💥', name:'灭霸打响指',      hint:'在左上角 LOGO 上连点 6 次，别停',            desc:'六颗无限宝石依次亮起。一个响指之后，半个宇宙化作飞灰——五年后他们又会回来。' },
+  ironman:  { icon:'🔴', name:'I am Iron Man',   hint:'右下角的 hjy 水印，试试连点 3 次',            desc:'方舟反应炉点火，史塔克工业 HUD 上线，然后他说出了那句台词。' },
+  hulk:     { icon:'💚', name:'HULK SMASH',      hint:'对着对战台中间的 VS 徽章狂点 7 下',           desc:'浩克最讨厌的，就是别人抢他镜头。' },
+  wakanda:  { icon:'💜', name:'WAKANDA FOREVER', hint:'页脚那三个小圆点，连点 5 次',                 desc:'振金矿脉亮起，瓦坎达万岁。' },
+  stanlee:  { icon:'🕶️', name:'斯坦·李客串',     hint:'一直往下滚，滚到更新日志的最后一条',           desc:'Excelsior! 老爷子又溜达着路过了。' },
+  rivalry:  { icon:'⚔️', name:'宿命对决',        hint:'把某几对宿敌凑到同一个对战台上',               desc:'经典宿敌同台时，战报上方会浮现只属于他们的台词。' },
+  assemble: { icon:'🅰️', name:'AVENGERS ASSEMBLE', hint:'↑ ↑ ↓ ↓ ← → ← → B A',                     desc:'复仇者，集结。' },
+  groot:    { icon:'🌱', name:'I am Groot',      hint:'点开火箭浣熊的详情页看看',                   desc:'我是格鲁特。（翻译版本随缘）' }
+};
+const EGG_ORDER = ['snap','ironman','hulk','wakanda','stanlee','rivalry','assemble','groot'];
 
+const EggBook = (function() {
+  const KEY = 'mpr_eggs';
+  let found = [];
+  try { const raw = localStorage.getItem(KEY); if (raw) found = JSON.parse(raw) || []; } catch(e) {}
+  if (!Array.isArray(found)) found = [];
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(found)); } catch(e) {} }
+  return {
+    has: function(id) { return found.indexOf(id) !== -1; },
+    add: function(id) {
+      if (found.indexOf(id) !== -1) return false;
+      found.push(id); save();
+      const total = EGG_ORDER.length;
+      showCopyToast('🥚 解锁彩蛋：' + (EGGS[id] ? EGGS[id].name : id) + '（' + found.length + '/' + total + '）');
+      return true;
+    },
+    count: function() { return found.length; },
+    list: function() { return found.slice(); }
+  };
+})();
+
+/* ---------- 视觉特效 ---------- */
+const FX = (function() {
+  function layer() { return document.getElementById('fx-layer'); }
+  function centerOf(el) {
+    if (!el || !el.getBoundingClientRect) return { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    const r = el.getBoundingClientRect();
+    return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+  }
+  function flash(color) {
+    const el = document.getElementById('fx-flash');
+    if (!el) return;
+    clearTimeout(el._t);
+    el.className = 'fx-flash' + (color ? ' ' + color : '');
+    void el.offsetWidth;
+    el.classList.add('fire');
+    el._t = setTimeout(() => el.classList.remove('fire'), 850);
+  }
+  function gray(on) {
+    const el = document.getElementById('fx-gray');
+    if (el) el.classList.toggle('fire', !!on);
+  }
+  function vignette(color, ms) {
+    const el = document.getElementById('fx-vignette');
+    if (!el) return;
+    clearTimeout(el._t);
+    el.className = 'fx-vignette' + (color ? ' ' + color : '');
+    void el.offsetWidth;
+    el.classList.add('fire');
+    el._t = setTimeout(() => el.classList.remove('fire'), ms || 1500);
+  }
+  function ring(x, y, size, color) {
+    const l = layer(); if (!l) return;
+    const el = document.createElement('div');
+    el.className = 'fx-ring';
+    el.style.left = x + 'px'; el.style.top = y + 'px';
+    el.style.width = size + 'px'; el.style.height = size + 'px';
+    el.style.marginLeft = (-size / 2) + 'px'; el.style.marginTop = (-size / 2) + 'px';
+    if (color) { el.style.borderColor = color; el.style.boxShadow = '0 0 30px ' + color; }
+    l.appendChild(el);
+    requestAnimationFrame(() => el.classList.add('fire'));
+    setTimeout(() => el.remove(), 1500);
+  }
+  /* opts: { color, count, origin:{x,y}, spread, dx, dy, min, max } */
+  function dust(count, opts) {
+    const l = layer(); if (!l) return;
+    const o = opts || {};
+    const color = o.color || 'rgba(255,255,255,.9)';
+    const n = count || 30;
+    for (let i = 0; i < n; i++) {
+      const el = document.createElement('div');
+      el.className = 'dust-p';
+      const s = (o.min || 3) + Math.random() * ((o.max || 8) - (o.min || 3));
+      el.style.width = s + 'px'; el.style.height = s + 'px';
+      const px = o.origin ? o.origin.x + (Math.random() - 0.5) * (o.spread || 200) : Math.random() * window.innerWidth;
+      const py = o.origin ? o.origin.y + (Math.random() - 0.5) * (o.spread || 200) : Math.random() * window.innerHeight * 0.85;
+      el.style.left = Math.max(0, Math.min(window.innerWidth, px)) + 'px';
+      el.style.top = Math.max(0, Math.min(window.innerHeight, py)) + 'px';
+      el.style.background = color;
+      el.style.boxShadow = '0 0 9px ' + color;
+      el.style.setProperty('--dx', ((Math.random() - 0.5) * (o.dx || 120)).toFixed(1) + 'px');
+      el.style.setProperty('--dy', (-(30 + Math.random() * (o.dy || 180))).toFixed(1) + 'px');
+      el.style.setProperty('--dur', (1.1 + Math.random() * 1.5).toFixed(2) + 's');
+      l.appendChild(el);
+      requestAnimationFrame(() => el.classList.add('fire'));
+      setTimeout(() => el.remove(), 3200);
+    }
+  }
+  function shards(count, color, x, y) {
+    const l = layer(); if (!l) return;
+    const n = count || 14;
+    const c = color || '#3eeb8b';
+    for (let i = 0; i < n; i++) {
+      const el = document.createElement('div');
+      el.className = 'shard';
+      const a = (Math.PI * 2 * i) / n + Math.random() * 0.35;
+      const dist = 130 + Math.random() * 230;
+      el.style.left = x + 'px'; el.style.top = y + 'px';
+      el.style.width = (16 + Math.random() * 28) + 'px';
+      el.style.background = c;
+      el.style.boxShadow = '0 0 14px ' + c;
+      el.style.setProperty('--dx', (Math.cos(a) * dist).toFixed(1) + 'px');
+      el.style.setProperty('--dy', (Math.sin(a) * dist).toFixed(1) + 'px');
+      el.style.setProperty('--rot', (Math.random() * 360).toFixed(0) + 'deg');
+      l.appendChild(el);
+      requestAnimationFrame(() => el.classList.add('fire'));
+      setTimeout(() => el.remove(), 1500);
+    }
+  }
+  return { centerOf: centerOf, flash: flash, gray: gray, vignette: vignette, ring: ring, dust: dust, shards: shards };
+})();
+
+function typeText(el, text, speed, done) {
+  if (!el) { if (done) done(); return; }
+  clearInterval(el._typer);
+  el.textContent = '';
+  let i = 0;
+  el._typer = setInterval(() => {
+    el.textContent = text.slice(0, ++i);
+    if (i >= text.length) { clearInterval(el._typer); if (done) done(); }
+  }, speed || 55);
+}
+
+/* ---------- 宿命对决台词库 ---------- */
+const RIVALRIES = [
+  { a:'h-c-hulk', b:'h-c-loki',
+    lines:[['a','够了！'],['b','……弱小的神。']],
+    note:'「PUNY GOD」—— 洛基在浩克手里只撑了三秒。' },
+  { a:'h-c-thanos', b:'h-c-ironman',
+    lines:[['a','I am inevitable.'],['b','And I am… Iron Man.']],
+    note:'无限手套对纳米战甲，终局之战的原句。' },
+  { a:'h-c-thanos', b:'h-c-thor',
+    lines:[['a','你本该瞄准头的。'],['b','这一次，我瞄了。']],
+    note:'暴风战斧与无限手套的账，总要算一次。' },
+  { a:'h-c-thanos', b:'h-c-strange',
+    lines:[['a','你拦不住必然。'],['b','我看了 1400 万种未来，只有一种能赢。']],
+    note:'泰坦星上的那一千四百万次推演。' },
+  { a:'h-c-thanos', b:'h-c-wanda',
+    lines:[['a','你失去的，我都知道。'],['b','你夺走了我的一切。']],
+    note:'混沌魔法对上无限手套，她本来可以一个人结束这场战争。' },
+  { a:'h-c-captain', b:'h-c-ironman',
+    lines:[['a','I can do this all day.'],['b','So was I.']],
+    note:'西伯利亚地堡里，盾牌砸在反应炉上的那一下。' },
+  { a:'h-c-blackwidow', b:'h-c-hawkeye',
+    lines:[['a','布达佩斯。'],['b','我们对布达佩斯的记忆完全不一样。']],
+    note:'沃米尔星之前，他们先聊了聊布达佩斯。' },
+  { a:'h-c-redskull', b:'h-c-captain',
+    lines:[['a','Hail Hydra.']],
+    note:'七十年的宿敌。顺便一提，「九头蛇万岁」这句话后来被美队亲自用过。' },
+  { a:'h-c-ultron', b:'h-c-ironman',
+    lines:[['a','我只想要和平。'],['b','为了和平，你打算毁掉一切。']],
+    note:'父亲与造物，奥创纪元。' },
+  { a:'h-c-falcon', b:'h-c-captain',
+    lines:[['a','On your left.']],
+    note:'「在你左边。」—— 这一句之后，被响指抹去的人一个接一个走了回来。' },
+  { a:'h-c-thor', b:'h-c-loki',
+    lines:[['a','Get help!'],['b','我们绝不玩「快帮帮我」。']],
+    note:'「快帮帮我」是阿斯加德兄弟俩最丢人也最有效的战术。' },
+  { a:'h-c-quicksilver', b:'h-c-ultron',
+    lines:[['a','你没看见那一下？']],
+    note:'「You didn\'t see that coming?」' },
+  { a:'h-c-taskmaster', b:'h-c-blackwidow',
+    lines:[['a','你的每一招我都记得。'],['b','那就忘掉红房子教你的东西。']],
+    note:'模仿大师能复制动作，复制不了选择。' },
+  { a:'h-c-valkyrie', b:'h-c-hela',
+    lines:[['a','女武神军团，冲锋。'],['b','他们全都死了，你也是。']],
+    note:'海拉屠尽了女武神，只剩她一个活着。' }
+];
+
+/* ---------- 科南密技 ---------- */
+const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+let konamiPos = 0;
+function konamiKey(key) {
+  const want = KONAMI[konamiPos];
+  const k = (typeof key === 'string' && key.length === 1) ? key.toLowerCase() : key;
+  if (k === want) {
+    konamiPos++;
+    if (konamiPos >= KONAMI.length) { konamiPos = 0; showAssembleEgg(); }
+  } else {
+    konamiPos = (k === KONAMI[0]) ? 1 : 0;
+  }
+}
+
+/* ---------- 彩蛋 1：灭霸打响指 ---------- */
+const GEM_TOTAL = 6;
+let snapStep = 0, snapResetTimer = null;
+function paintGems() {
+  document.querySelectorAll('#gem-track .gem-pip').forEach((p, i) => p.classList.toggle('lit', i < snapStep));
+  const track = document.getElementById('gem-track');
+  if (!track) return;
+  if (snapStep > 0) track.classList.add('show');
+  else setTimeout(() => track.classList.remove('show'), 600);
+}
+function snapCharge() {
+  snapStep = Math.min(GEM_TOTAL, snapStep + 1);
+  clearTimeout(snapResetTimer);
+  snapResetTimer = setTimeout(() => { snapStep = 0; paintGems(); }, 4000);
+  paintGems();
+  const mark = document.getElementById('logo-mark');
+  if (mark) { mark.classList.remove('charging'); void mark.offsetWidth; mark.classList.add('charging'); }
+  if (snapStep < GEM_TOTAL) Sound.click();
+  if (snapStep >= GEM_TOTAL) { snapStep = 0; showSnapEgg(); }
+}
 function showSnapEgg() {
   Sound.snap();
+  document.querySelectorAll('#gem-track .gem-pip').forEach(p => p.classList.add('lit'));
   const toast = document.getElementById('egg-snap-toast');
+  const sub = document.getElementById('egg-snap-sub');
+  sub.textContent = '宇宙的一半生命……消失了';
   toast.classList.add('show');
   document.body.classList.add('snap-effect');
+  FX.flash('');
+  FX.ring(window.innerWidth / 2, window.innerHeight / 2, 2600, 'rgba(245,197,24,.85)');
+  setTimeout(() => FX.gray(true), 150);
+  FX.dust(72, { color:'rgba(255,255,255,.85)', dx:170, dy:230 });
+  EggBook.add('snap');
+  renderEggBook();
   setTimeout(() => {
-    toast.classList.remove('show');
     document.body.classList.remove('snap-effect');
-  }, 3200);
+    document.body.classList.add('blip-effect');
+    FX.flash('gold');
+    FX.gray(false);
+    FX.dust(48, { color:'rgba(245,197,24,.9)', dx:120, dy:180 });
+    typeText(sub, '……五年后，他们回来了。', 60);
+    setTimeout(() => {
+      document.body.classList.remove('blip-effect');
+      toast.classList.remove('show');
+      paintGems();
+    }, 1600);
+  }, 3400);
+}
+/* ---------- 彩蛋 2：I am Iron Man ---------- */
+let imStep = 0, imResetTimer = null;
+function ironmanCharge() {
+  imStep++;
+  clearTimeout(imResetTimer);
+  imResetTimer = setTimeout(() => { imStep = 0; ironmanHot(false); }, 4000);
+  const wm = document.getElementById('watermark');
+  ironmanHot(true);
+  const c = FX.centerOf(wm);
+  FX.ring(c.x, c.y, 170, 'rgba(61,208,255,.85)');
+  FX.dust(8, { color:'rgba(61,208,255,.9)', origin:c, spread:60, dx:70, dy:110, min:2, max:5 });
+  if (imStep < 3) Sound.click();
+  if (imStep >= 3) { imStep = 0; showIronmanEgg(); }
+}
+function ironmanHot(on) {
+  const wm = document.getElementById('watermark');
+  if (wm) wm.classList.toggle('hot', !!on);
 }
 function showIronmanEgg() {
   Sound.ironman();
-  const toast = document.getElementById('egg-ironman-toast');
-  toast.classList.add('show');
+  ironmanHot(false);
+  const hud = document.getElementById('ironman-hud');
+  hud.classList.add('show');
   document.body.classList.add('ironman-effect');
+  FX.flash('cyan');
+  FX.vignette('cyan', 5200);
+  const toast = document.getElementById('egg-ironman-toast');
+  const main = document.getElementById('egg-ironman-main');
+  const sub = document.getElementById('egg-ironman-sub');
+  sub.textContent = ' ';
+  toast.classList.add('show');
+  typeText(main, 'I AM IRON MAN', 85, () => {
+    sub.textContent = '— Tony Stark';
+    setTimeout(() => {
+      /* 说完这句话，他打了个响指 */
+      const c = FX.centerOf(document.getElementById('watermark'));
+      FX.flash('');
+      FX.ring(c.x, c.y, 1200, 'rgba(245,197,24,.9)');
+      Sound.snap();
+      FX.gray(true);
+      document.body.classList.add('snap-effect');
+      setTimeout(() => {
+        document.body.classList.remove('snap-effect');
+        document.body.classList.add('blip-effect');
+        FX.gray(false);
+        setTimeout(() => document.body.classList.remove('blip-effect'), 1300);
+      }, 800);
+      sub.textContent = '— Tony Stark · 以及，最后一个响指';
+    }, 700);
+  });
+  EggBook.add('ironman');
+  renderEggBook();
   setTimeout(() => {
     toast.classList.remove('show');
+    hud.classList.remove('show');
     document.body.classList.remove('ironman-effect');
-  }, 3500);
+  }, 5600);
 }
-function showHulkEgg() {
+/* ---------- 彩蛋 3：HULK SMASH ---------- */
+const HULK_TOTAL = 7;
+let hulkStep = 0, hulkResetTimer = null;
+function hulkReset() {
+  hulkStep = 0;
+  document.querySelectorAll('.vs-badge').forEach(b => b.classList.remove('hulk-charge'));
+}
+function hulkCharge(badge) {
+  hulkStep++;
+  clearTimeout(hulkResetTimer);
+  hulkResetTimer = setTimeout(hulkReset, 2600);
+  if (badge) {
+    badge.classList.add('hulk-charge');
+    setTimeout(() => badge.classList.remove('hulk-charge'), 180);
+  }
+  if (hulkStep < HULK_TOTAL) Sound.click();
+  if (hulkStep >= HULK_TOTAL) { hulkReset(); showHulkEgg(badge); }
+}
+function showHulkEgg(badge) {
   Sound.hulk();
   const toast = document.getElementById('egg-hulk-toast');
   toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2500);
+  document.body.classList.add('hulk-effect');
+  FX.flash('green');
+  FX.vignette('green', 2600);
+  const c = badge ? FX.centerOf(badge) : { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+  setTimeout(() => {
+    FX.shards(18, '#3eeb8b', c.x, c.y);
+    FX.dust(30, { color:'rgba(62,235,139,.9)', origin:c, spread:150, dx:190, dy:170 });
+  }, 130);
+  EggBook.add('hulk');
+  renderEggBook();
+  setTimeout(() => {
+    toast.classList.remove('show');
+    document.body.classList.remove('hulk-effect');
+  }, 2800);
 }
-function showStanLee() {
-  if (stanLeeShown) return;
+/* ---------- 彩蛋 5：斯坦·李客串 ---------- */
+const STAN_QUOTES = [
+  ['Excelsior!', '— Stan Lee'],
+  ['Nuff said!', '— 别的就不用多说啦'],
+  ['Face front, True Believer!', '— 抬起头来，忠实读者'],
+  ['\'Tis a gift to be simple.', '— 路过一下，别介意'],
+  ['I\'m the best at what I do…', '— 等等，这句好像是金刚狼的']
+];
+let stanLeeShown = false;
+function showStanLee(force) {
+  if (stanLeeShown && !force) return;
   stanLeeShown = true;
   Sound.stanlee();
   const el = document.getElementById('egg-stanlee');
-  const x = Math.random() * (window.innerWidth - 200) + 20;
-  const y = window.innerHeight * 0.6 + Math.random() * 100;
-  el.style.left = x + 'px';
+  const q = STAN_QUOTES[Math.floor(Math.random() * STAN_QUOTES.length)];
+  document.getElementById('egg-stanlee-say').textContent = q[0];
+  document.getElementById('egg-stanlee-sub').textContent = q[1];
+  const W = window.innerWidth;
+  const startX = -300;
+  const endX = Math.max(40, W - 330 - Math.random() * (W * 0.2));
+  const y = window.innerHeight * (0.42 + Math.random() * 0.32);
+  el.style.transition = 'none';
+  el.style.transform = 'none';
+  el.style.left = startX + 'px';
   el.style.top = y + 'px';
+  void el.offsetWidth;
   el.classList.add('show');
-  setTimeout(() => { el.classList.remove('show'); }, 5000);
-  setTimeout(() => { stanLeeShown = false; }, 30000);
+  el.style.transition = 'opacity .5s, transform 3.6s cubic-bezier(.3,.1,.4,1)';
+  el.style.transform = 'translateX(' + (endX - startX) + 'px)';
+  EggBook.add('stanlee');
+  renderEggBook();
+  setTimeout(() => {
+    el.style.transform = 'translateX(' + (W + 340 - startX) + 'px)';
+    setTimeout(() => {
+      el.classList.remove('show');
+      el.style.transition = 'none';
+      el.style.transform = 'none';
+    }, 3600);
+  }, 4600);
+  setTimeout(() => { stanLeeShown = false; }, 28000);
+}
+
+/* ---------- 彩蛋 4：WAKANDA FOREVER ---------- */
+const WAK_TOTAL = 5;
+let wakStep = 0, wakResetTimer = null;
+function wakandaReset() {
+  wakStep = 0;
+  document.querySelectorAll('#footer-dots i').forEach(d => d.classList.remove('lit'));
+}
+function wakandaCharge() {
+  wakStep++;
+  clearTimeout(wakResetTimer);
+  wakResetTimer = setTimeout(wakandaReset, 2800);
+  const dots = document.querySelectorAll('#footer-dots i');
+  dots.forEach((d, i) => d.classList.toggle('lit', i < Math.min(3, wakStep)));
+  if (wakStep < WAK_TOTAL) Sound.click();
+  if (wakStep >= WAK_TOTAL) { wakandaReset(); showWakandaEgg(); }
+}
+function showWakandaEgg() {
+  Sound.wakanda();
+  FX.vignette('purple', 3200);
+  const vein = document.createElement('div');
+  vein.className = 'fx-vein';
+  document.body.appendChild(vein);
+  requestAnimationFrame(() => vein.classList.add('fire'));
+  setTimeout(() => vein.remove(), 1500);
+  const sal = document.createElement('div');
+  sal.className = 'fx-salute';
+  sal.innerHTML = '<i></i><i></i>';
+  document.body.appendChild(sal);
+  requestAnimationFrame(() => sal.classList.add('fire'));
+  setTimeout(() => sal.remove(), 2700);
+  FX.dust(52, {
+    color:'rgba(200,148,255,.9)', dx:90, dy:340, min:3, max:7,
+    origin:{ x: window.innerWidth / 2, y: window.innerHeight }, spread: window.innerWidth
+  });
+  const t = document.createElement('div');
+  t.className = 'egg-hulk-toast';
+  t.innerHTML = 'WAKANDA FOREVER<small>瓦坎达万岁 · — T\'Challa</small>';
+  t.style.background = 'linear-gradient(135deg,rgba(168,85,247,.94),rgba(107,45,168,.97))';
+  t.style.borderColor = '#c894ff';
+  t.style.boxShadow = '0 30px 80px rgba(168,85,247,.55),inset 0 0 40px rgba(255,255,255,.14)';
+  t.style.textShadow = '0 3px 0 rgba(0,0,0,.35),0 0 26px rgba(200,148,255,.9)';
+  document.body.appendChild(t);
+  requestAnimationFrame(() => t.classList.add('show'));
+  EggBook.add('wakanda');
+  renderEggBook();
+  setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 520); }, 3400);
+}
+
+/* ---------- 彩蛋 7：AVENGERS ASSEMBLE ---------- */
+function showAssembleEgg() {
+  Sound.victory();
+  const ov = document.getElementById('assemble-overlay');
+  ov.classList.add('show');
+  document.body.classList.add('assemble-effect');
+  FX.flash('red');
+  FX.vignette('red', 4400);
+  const cards = document.querySelectorAll('#hero-roster .char-card');
+  cards.forEach((c, i) => { c.style.animationDelay = (i * 45) + 'ms'; });
+  setTimeout(() => {
+    Sound.battle();
+    FX.dust(90, { color:'rgba(245,197,24,.9)', dx:240, dy:280 });
+  }, 520);
+  EggBook.add('assemble');
+  renderEggBook();
+  setTimeout(() => {
+    ov.classList.remove('show');
+    document.body.classList.remove('assemble-effect');
+    cards.forEach(c => { c.style.animationDelay = ''; });
+  }, 4800);
+}
+
+/* ---------- 彩蛋 8：I am Groot ---------- */
+const GROOT_LINES = [
+  ['I am Groot.', '「我是格鲁特。」'],
+  ['I am Groot!', '「我，是格鲁特！」'],
+  ['I am Groot?', '「……我是格鲁特？」'],
+  ['We are Groot.', '「我们，是格鲁特。」']
+];
+let grootIdx = 0, grootTimer = null;
+function showGrootEgg() {
+  const el = document.getElementById('groot-toast');
+  const line = GROOT_LINES[grootIdx % GROOT_LINES.length];
+  grootIdx++;
+  document.getElementById('groot-say').textContent = line[0];
+  document.getElementById('groot-trans').textContent = line[1];
+  Sound.stanlee();
+  el.classList.add('show');
+  EggBook.add('groot');
+  renderEggBook();
+  setTimeout(() => {
+    FX.dust(16, { color:'rgba(110,227,154,.9)', origin: FX.centerOf(el), spread:170, dx:100, dy:150, min:2, max:6 });
+  }, 220);
+  clearTimeout(grootTimer);
+  grootTimer = setTimeout(() => el.classList.remove('show'), 4400);
+}
+
+/* ---------- 彩蛋 6：宿命对决 ---------- */
+let lastRivalryKey = '';
+function findRivalry(idA, idB) {
+  if (!idA || !idB || idA === idB) return null;
+  for (let i = 0; i < RIVALRIES.length; i++) {
+    const r = RIVALRIES[i];
+    if ((r.a === idA && r.b === idB) || (r.a === idB && r.b === idA)) {
+      return { def: r, flip: r.a === idB };
+    }
+  }
+  return null;
+}
+function renderRivalry() {
+  const el = document.getElementById('rivalry-banner');
+  if (!el) return;
+  const st = State.hero;
+  /* 把 mode 也算进 key，避免切换世界观后误判为「没变化」 */
+  const key = st.mode + '|' + [st.a, st.b].sort().join('|');
+  if (key === lastRivalryKey) return;
+  const m = findRivalry(st.a, st.b);
+  const A = m ? findItem('hero', st.mode, st.a) : null;
+  const B = m ? findItem('hero', st.mode, st.b) : null;
+  if (!m || !A || !B) {
+    lastRivalryKey = key;
+    el.classList.remove('show');
+    el.innerHTML = '';
+    return;
+  }
+  lastRivalryKey = key;
+  const lines = m.def.lines.map(pair => {
+    const isA = (pair[0] === 'a') !== m.flip;
+    const who = isA ? A : B;
+    return '<div class="rv-line"><span class="rv-who ' + (isA ? 'a' : 'b') + '">' + who.name + '</span>' +
+           '<span class="rv-say">' + pair[1] + '</span></div>';
+  }).join('');
+  el.innerHTML = '<div class="rv-tag">宿命对决 · ICONIC RIVALRY</div>' +
+    '<div class="rv-lines">' + lines + '</div>' +
+    '<div class="rv-note">' + m.def.note + '</div>';
+  el.classList.remove('show');
+  void el.offsetWidth;
+  el.classList.add('show');
+  Sound.battle();
+  EggBook.add('rivalry');
+  renderEggBook();
+}
+
+/* ---------- 彩蛋图鉴 ---------- */
+function renderEggBook() {
+  const listEl = document.getElementById('eb-list');
+  if (!listEl) return;
+  const total = EGG_ORDER.length;
+  const count = EggBook.count();
+  const totalEl = document.getElementById('eggbook-total');
+  const ebTotal = document.getElementById('eb-total');
+  const countEl = document.getElementById('eggbook-count');
+  const btn = document.getElementById('eggbook-btn');
+  if (totalEl) totalEl.textContent = total;
+  if (ebTotal) ebTotal.textContent = total;
+  if (countEl) countEl.textContent = count;
+  if (btn) btn.classList.toggle('complete', count >= total);
+  listEl.innerHTML = EGG_ORDER.map(id => {
+    const d = EGGS[id];
+    const found = EggBook.has(id);
+    return '<div class="eb-item' + (found ? ' found' : '') + '">' +
+      '<div class="eb-icon">' + d.icon + '</div>' +
+      '<div class="eb-body">' +
+        '<div class="eb-name">' + (found ? d.name : '？？？') + '</div>' +
+        '<div class="eb-txt">' + (found ? d.desc : '<span class="eb-hint">线索：' + d.hint + '</span>') + '</div>' +
+      '</div></div>';
+  }).join('');
+  const foot = document.getElementById('eb-foot');
+  if (foot) {
+    foot.innerHTML = count >= total
+      ? '🎉 全部 <b>' + total + '</b> 个彩蛋已收集完成 —— Excelsior!'
+      : '已找到 <b>' + count + '</b> / ' + total + ' 个 · 有些彩蛋需要一点耐心，和一点漫威常识';
+  }
 }
 function bindEggs() {
-  document.getElementById('logo-mark').addEventListener('click', () => {
-    snapClickCount++;
-    clearTimeout(snapClickTimer);
-    snapClickTimer = setTimeout(() => { snapClickCount = 0; }, 2000);
-    if (snapClickCount >= 5) { snapClickCount = 0; showSnapEgg(); }
-  });
-  document.querySelector('.watermark').addEventListener('click', () => {
-    ironmanClickCount++;
-    clearTimeout(ironmanClickTimer);
-    ironmanClickTimer = setTimeout(() => { ironmanClickCount = 0; }, 2000);
-    if (ironmanClickCount >= 3) { ironmanClickCount = 0; showIronmanEgg(); }
-  });
+  /* 1. 灭霸打响指：连点 LOGO */
+  const logo = document.getElementById('logo-mark');
+  if (logo) logo.addEventListener('click', snapCharge);
+
+  /* 2. I am Iron Man：连点右下角水印 */
+  const wm = document.getElementById('watermark');
+  if (wm) wm.addEventListener('click', ironmanCharge);
+
+  /* 3. HULK SMASH：连点 VS 徽章 */
   document.querySelectorAll('.vs-badge').forEach(el => {
-    el.addEventListener('click', () => {
-      hulkClickCount++;
-      clearTimeout(hulkClickTimer);
-      hulkClickTimer = setTimeout(() => { hulkClickCount = 0; }, 2000);
-      if (hulkClickCount >= 7) { hulkClickCount = 0; showHulkEgg(); }
-    });
+    el.addEventListener('click', () => hulkCharge(el));
   });
-  let stanLeeObserver = new IntersectionObserver((entries) => {
+
+  /* 4. WAKANDA FOREVER：连点页脚圆点 */
+  const dots = document.getElementById('footer-dots');
+  if (dots) dots.addEventListener('click', wakandaCharge);
+
+  /* 5. 斯坦·李：滚到更新日志最后一条 */
+  const stanLeeObserver = new IntersectionObserver((entries) => {
     entries.forEach(en => { if (en.isIntersecting) showStanLee(); });
   }, { threshold: 0.5 });
   const clEl = document.querySelector('.cl-item:last-child');
   if (clEl) stanLeeObserver.observe(clEl);
-  const footerDots = document.querySelector('.footer-inner .dots');
-  let wakandaCount = 0, wakandaTimer = null;
-  if (footerDots) {
-    footerDots.addEventListener('click', () => {
-      wakandaCount++;
-      clearTimeout(wakandaTimer);
-      wakandaTimer = setTimeout(() => { wakandaCount = 0; }, 2000);
-      if (wakandaCount >= 5) {
-        wakandaCount = 0;
-        Sound.wakanda();
-        const t = document.createElement('div');
-        t.className = 'egg-hulk-toast';
-        t.innerHTML = 'WAKANDA FOREVER<small>— T\'Challa</small>';
-        t.style.background = 'linear-gradient(135deg,rgba(168,85,247,.9),rgba(107,45,168,.95))';
-        t.style.borderColor = '#c894ff';
-        document.body.appendChild(t);
-        requestAnimationFrame(() => t.classList.add('show'));
-        setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 600); }, 2500);
-      }
+
+  /* 5b. 斯坦·李：点开英雄卡片时有小概率再次乱入 */
+  document.addEventListener('click', e => {
+    const card = e.target.closest('.char-card, .matrix-tile');
+    if (!card) return;
+    if (Math.random() < 0.045) setTimeout(() => showStanLee(), 620);
+  });
+
+  /* 彩蛋图鉴面板 */
+  const btn = document.getElementById('eggbook-btn');
+  const panel = document.getElementById('eggbook-panel');
+  if (btn && panel) {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      Sound.click();
+      panel.classList.toggle('open');
+    });
+    const closeBtn = document.getElementById('eggbook-close');
+    if (closeBtn) closeBtn.addEventListener('click', () => { Sound.click(); panel.classList.remove('open'); });
+    document.addEventListener('click', e => {
+      if (!panel.classList.contains('open')) return;
+      if (panel.contains(e.target) || btn.contains(e.target)) return;
+      panel.classList.remove('open');
     });
   }
+  renderEggBook();
 }
 
 function bindShortcuts() {
@@ -3319,6 +4092,7 @@ function bindShortcuts() {
       return;
     }
     if (isInput) return;
+    konamiKey(e.key);
     if (e.key === 'r' || e.key === 'R') {
       if (!e.ctrlKey && !e.metaKey) { e.preventDefault(); randomBattle(); }
     }
