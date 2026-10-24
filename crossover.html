@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>X-OVER INDEX · 跨宇宙战力平替对照</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23e62429'/%3E%3Ctext x='16' y='25' font-family='Impact,Arial Black,sans-serif' font-size='23' text-anchor='middle' fill='white'%3EX%3C/text%3E%3C/svg%3E">
+<meta name="description" content="漫威、DC、黑袍纠察队、无敌少侠、龙珠、一拳超人——79 位角色横向对照，找出彼此世界里的平替。">
+<meta property="og:title" content="X-OVER INDEX · 跨宇宙战力平替对照">
+<meta property="og:description" content="6 个世界观、79 位角色、395 组平替：选一个人，看看另外五个宇宙谁在干他的活。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://fengzhanxdtpy75.github.io/assets/crossover/d-superman.jpg">
+<style>
+:root{
+  --red:#e62429;--red-2:#ff5257;--gold:#f5c518;--blue:#3d8bff;--green:#28e07a;
+  --bg:#0b0b10;--bg-2:#13131a;--bg-3:#1a1a23;
+  --line:rgba(255,255,255,.09);--line-2:rgba(255,255,255,.17);
+  --text:#f2f3f7;--muted:#9797a8;
+  --u-marvel:#e62429;--u-dc:#3d8bff;--u-boys:#a3161b;--u-invincible:#2ec4b6;--u-dragonball:#ff8a1e;--u-opm:#f5c518;
+  --max:1280px;--nav-h:64px;
+  --font-d:'Impact','Haettenschweiler','Arial Narrow Bold','Noto Sans SC',sans-serif;
+  --font-b:'Noto Sans SC','PingFang SC','Microsoft YaHei',system-ui,-apple-system,sans-serif;
+  --mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--font-b);line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(900px 520px at 12% -4%,rgba(230,36,41,.20),transparent 62%),
+  radial-gradient(760px 500px at 92% 8%,rgba(61,139,255,.14),transparent 60%),
+  radial-gradient(720px 620px at 50% 108%,rgba(245,197,24,.07),transparent 62%);}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.30;background-image:
+  linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:72px 72px;
+  mask-image:radial-gradient(circle at 50% 22%,#000 18%,transparent 76%);-webkit-mask-image:radial-gradient(circle at 50% 22%,#000 18%,transparent 76%)}
+a{color:inherit}
+img{display:block}
+button{font-family:inherit}
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 28px}
+.mono{font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.u-marvel{--uc:var(--u-marvel)}.u-dc{--uc:var(--u-dc)}.u-boys{--uc:var(--u-boys)}.u-invincible{--uc:var(--u-invincible)}.u-dragonball{--uc:var(--u-dragonball)}.u-opm{--uc:var(--u-opm)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:200;background:rgba(11,11,16,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:var(--max);margin:0 auto;padding:0 28px;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0}
+.logo-x{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;font-family:var(--font-d);font-size:21px;color:#fff;background:linear-gradient(135deg,var(--red) 0 49%,#2563eb 51% 100%);box-shadow:0 0 22px rgba(230,36,41,.45);transition:.3s}
+.logo:hover .logo-x{transform:rotate(-8deg) scale(1.06)}
+.logo-t{font-family:var(--font-d);font-size:19px;letter-spacing:2.4px;line-height:1}
+.logo-t em{font-style:normal;color:var(--red-2)}
+.logo-s{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:1.6px;color:var(--muted);margin-top:3px}
+.nav-links{display:flex;gap:2px}
+.nav-links a{padding:8px 13px;border-radius:8px;font-size:12.5px;font-weight:700;letter-spacing:.4px;color:var(--muted);text-decoration:none;transition:.22s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav-links a.here{color:#fff}
+.nav-links a.here::after{content:'';display:block;height:2px;margin-top:5px;border-radius:2px;background:linear-gradient(90deg,var(--red),var(--gold))}
+.nav-back{display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--muted);font-size:11.5px;font-weight:700;letter-spacing:.6px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;transition:.22s;white-space:nowrap}
+.nav-back:hover{color:#fff;border-color:var(--line-2);background:rgba(255,255,255,.05)}
+.mobile-tabs{display:none;position:sticky;top:var(--nav-h);z-index:190;background:rgba(11,11,16,.95);border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.mobile-tabs::-webkit-scrollbar{display:none}
+.mobile-tabs div{display:flex;gap:6px;padding:9px 14px;white-space:nowrap}
+.mobile-tabs a{flex-shrink:0;font-size:12px;font-weight:700;color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:7px;border:1px solid transparent}
+.mobile-tabs a.here{color:#fff;background:rgba(230,36,41,.14);border-color:rgba(230,36,41,.32)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;z-index:1;padding:74px 0 40px;overflow:hidden}
+.hero-word{position:absolute;top:8px;left:50%;transform:translateX(-50%);font-family:var(--font-d);font-size:clamp(110px,21vw,290px);letter-spacing:10px;color:rgba(255,255,255,.026);white-space:nowrap;pointer-events:none;user-select:none;line-height:1}
+.hero-in{position:relative;max-width:var(--max);margin:0 auto;padding:0 28px}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:2.6px;color:var(--red-2);margin-bottom:18px}
+.eyebrow::before{content:'';width:34px;height:2px;background:linear-gradient(90deg,var(--red),transparent)}
+.hero h1{font-family:var(--font-d);font-size:clamp(52px,7.4vw,92px);line-height:.94;letter-spacing:2px;margin-bottom:14px;text-transform:uppercase}
+.hero h1 .stroke{color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.55)}
+.hero h1 em{font-style:normal;color:var(--red-2);text-shadow:0 0 40px rgba(230,36,41,.35)}
+.hero-sub{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px;letter-spacing:1.2px;color:var(--muted);margin-bottom:22px}
+.hero-sub b{color:#fff;font-weight:900}
+.hero-sub .dot{width:4px;height:4px;border-radius:50%;background:var(--red)}
+.lead{max-width:640px;color:#b9bbc8;font-size:15px;margin-bottom:32px}
+.lead b{color:#fff}
+.hero-grid{display:grid;grid-template-columns:1.55fr .95fr;gap:26px;align-items:stretch;margin-top:34px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stats>div{padding:16px 18px;background:linear-gradient(165deg,rgba(255,255,255,.055),rgba(255,255,255,.014));border:1px solid var(--line);border-radius:12px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.stats>div::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--red);opacity:.8}
+.stats b{display:block;font-family:var(--font-d);font-size:30px;line-height:1.05;letter-spacing:1px}
+.stats span{font-family:var(--mono);font-size:9.5px;letter-spacing:1.3px;color:var(--muted)}
+.stats i{display:block;font-style:normal;font-size:9.5px;color:#6f6f80;margin-top:6px;letter-spacing:.2px;line-height:1.5}
+.chains{border:1px solid var(--line);border-radius:12px;background:rgba(19,19,26,.72);padding:16px 18px;display:flex;flex-direction:column;justify-content:center}
+.chains h3{font-family:var(--mono);font-size:9.5px;letter-spacing:2px;color:var(--muted);margin-bottom:11px;display:flex;justify-content:space-between}
+.chains h3 span{color:var(--gold)}
+.chain{display:flex;align-items:center;gap:7px;font-size:11.5px;color:#cdced9;padding:4px 0;white-space:nowrap}
+.chain b{color:#fff;font-weight:800}
+.chain .arr{color:rgba(255,255,255,.25);font-family:var(--mono);font-size:10px}
+.chain .u{width:5px;height:5px;border-radius:50%;background:var(--uc);flex-shrink:0}
+.universe-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:34px}
+.uni-card{position:relative;border:1px solid var(--line);border-radius:11px;padding:13px 14px 12px;background:linear-gradient(170deg,rgba(255,255,255,.045),rgba(255,255,255,.012));overflow:hidden;cursor:pointer;transition:.25s}
+.uni-card::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;background:var(--uc);opacity:.9}
+.uni-card:hover{transform:translateY(-3px);border-color:var(--line-2);background:rgba(255,255,255,.06)}
+.uni-card .uc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.uni-card .uc-en{font-family:var(--mono);font-size:8px;letter-spacing:1.5px;color:var(--uc)}
+.uni-card .uc-n{font-family:var(--mono);font-size:8.5px;color:var(--muted)}
+.uni-card h4{font-size:13.5px;font-weight:900;letter-spacing:.5px;margin-bottom:2px}
+.uni-card p{font-size:10px;color:var(--muted);line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uni-card .uc-bar{height:3px;border-radius:3px;background:rgba(255,255,255,.08);margin-top:9px;overflow:hidden}
+.uni-card .uc-bar i{display:block;height:100%;background:var(--uc);border-radius:3px}
+
+/* ---------- section ---------- */
+.section{position:relative;z-index:1;padding:62px 0 8px;scroll-margin-top:calc(var(--nav-h) + 12px)}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:26px;flex-wrap:wrap;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.section-head h2{font-family:var(--font-d);font-size:clamp(25px,3.2vw,36px);letter-spacing:2px;display:flex;align-items:center;gap:14px;line-height:1}
+.section-head h2 .num{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1px;color:var(--red-2);border:1px solid rgba(230,36,41,.4);background:rgba(230,36,41,.1);border-radius:6px;padding:4px 8px}
+.section-head p{font-size:12.5px;color:var(--muted);max-width:430px}
+.section-head p b{color:#dcdde6}
+
+/* ---------- radar ---------- */
+.radar-shell{display:grid;grid-template-columns:318px minmax(0,1fr);gap:18px;align-items:start}
+.picker{border:1px solid var(--line);border-radius:14px;background:rgba(17,17,24,.9);overflow:hidden;position:sticky;top:calc(var(--nav-h) + 14px)}
+.uni-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.uni-tab{appearance:none;border:0;background:#101017;color:var(--muted);padding:10px 4px 9px;font-size:10.5px;font-weight:800;letter-spacing:.5px;cursor:pointer;transition:.2s;position:relative}
+.uni-tab:hover{color:#fff;background:#171720}
+.uni-tab.on{color:#fff;background:color-mix(in srgb,var(--uc) 16%,#101017)}
+.uni-tab.on::after{content:'';position:absolute;left:8px;right:8px;bottom:0;height:2px;background:var(--uc)}
+.uni-tab i{display:block;width:5px;height:5px;border-radius:50%;background:var(--uc);margin:0 auto 4px;opacity:.9}
+.picker-search{position:relative;padding:12px 12px 8px}
+.picker-search input{width:100%;background:#0c0c12;border:1px solid var(--line);border-radius:8px;color:#fff;font-size:12px;padding:9px 30px 9px 11px;outline:none;transition:.2s;font-family:inherit}
+.picker-search input:focus{border-color:rgba(230,36,41,.55);box-shadow:0 0 0 3px rgba(230,36,41,.1)}
+.picker-search input::placeholder{color:#5c5c6b}
+.picker-search svg{position:absolute;right:22px;top:22px;width:13px;height:13px;color:#5c5c6b;pointer-events:none}
+.pick-list{max-height:430px;overflow-y:auto;padding:2px 8px 10px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.16) transparent}
+.pick-list::-webkit-scrollbar{width:5px}
+.pick-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:4px}
+.pick{display:flex;align-items:center;gap:10px;width:100%;background:transparent;border:1px solid transparent;border-radius:9px;padding:6px;cursor:pointer;text-align:left;color:inherit;transition:.16s}
+.pick:hover{background:rgba(255,255,255,.045)}
+.pick.on{background:rgba(255,255,255,.07);border-color:var(--line-2)}
+.pick.on .pick-p{box-shadow:0 0 0 2px var(--uc)}
+.pick-p{width:34px;height:43px;border-radius:5px;overflow:hidden;flex-shrink:0;background:#0a0a0f;border:1px solid rgba(255,255,255,.1)}
+.pick-p img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.pick-i{min-width:0;flex:1}
+.pick-n{display:block;font-size:12.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pick-s{display:block;font-family:var(--mono);font-size:8px;letter-spacing:.6px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase}
+.pick-pow{font-family:var(--font-d);font-size:19px;letter-spacing:.5px;color:#fff;opacity:.9;flex-shrink:0}
+.pick-empty{padding:28px 12px;text-align:center;color:var(--muted);font-size:11.5px}
+
+.stage{min-width:0}
+.sel-card{position:relative;border:1px solid var(--line);border-radius:14px;background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(255,255,255,.012));padding:18px;display:grid;grid-template-columns:180px minmax(0,1fr);gap:20px;overflow:hidden}
+.sel-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--uc)}
+.sel-card::after{content:'';position:absolute;right:-40px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--uc) 30%,transparent),transparent 68%);pointer-events:none}
+.sel-photo{position:relative;border-radius:10px;overflow:hidden;background:#0d0d13;border:1px solid rgba(255,255,255,.1);aspect-ratio:4/5}
+.sel-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.sel-photo .tier-flag{position:absolute;left:8px;top:8px;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.8px;background:rgba(8,8,12,.82);border:1px solid rgba(255,255,255,.18);border-radius:5px;padding:3px 6px;backdrop-filter:blur(6px)}
+.sel-photo .pow-flag{position:absolute;right:8px;bottom:8px;font-family:var(--font-d);font-size:24px;line-height:1;text-shadow:0 2px 12px #000;color:#fff}
+.sel-info{min-width:0;position:relative;z-index:1}
+.sel-top{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:6px}
+.badge-u{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:1.2px;color:var(--uc);border:1px solid color-mix(in srgb,var(--uc) 55%,transparent);background:color-mix(in srgb,var(--uc) 13%,transparent);border-radius:5px;padding:2px 7px}
+.badge-tier{font-family:var(--mono);font-size:9px;letter-spacing:.8px;color:var(--gold);border:1px solid rgba(245,197,24,.35);background:rgba(245,197,24,.08);border-radius:5px;padding:2px 7px}
+.sel-name{font-family:var(--font-d);font-size:clamp(30px,3.4vw,44px);line-height:1;letter-spacing:1.5px;margin:2px 0 3px}
+.sel-en{font-family:var(--mono);font-size:9.5px;letter-spacing:1.6px;color:var(--muted);text-transform:uppercase}
+.sel-role{font-size:11.5px;color:#c9cad5;margin-top:9px}
+.sel-note{font-size:11.5px;color:var(--muted);margin-top:7px;max-width:560px;line-height:1.7}
+.sel-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.tag{font-size:10px;font-weight:700;color:#d7d8e2;background:rgba(255,255,255,.055);border:1px solid var(--line);border-radius:5px;padding:2px 7px}
+.tag.hot{color:#fff;border-color:color-mix(in srgb,var(--uc) 60%,transparent);background:color-mix(in srgb,var(--uc) 18%,transparent)}
+.sel-bottom{display:flex;align-items:flex-end;gap:24px;margin-top:14px;flex-wrap:wrap}
+.axis-bars{flex:1;min-width:230px;display:grid;grid-template-columns:1fr 1fr;gap:5px 18px}
+.axis{display:grid;grid-template-columns:34px 1fr 24px;align-items:center;gap:7px}
+.axis span{font-size:9.5px;color:var(--muted);letter-spacing:.5px}
+.axis .bar{height:4px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}
+.axis .bar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,color-mix(in srgb,var(--uc) 55%,#fff),var(--uc));transition:width .5s ease}
+.axis b{font-family:var(--mono);font-size:9.5px;font-weight:700;text-align:right;color:#d9dae4}
+.sel-peak{font-size:10px;color:var(--muted);text-align:right;line-height:1.5;flex-shrink:0}
+.sel-peak b{display:block;font-family:var(--font-d);font-size:26px;letter-spacing:.5px;color:#fff}
+.sel-peak em{font-style:normal;color:var(--gold)}
+
+.stage-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:20px 2px 12px;flex-wrap:wrap}
+.stage-head h3{font-size:12px;font-weight:900;letter-spacing:1.5px;display:flex;align-items:center;gap:9px}
+.stage-head h3::before{content:'';width:3px;height:13px;border-radius:2px;background:var(--red)}
+.stage-head span{font-size:9.5px;color:#747485;font-family:var(--mono);letter-spacing:.6px}
+.match-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:10px}
+.mc{position:relative;border:1px solid var(--line);border-radius:12px;background:rgba(17,17,24,.86);padding:12px;cursor:pointer;transition:.22s;overflow:hidden;display:flex;flex-direction:column;gap:9px;min-width:0}
+.mc::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;background:var(--uc);opacity:.85}
+.mc:hover{transform:translateY(-3px);border-color:var(--line-2);background:rgba(255,255,255,.055);box-shadow:0 16px 34px rgba(0,0,0,.4)}
+.mc-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.mc-uni{font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:1.2px;color:var(--uc)}
+.mc-score{font-family:var(--font-d);font-size:17px;letter-spacing:.5px;color:#fff;line-height:1}
+.mc-score small{font-size:9px;color:var(--muted);margin-left:1px}
+.mc-body{display:flex;gap:10px;align-items:center;min-width:0}
+.mc-photo{width:52px;height:65px;border-radius:6px;overflow:hidden;flex-shrink:0;background:#0c0c12;border:1px solid rgba(255,255,255,.1)}
+.mc-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.mc-name{font-size:15px;font-weight:900;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mc-en{font-family:var(--mono);font-size:8px;letter-spacing:.7px;color:var(--muted);text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.mc-delta{display:inline-flex;align-items:center;gap:3px;margin-top:4px;font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.4px;border-radius:4px;padding:1px 5px;white-space:nowrap}
+.mc-delta.minus{color:#7ef0b0;background:rgba(40,224,122,.1);border:1px solid rgba(40,224,122,.25)}
+.mc-delta.plus{color:#ffb04d;background:rgba(255,138,30,.1);border:1px solid rgba(255,138,30,.28)}
+.mc-delta.same{color:#c9cad5;background:rgba(255,255,255,.06);border:1px solid var(--line)}
+.mc-tags{display:flex;flex-wrap:wrap;gap:4px}
+.mc-tags .tag{font-size:9px;padding:1px 5px}
+.mc-why{font-size:10px;line-height:1.55;color:var(--muted);margin-top:auto}
+.mc-why b{color:#d9dae4;font-weight:700}
+.mc-alt{font-size:9px;color:#666678;border-top:1px dashed rgba(255,255,255,.08);padding-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mc-alt a{color:#9a9aab;text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.18)}
+.mc-alt a:hover{color:#fff}
+.mc-alt i{font-style:normal;font-family:var(--mono);font-size:7.5px;color:#666678;margin-left:2px}
+
+.stage-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;flex-wrap:wrap}
+.btn{appearance:none;border:1px solid var(--line-2);background:rgba(255,255,255,.05);color:#e7e8f0;font-size:11px;font-weight:800;letter-spacing:.6px;border-radius:8px;padding:8px 13px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28);transform:translateY(-1px)}
+.btn[disabled]{opacity:.32;cursor:not-allowed;transform:none;background:rgba(255,255,255,.03)}
+.btn.gold{border-color:rgba(245,197,24,.35);color:var(--gold);background:rgba(245,197,24,.07)}
+.btn.gold:hover{background:rgba(245,197,24,.14)}
+.hint{font-size:10px;color:#6c6c7c}
+
+/* ---------- tier lanes ---------- */
+.lane-tools{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.chip-filter{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);font-size:10.5px;font-weight:700;border-radius:20px;padding:5px 11px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:5px}
+.chip-filter i{width:5px;height:5px;border-radius:50%;background:var(--uc)}
+.chip-filter:hover{color:#fff;border-color:var(--line-2)}
+.chip-filter.on{color:#fff;border-color:color-mix(in srgb,var(--uc) 60%,transparent);background:color-mix(in srgb,var(--uc) 16%,transparent)}
+.chip-filter.off{opacity:.38}
+.lanes{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:rgba(15,15,21,.7)}
+.lane{display:grid;grid-template-columns:118px minmax(0,1fr);border-bottom:1px solid var(--line);transition:.2s}
+.lane:last-child{border-bottom:0}
+.lane:hover{background:rgba(255,255,255,.022)}
+.lane-l{padding:13px 14px;border-right:1px solid var(--line);position:relative}
+.lane-l::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--tc)}
+.lane-l b{display:block;font-family:var(--font-d);font-size:20px;letter-spacing:1px;line-height:1}
+.lane-l span{display:block;font-size:10px;color:#c9cad5;margin-top:3px}
+.lane-l small{display:block;font-family:var(--mono);font-size:8px;color:#666678;margin-top:2px;letter-spacing:.5px}
+.lane-c{display:flex;flex-wrap:wrap;gap:6px;padding:11px 14px;min-height:52px;align-items:center}
+.lc{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-left:2px solid var(--uc);background:rgba(255,255,255,.035);border-radius:6px;padding:3px 8px 3px 4px;cursor:pointer;transition:.18s;text-decoration:none;color:inherit}
+.lc:hover{background:rgba(255,255,255,.09);transform:translateY(-2px);border-color:var(--line-2)}
+.lc img,.lc .lc-em{width:22px;height:27px;border-radius:3px;object-fit:cover;object-position:50% 18%;background:#0a0a0f;flex-shrink:0}
+.lc .lc-em{display:grid;place-items:center;font-family:var(--font-d);font-size:11px;color:#fff;background:linear-gradient(150deg,var(--uc),#0b0b10)}
+.lc b{font-size:10.5px;font-weight:800;white-space:nowrap}
+.lc em{font-family:var(--mono);font-style:normal;font-size:8.5px;color:#8b8b9c}
+.lane-empty{font-size:10.5px;color:#5d5d6b;font-family:var(--mono);letter-spacing:.8px}
+
+/* ---------- matrix ---------- */
+.matrix-wrap{border:1px solid var(--line);border-radius:14px;overflow:auto;background:rgba(15,15,21,.78);scrollbar-width:thin}
+table.mx{border-collapse:collapse;width:100%;min-width:900px}
+table.mx th,table.mx td{border-bottom:1px solid var(--line);border-right:1px solid rgba(255,255,255,.05);padding:0;text-align:left}
+table.mx thead th{position:sticky;top:0;z-index:2;background:#14141c;padding:11px 12px;font-family:var(--mono);font-size:9px;letter-spacing:1.6px;color:var(--muted);font-weight:700}
+table.mx thead th em{display:block;font-style:normal;font-family:var(--font-b);font-size:11px;color:#dcdde6;letter-spacing:0;margin-top:2px;font-weight:800}
+table.mx tbody tr:hover{background:rgba(255,255,255,.025)}
+.mx-arch{position:sticky;left:0;z-index:1;background:#12121a;padding:11px 13px;min-width:150px;max-width:180px}
+.mx-arch b{display:block;font-size:11.5px;font-weight:900;white-space:nowrap}
+.mx-arch span{display:block;font-size:9px;color:#747485;line-height:1.45;margin-top:2px;white-space:normal}
+.mx-cell{display:block;padding:9px 12px;text-decoration:none;transition:.16s;min-height:52px;position:relative}
+.mx-cell:hover{background:color-mix(in srgb,var(--uc) 12%,transparent)}
+.mx-cell b{display:block;font-size:11.5px;font-weight:800;white-space:nowrap}
+.mx-cell b::before{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--uc);margin-right:5px;vertical-align:2px}
+.mx-cell span{display:block;font-family:var(--mono);font-size:8.5px;color:#878798;margin-left:9px;margin-top:1px;white-space:nowrap}
+.mx-cell.none{cursor:default;color:#3f3f4c;padding:9px 12px;min-height:52px}
+.mx-cell.none:hover{background:transparent}
+.mx-cell.none b{font-weight:400}
+.mx-note{font-size:11px;color:var(--muted);margin-top:12px;line-height:1.8}
+.mx-note b{color:#dcdde6}
+
+/* ---------- rules ---------- */
+.rules{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;align-items:start}
+.panel{border:1px solid var(--line);border-radius:14px;background:rgba(17,17,24,.8);padding:20px}
+.panel h3{font-size:13px;font-weight:900;letter-spacing:1px;display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.panel h3::before{content:'';width:3px;height:13px;border-radius:2px;background:var(--gold)}
+.steps{display:flex;flex-direction:column;gap:0}
+.step{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:11px 0;border-bottom:1px dashed rgba(255,255,255,.08)}
+.step:last-child{border-bottom:0}
+.step i{font-family:var(--font-d);font-style:normal;font-size:18px;color:var(--red-2);line-height:1.3}
+.step b{display:block;font-size:11.5px;font-weight:900;margin-bottom:1px}
+.step p{font-size:10.5px;color:var(--muted);line-height:1.65}
+.formula{margin-top:14px;border:1px solid rgba(245,197,24,.2);background:rgba(245,197,24,.05);border-radius:9px;padding:11px 13px;font-family:var(--mono);font-size:9.5px;line-height:1.9;color:#cfd0db;letter-spacing:.2px}
+.formula b{color:var(--gold)}
+.formula span{color:#8c8c9d}
+.rules-list{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.rule{border:1px solid var(--line);border-radius:10px;padding:12px;background:rgba(255,255,255,.022)}
+.rule b{display:block;font-size:11px;font-weight:900;margin-bottom:3px}
+.rule p{font-size:10px;color:var(--muted);line-height:1.6}
+.unitable{width:100%;border-collapse:collapse;margin-top:16px}
+.unitable th,.unitable td{font-size:9.5px;padding:6px 4px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+.unitable th{font-family:var(--mono);font-size:8px;letter-spacing:.8px;color:var(--muted);font-weight:700}
+.unitable td b{font-size:10.5px}
+.unitable .sw{display:inline-block;width:6px;height:6px;border-radius:2px;background:var(--uc);margin-right:5px;vertical-align:0}
+.caliber{font-size:10px;color:#747485;margin-top:10px;line-height:1.7;border-left:2px solid rgba(245,197,24,.4);padding-left:9px}
+.caliber b{color:#b9bac6}
+
+/* ---------- footer ---------- */
+.footer{position:relative;z-index:1;margin-top:66px;border-top:1px solid var(--line);background:rgba(10,10,14,.8);padding:34px 0 46px}
+.footer-in{max-width:var(--max);margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap}
+.f-brand{max-width:520px}
+.f-brand .logo{margin-bottom:10px}
+.f-brand p{font-size:10.5px;color:#747485;line-height:1.8}
+.f-brand a{color:#b9bac6;text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.2)}
+.f-brand a:hover{color:#fff}
+.f-meta{font-size:10px;color:#666678;text-align:right;line-height:1.9}
+.f-meta b{color:#a8a9b7;font-family:var(--mono);letter-spacing:.3px}
+.f-links{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+.f-links a{font-size:10px;color:#8c8c9d;text-decoration:none}
+.f-links a:hover{color:#fff}
+
+.scroll-top{position:fixed;right:22px;bottom:22px;z-index:900;width:40px;height:40px;border-radius:50%;border:1px solid var(--line-2);background:rgba(20,20,28,.9);color:var(--muted);display:grid;place-items:center;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(12px);transition:.25s;backdrop-filter:blur(8px)}
+.scroll-top.on{opacity:1;pointer-events:auto;transform:none}
+.scroll-top:hover{color:#fff;border-color:var(--red);background:var(--red)}
+.toast{position:fixed;left:50%;top:20px;transform:translate(-50%,-80px);z-index:990;background:rgba(20,90,50,.96);border:1px solid rgba(40,224,122,.5);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.3px;border-radius:8px;padding:9px 16px;opacity:0;transition:.3s;pointer-events:none;box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+.mc-pin{margin-left:6px;flex:1;font-size:7px;font-weight:800;letter-spacing:.6px;color:var(--gold);background:rgba(245,197,24,.1);border:1px solid rgba(245,197,24,.3);border-radius:4px;padding:1px 4px;white-space:nowrap;max-width:64px;overflow:hidden;text-overflow:ellipsis}
+.mc.weak{border-color:rgba(255,255,255,.07)}
+.mc.weak .mc-score{color:#9a9aab}
+.mc.weak::before{opacity:.45}
+.mc.empty{cursor:default;border-style:dashed;background:rgba(13,13,19,.6)}
+.mc.empty::before{opacity:.35}
+.mc.empty:hover{transform:none;background:rgba(13,13,19,.6);box-shadow:none}
+.mc-empty-tag{font-family:var(--mono);font-size:7.5px;letter-spacing:1px;color:#777;border:1px dashed rgba(255,255,255,.18);border-radius:4px;padding:1px 5px}
+.mc-empty-body{flex:1;display:flex;flex-direction:column;justify-content:center;gap:4px;padding:6px 0}
+.mc-empty-body b{font-size:14px;font-weight:900;color:#8a8a9b}
+.mc-empty-body p{font-size:9.5px;line-height:1.55;color:#666678}
+.mc.empty .mc-why{margin-top:0;font-size:9px;color:#55556a;border-top:1px dashed rgba(255,255,255,.07);padding-top:6px}
+.pick-p .emblem .em-init{font-size:12px}
+.pick-p .emblem .em-glyph,.mc-photo .emblem .em-glyph{font-size:5px;top:2px;left:3px}
+.pick-p .emblem .em-sub,.mc-photo .emblem .em-sub{display:none}
+.pick-p .emblem::after,.mc-photo .emblem::after{inset:3px}
+.mc-photo .emblem .em-init{font-size:17px}
+.lc .lc-em{font-size:10px}
+
+/* placeholder emblem for the two live-action universes */
+.emblem{position:relative;width:100%;height:100%;display:grid;place-items:center;overflow:hidden;background:
+  radial-gradient(120% 90% at 50% 8%,color-mix(in srgb,var(--uc) 44%,#0b0b10) 0%,#0b0b10 72%),
+  #0b0b10}
+.emblem::before{content:'';position:absolute;inset:0;opacity:.16;background:repeating-linear-gradient(135deg,rgba(255,255,255,.5) 0 1px,transparent 1px 9px)}
+.emblem::after{content:'';position:absolute;inset:8px;border:1px solid color-mix(in srgb,var(--uc) 45%,transparent);border-radius:3px}
+.emblem .em-glyph{position:absolute;top:4px;left:7px;font-family:var(--mono);font-size:7px;letter-spacing:1px;color:color-mix(in srgb,var(--uc) 80%,#fff);opacity:.85}
+.emblem .em-init{position:relative;font-family:var(--font-d);font-size:clamp(26px,3.2vw,40px);letter-spacing:1px;color:#fff;text-shadow:0 3px 18px rgba(0,0,0,.6);line-height:1}
+.emblem .em-sub{position:absolute;bottom:6px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:6.5px;letter-spacing:1.2px;color:rgba(255,255,255,.5)}
+.emblem.lg .em-init{font-size:clamp(44px,6vw,64px)}
+.emblem.lg .em-glyph{font-size:9px;top:8px;left:10px}
+.emblem.lg .em-sub{font-size:8px;bottom:10px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+
+/* ---------- responsive ---------- */
+@media(max-width:1100px){
+  .hero-grid{grid-template-columns:1fr}
+  .universe-strip{grid-template-columns:repeat(3,1fr)}
+  .radar-shell{grid-template-columns:1fr}
+  .picker{position:static}
+  .pick-list{max-height:250px;display:grid;grid-template-columns:1fr 1fr;gap:2px 6px}
+  .rules{grid-template-columns:1fr}
+}
+@media(max-width:820px){
+  .nav-links{display:none}
+  .mobile-tabs{display:block}
+  .wrap,.nav-inner,.hero-in,.footer-in{padding-left:16px;padding-right:16px}
+  .hero{padding-top:44px}
+  .stats{grid-template-columns:1fr 1fr}
+  .hero-grid{gap:18px}
+  .section{scroll-margin-top:calc(var(--nav-h) + 58px)}
+  .eyebrow{font-size:9px;letter-spacing:1.7px}
+  .hero-sub{font-size:10.5px;letter-spacing:.8px}
+  .stats b{font-size:26px}
+  .sel-card{grid-template-columns:120px minmax(0,1fr);gap:14px;padding:14px}
+  .sel-note{display:none}
+  .axis-bars{grid-template-columns:1fr;min-width:0;width:100%}
+  .axis{grid-template-columns:30px minmax(0,1fr) 22px;gap:5px}
+  .match-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .mc-name{font-size:13px}
+}
+@media(max-width:560px){
+  .universe-strip{grid-template-columns:1fr 1fr;gap:8px}
+  .uni-card{padding:11px 12px 10px}
+  .uni-card p{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;min-height:28px}
+  .pick-list{grid-template-columns:1fr}
+  .lane{grid-template-columns:84px minmax(0,1fr)}
+  .lane-l{padding:10px 9px}
+  .lane-l b{font-size:16px}
+  .lane-l small{display:none}
+  .lc em{display:none}
+  .sel-photo{aspect-ratio:1/1.15}
+  .sel-bottom{gap:10px}
+  .sel-peak{width:100%;text-align:left;border-top:1px solid var(--line);padding-top:8px}
+  .sel-peak b{display:inline;font-size:20px;margin-right:6px}
+  .match-grid{grid-template-columns:1fr 1fr}
+  .stage-foot .hint{display:none}
+  .f-meta{text-align:left}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#top" aria-label="X-OVER INDEX">
+      <span class="logo-x">X</span>
+      <span class="logo-t">X-OVER<em> INDEX</em><span class="logo-s">CROSS-UNIVERSE POWER EXCHANGE</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#radar" class="here">平替雷达</a>
+      <a href="#lanes">档位横切</a>
+      <a href="#matrix">平替矩阵</a>
+      <a href="#rules">换算规则</a>
+    </div>
+    <a class="nav-back" href="index.html">← 漫威主站</a>
+  </div>
+</nav>
+<div class="mobile-tabs"><div>
+  <a href="#radar" class="here">平替雷达</a><a href="#lanes">档位横切</a><a href="#matrix">平替矩阵</a><a href="#rules">换算规则</a><a href="index.html">主站</a>
+</div></div>
+
+<header class="hero" id="top">
+  <div class="hero-word">CROSSOVER</div>
+  <div class="hero-in">
+    <div class="eyebrow">CROSS-UNIVERSE POWER EXCHANGE · 6 WORLDS</div>
+    <h1>CROSSOVER <em>INDEX</em></h1>
+    <div class="hero-sub"><b>跨宇宙战力平替对照</b><span class="dot"></span>MARVEL · DC · THE BOYS · INVINCIBLE · DRAGON BALL · ONE PUNCH MAN</div>
+    <p class="lead">同一个模板，在不同宇宙里卖不同的价。选一个人，看看另外五个世界谁在干他的活——<b>以及这个平替到底打了几折</b>。</p>
+    <div class="hero-grid">
+      <div class="stats">
+        <div><b>06</b><span>UNIVERSES</span><i>六个世界观横向并置</i></div>
+        <div><b>79</b><span>CHARACTERS</span><i>每个都能点开找平替</i></div>
+        <div><b>08</b><span>POWER TIERS</span><i>T0 神话级 → T5 凡人级</i></div>
+        <div><b>395</b><span>MATCHES</span><i>按平替度实时排序</i></div>
+      </div>
+      <div class="chains">
+        <h3>COMMON EXCHANGE <span>今日汇率</span></h3>
+        <div class="chain"><b>超人</b><span class="arr">→</span><span class="u u-marvel"></span>哨兵<span class="arr">/</span><span class="u u-invincible"></span>全能侠<span class="arr">/</span><span class="u u-boys"></span>祖国人</div>
+        <div class="chain"><b>蝙蝠侠</b><span class="arr">→</span><span class="u u-marvel"></span>钢铁侠<span class="arr">/</span><span class="u u-boys"></span>玄色<span class="arr">/</span><span class="u u-invincible"></span>机器人</div>
+        <div class="chain"><b>奇异博士</b><span class="arr">→</span><span class="u u-dc"></span>命运博士<span class="arr">/</span><span class="u u-dc"></span>扎坦娜</div>
+        <div class="chain"><b>闪电侠</b><span class="arr">→</span><span class="u u-marvel"></span>快银<span class="arr">/</span><span class="u u-boys"></span>A-Train<span class="arr">/</span><span class="u u-opm"></span>闪光佛莱士</div>
+      </div>
+    </div>
+    <div class="universe-strip" id="uniStrip"></div>
+  </div>
+</header>
+
+<main>
+<section class="section" id="radar">
+  <div class="wrap">
+    <div class="section-head rv">
+      <h2><span class="num">01</span>平替雷达</h2>
+      <p>点左边的任意角色，右边给出<b>另外五个宇宙里的对位</b>。点结果可以继续跳转——一条平替链就这么走出来了。</p>
+    </div>
+    <div class="radar-shell rv">
+      <aside class="picker" id="picker">
+        <div class="uni-tabs" id="uniTabs"></div>
+        <div class="picker-search">
+          <input id="pickSearch" type="search" placeholder="搜索角色 / 英文名 / 标签…" autocomplete="off" aria-label="搜索角色">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </div>
+        <div class="pick-list" id="pickList"></div>
+      </aside>
+      <div class="stage">
+        <div id="selCard"></div>
+        <div class="stage-head">
+          <h3>在其他宇宙的平替</h3>
+          <span>平替度 = 六维 35% · 标签 25% · 原型 25% · 战力 15%</span>
+        </div>
+        <div class="match-grid" id="matchGrid"></div>
+        <div class="stage-foot">
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn" id="btnBack" disabled>← 上一位</button>
+            <button class="btn gold" id="btnRandom">🎲 随机抽一位</button>
+            <button class="btn" id="btnCopy">🔗 复制这条对照</button>
+          </div>
+          <span class="hint">点击任意平替可切换主角 · 支持 <b>Ctrl K</b> 搜索</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="lanes">
+  <div class="wrap">
+    <div class="section-head rv">
+      <h2><span class="num">02</span>档位横切</h2>
+      <p>把六个宇宙按同一个 0–100 标尺切开。同一行＝同一档，<b>不代表能打平</b>；点角色可以回到雷达。</p>
+    </div>
+    <div class="lane-tools rv" id="laneFilters"></div>
+    <div class="lanes rv" id="laneList"></div>
+  </div>
+</section>
+
+<section class="section" id="matrix">
+  <div class="wrap">
+    <div class="section-head rv">
+      <h2><span class="num">03</span>平替矩阵</h2>
+      <p>按"工种"而不是按战力排。同一行是同一个岗位，空格代表<b>这个宇宙根本没设这个岗</b>。</p>
+    </div>
+    <div class="matrix-wrap rv">
+      <table class="mx" id="mxTable"></table>
+    </div>
+    <p class="mx-note rv"><b>怎么读：</b>横向看一个人在不同宇宙的"同行"，纵向看一个宇宙缺什么。比如龙珠没有科技富豪、黑袍没有魔法系——空缺本身就是世界观差异。</p>
+  </div>
+</section>
+
+<section class="section" id="rules">
+  <div class="wrap">
+    <div class="section-head rv">
+      <h2><span class="num">04</span>换算规则</h2>
+      <p>把六个宇宙塞进一张表，需要先承认这张表是<b>有偏见的</b>。下面是它的偏见。</p>
+    </div>
+    <div class="rules rv">
+      <div class="panel">
+        <h3>战力是怎么对齐的</h3>
+        <div class="steps">
+          <div class="step"><i>01</i><div><b>统一标尺 0–100</b><p>沿用主站同一套八档区间（T0 97–100 … T5 0–39），但按跨宇宙口径重新校准；本页数值不能和主站单宇宙排名直接混用。</p></div></div>
+          <div class="step"><i>02</i><div><b>六维画像</b><p>力量 / 速度 / 防御 / 能量 / 技巧 / 特殊。「特殊」装的是魔法、心灵、科技、现实改写这类不讲道理的能力。</p></div></div>
+          <div class="step"><i>03</i><div><b>定位标签 + 原型</b><p>每个角色 4–7 个标签和 1–2 个原型（飞行坦克、极速者、科技军火…）。标签重合＋原型一致，比数值接近更能说明"他干的是不是同一份工作"。</p></div></div>
+          <div class="step"><i>04</i><div><b>只取常态</b><p>战斗用「常态」比较；「巅峰形态」写在详情里，代表这个人的上限，不参与平替计算。</p></div></div>
+        </div>
+        <div class="formula">
+          平替度 = <b>35</b>×六维相似 + <b>25</b>×标签重合 + <b>25</b>×原型一致 + <b>15</b>×战力接近<br>
+          折扣 &nbsp; = 目标战力 ÷ 本尊战力<br>
+          <span>≥80% 可以直接换人 · 60–79% 换得起但要改剧本 · &lt;60% 只是同一个赛道</span>
+        </div>
+        <table class="unitable" id="uniTable"></table>
+        <p class="caliber"><b>口径声明：</b>战力是编辑口径，不是官方设定。同一角色在不同编剧、不同宇宙线里差异极大；本页只取"大众认知里的常态"，并把上限单独标出。</p>
+      </div>
+      <div class="panel">
+        <h3>为什么不能直接约架</h3>
+        <div class="rules-list">
+          <div class="rule"><b>① 死亡不是一件事</b><p>DC 有重启，漫威有多元宇宙，龙珠有龙珠。在这边"死了"是剧情终点，在那边只是下一话的开场。</p></div>
+          <div class="rule"><b>② 速度是不同单位</b><p>闪电侠的速度是剧情装置，快银是物理速度，龙珠用瞬移直接绕过距离——同一个"快"字，三种定价。</p></div>
+          <div class="rule"><b>③ 数值上限不同</b><p>龙珠的战斗力会膨胀，美漫的战力随编剧浮动，一拳超人干脆把强写成笑点。跨表比较只能比"档位感"。</p></div>
+          <div class="rule"><b>④ 规则系打物理系</b><p>时间停止、现实改写、精神控制，在纯肉体面前是降维打击——所以「特殊」必须单独占一维。</p></div>
+          <div class="rule"><b>⑤ 叙事护体</b><p>埼玉的强是搞笑设定，曼哈顿的强是哲学设定。把他们放进同一张表，本身就已经是一种冒犯。</p></div>
+          <div class="rule"><b>⑥ 版本差异</b><p>同一个超人，白银时代能吹熄太阳，DCEU 里会被氪石放倒。本页选"最常见的那版"。</p></div>
+        </div>
+        <div class="formula" style="margin-top:12px">
+          <b>平替 ≠ 打平</b><br>
+          <span>平替关心的是"能不能顶班"：定位像、档位近、故事里换得进去。战力完全相等反而少见——那叫复制人，不叫平替。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="footer-in">
+    <div class="f-brand">
+      <a class="logo" href="#top"><span class="logo-x">X</span><span class="logo-t">X-OVER<em> INDEX</em></span></a>
+      <p>粉丝向跨宇宙战力对照，非官方设定。素材来自各作品官方角色页与公开资料：Marvel 官网 / DC 官网 / 东映动画《龙珠超》角色页 / AniList / The Boys、Invincible 官方剧集资料。部分世界观无官方单独立绘，使用档案徽记代替。</p>
+      <div class="f-links">
+        <a href="index.html">← 回到漫威战力主站</a>
+        <a href="#rules">换算规则</a>
+        <a href="#matrix">平替矩阵</a>
+      </div>
+    </div>
+    <div class="f-meta">
+      <b>X-OVER INDEX v1.0</b><br>
+      79 CHARACTERS · 6 UNIVERSES · 8 TIERS<br>
+      DATA REVISED 2026.10<br>
+      <span style="color:#4d4d5c">hjy</span>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-top" id="toTop" aria-label="回到顶部">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 14 6-6 6 6"/></svg>
+</button>
+<div class="toast" id="toast">已复制</div>
+
+<script>
+/* ============ DATA ============ */
+const UNI = {
+  marvel:{name:'漫威',en:'MARVEL',glyph:'M',sub:'MARVEL ARCHIVE',color:'#e62429',tag:'英雄密度最高',
+    blurb:'从街头到全能宇宙',countNote:'17 人 · 最高 100'},
+  dc:{name:'DC 宇宙',en:'DC',glyph:'D',sub:'DC ARCHIVE',color:'#3d8bff',tag:'神性与重启',
+    blurb:'神性浓度最高',countNote:'18 人 · 最高 93'},
+  boys:{name:'黑袍纠察队',en:'THE BOYS',glyph:'V',sub:'VOUGHT ARCHIVE',color:'#a3161b',tag:'英雄是产品',
+    blurb:'英雄是企业的资产',countNote:'10 人 · 最高 71'},
+  invincible:{name:'无敌少侠',en:'INVINCIBLE',glyph:'I',sub:'SKYBOUND ARCHIVE',color:'#2ec4b6',tag:'血脉即命运',
+    blurb:'血脉决定立场',countNote:'10 人 · 最高 83'},
+  dragonball:{name:'龙珠',en:'DRAGON BALL',glyph:'DB',sub:'TOEI ARCHIVE',color:'#ff8a1e',tag:'数值膨胀',
+    blurb:'战斗力一路通胀',countNote:'12 人 · 最高 88'},
+  opm:{name:'一拳超人',en:'ONE PUNCH MAN',glyph:'OPM',sub:'HERO ASSOC.',color:'#f5c518',tag:'最强是笑点',
+    blurb:'最强是个笑点',countNote:'12 人 · 最高 96'}
+};
+const ORDER = ['marvel','dc','boys','invincible','dragonball','opm'];
+const FEATURED = {marvel:'m-thor',dc:'d-superman',boys:'b-homelander',invincible:'i-omni',dragonball:'db-goku',opm:'o-saitama'};
+const TIERS = [
+  {id:'t0',  label:'T0',  name:'神话级', range:'97–100', color:'#ff2d55'},
+  {id:'t05', label:'T0.5',name:'传说级', range:'90–96',  color:'#f5c518'},
+  {id:'t1',  label:'T1',  name:'史诗级', range:'82–89',  color:'#ff8a1e'},
+  {id:'t15', label:'T1.5',name:'宇宙级', range:'75–81',  color:'#3d8bff'},
+  {id:'t2',  label:'T2',  name:'星域级', range:'65–74',  color:'#2ec4b6'},
+  {id:'t3',  label:'T3',  name:'星球级', range:'53–64',  color:'#8b5cf6'},
+  {id:'t4',  label:'T4',  name:'超凡级', range:'40–52',  color:'#9aa0b0'},
+  {id:'t5',  label:'T5',  name:'凡人级', range:'0–39',   color:'#5c5c6b'}
+];
+const AX = ['力量','速度','防御','能量','技巧','特殊'];
+/* ax order: 力量 速度 防御 能量 技巧 特殊 */
+const CHARS = [
+  /* ---- MARVEL ---- */
+  {id:'m-oaa',u:'marvel',name:'万物之上',en:'One-Above-All',role:'漫威至高 / 造物主',p:100,pk:100,pkn:'不可描述',
+    ax:[100,100,100,100,100,100],tg:['宇宙','神明','现实改写','创世'],ar:'cosmic',img:'m-oaa.jpg',
+    note:'漫威宇宙的最终作者。他不是「最强角色」，是「书写最强角色的人」。'},
+  {id:'m-sentry',u:'marvel',name:'哨兵',en:'Sentry',role:'复仇者 / 黑暗复仇者',p:84,pk:93,pkn:'虚空完全体',
+    ax:[97,90,92,95,70,88],tg:['力量型','飞行','能量投射','精神','宇宙','防御','超高速'],ar:'brick,cosmic',img:'m-sentry.jpg',
+    note:'官方设定里的「百万太阳之力」，靠人格分裂压着自己的虚无。'},
+  {id:'m-jeangrey',u:'marvel',name:'凤凰女',en:'Jean Grey',role:'X 战警 / 凤凰之力宿主',p:84,pk:94,pkn:'白凤凰之王',
+    ax:[55,60,75,98,60,99],tg:['心灵','能量投射','宇宙','现实改写','变身'],ar:'psychic,cosmic',img:'m-jeangrey.jpg',
+    note:'凤凰之力的宿主。死亡与重生都是她设定的一部分。'},
+  {id:'m-thanos',u:'marvel',name:'灭霸',en:'Thanos',role:'泰坦征服者 / 宇宙级反派',p:83,pk:94,pkn:'无限手套',
+    ax:[92,82,90,88,88,80],tg:['力量型','宇宙','战术','格斗','反派','超高速'],ar:'cosmic,brick',img:'m-thanos.jpg',
+    note:'裸装靠肉体，戴手套靠规则。两种灭霸不是一个量级。'},
+  {id:'m-thor',u:'marvel',name:'雷神',en:'Thor',role:'阿斯加德之王 / 复仇者',p:78,pk:91,pkn:'符文王雷神',
+    ax:[90,78,85,92,82,75],tg:['力量型','飞行','能量投射','神明','外星','格斗'],ar:'brick,king',img:'m-thor.jpg',
+    note:'锤子只是配件，雷电和神格才是本体。'},
+  {id:'m-hulk',u:'marvel',name:'绿巨人',en:'Hulk',role:'复仇者 / 伽马怪物',p:76,pk:85,pkn:'绿殇',
+    ax:[96,55,90,30,55,45],tg:['力量型','再生','纯肉体','反英雄'],ar:'brick,monster',img:'m-hulk.jpg',
+    note:'越愤怒越强，上限取决于他还能气多久。'},
+  {id:'m-wanda',u:'marvel',name:'绯红女巫',en:'Scarlet Witch',role:'复仇者 / 混沌魔法',p:84,pk:96,pkn:'HOM 混沌之战',
+    ax:[40,55,60,97,55,99],tg:['魔法','现实改写','混沌','能量投射'],ar:'mystic',img:'m-wanda.jpg',
+    note:'她的「改现实」不是投影，是把设定重写一遍。'},
+  {id:'m-strange',u:'marvel',name:'奇异博士',en:'Doctor Strange',role:'至尊法师',p:74,pk:85,pkn:'吞星使者至尊法师',
+    ax:[35,55,65,92,60,95],tg:['魔法','时间','心灵','战术'],ar:'mystic',img:'m-strange.jpg',
+    note:'战斗方式是找规则漏洞，不是对拳。'},
+  {id:'m-ironman',u:'marvel',name:'钢铁侠',en:'Iron Man',role:'复仇者 / 斯塔克工业',p:65,pk:86,pkn:'弑神者战甲',
+    ax:[60,72,78,88,70,92],tg:['科技','飞行','能量投射','富豪','战术'],ar:'tech',img:'m-ironman.jpg',
+    note:'凡人用钱和工程学堆出来的神。上限看当天穿哪套。'},
+  {id:'m-captain',u:'marvel',name:'美国队长',en:'Captain America',role:'复仇者 / 超级士兵',p:52,pk:62,pkn:'雷神之锤形态',
+    ax:[55,55,60,20,95,60],tg:['格斗','战术','领袖','凡人','英雄'],ar:'fighter,soldier',img:'m-captain.jpg',
+    note:'血清战士。真正值钱的是让所有人愿意跟他冲的那口气。'},
+  {id:'m-spiderman',u:'marvel',name:'蜘蛛侠',en:'Spider-Man',role:'纽约街头英雄',p:62,pk:70,pkn:'毒液共生体',
+    ax:[62,75,58,30,80,55],tg:['街头','格斗','侦查','超高速','科技'],ar:'street,fighter',img:'m-spiderman.jpg',
+    note:'预知危险、嘴炮、以及怎么打都不肯放手。'},
+  {id:'m-wolverine',u:'marvel',name:'金刚狼',en:'Wolverine',role:'X 战警 / 复仇者',p:62,pk:78,pkn:'凤凰之力·金刚狼',
+    ax:[65,60,72,20,92,65],tg:['再生','格斗','纯肉体','反英雄','组织'],ar:'fighter',img:'m-wolverine.jpg',
+    note:'自愈因子让他能打完所有必输的架。'},
+  {id:'m-quicksilver',u:'marvel',name:'快银',en:'Quicksilver',role:'复仇者 / 变种人',p:55,pk:58,pkn:'泰瑞根强化',
+    ax:[40,96,45,20,60,40],tg:['超高速','格斗','凡人','组织'],ar:'speed',img:'m-quicksilver.jpg',
+    note:'快到能改写战场，但打不动真正的坦克。'},
+  {id:'m-magneto',u:'marvel',name:'万磁王',en:'Magneto',role:'变种人兄弟会领袖',p:74,pk:80,pkn:'全球磁场·两极反转',
+    ax:[45,62,60,90,70,92],tg:['能量投射','战术','领袖','反派'],ar:'elemental',img:'m-magneto.jpg',
+    note:'磁场的主宰。对金属系是降维打击，对纯能量体未必。'},
+  {id:'m-storm',u:'marvel',name:'暴风女',en:'Storm',role:'X 战警 / 欧米茄级变种人',p:66,pk:74,pkn:'欧米茄级天气',
+    ax:[40,65,50,88,62,80],tg:['能量投射','飞行','领袖','格斗'],ar:'elemental',img:'m-storm.jpg',
+    note:'晴天是她的礼貌，雷暴才是她的常态。'},
+  {id:'m-captainmarvel',u:'marvel',name:'惊奇队长',en:'Captain Marvel',role:'复仇者 / 克里战士',p:78,pk:84,pkn:'双星',
+    ax:[85,85,80,88,72,60],tg:['力量型','飞行','能量投射','外星','领袖'],ar:'brick,cosmic',img:'m-captainmarvel.jpg',
+    note:'能量吸收＋宇宙级机动，硬碰硬型选手。'},
+  {id:'m-hawkeye',u:'marvel',name:'鹰眼',en:'Hawkeye',role:'复仇者 / 神射手',p:47,pk:52,pkn:'浪人形态',
+    ax:[38,50,42,30,92,45],tg:['弓箭手','凡人','远程','战术','英雄'],ar:'archer',img:'m-hawkeye.jpg',
+    note:'没有超能力的复仇者。他的价值在于从不射偏。'},
+
+  /* ---- DC ---- */
+  {id:'d-superman',u:'dc',name:'超人',en:'Superman',role:'氪星最后的希望 / 正义联盟',p:80,pk:88,pkn:'太阳耀斑',
+    ax:[96,88,92,85,72,55],tg:['力量型','飞行','能量投射','超高速','外星','领袖','防御'],ar:'brick',img:'d-superman.jpg',
+    note:'阳光越足越离谱，氪石越近越狼狈。'},
+  {id:'d-batman',u:'dc',name:'蝙蝠侠',en:'Batman',role:'哥谭义警 / 正义联盟',p:47,pk:57,pkn:'地狱蝙蝠',
+    ax:[35,40,45,25,98,90],tg:['科技','战术','格斗','凡人','富豪','侦查'],ar:'tech,fighter',img:'d-batman.jpg',
+    note:'没有超能力的侦探。他的超能力是「凡事都有预案」。'},
+  {id:'d-wonderwoman',u:'dc',name:'神奇女侠',en:'Wonder Woman',role:'亚马逊公主 / 正义联盟',p:76,pk:83,pkn:'神格觉醒',
+    ax:[88,80,85,70,92,70],tg:['力量型','格斗','神明','领袖','防御'],ar:'brick,fighter',img:'d-wonderwoman.jpg',
+    note:'半神血统＋三千年战斗经验。'},
+  {id:'d-flash',u:'dc',name:'闪电侠',en:'The Flash',role:'神速力使用者 / 正义联盟',p:77,pk:92,pkn:'神速力全开',
+    ax:[55,100,65,70,72,95],tg:['超高速','时间','组织','英雄'],ar:'speed',img:'d-flash.jpg',
+    note:'神速力的管道。跑到极端就是时间旅行。'},
+  {id:'d-greenlantern',u:'dc',name:'绿灯侠',en:'Green Lantern',role:'2814 扇区 / 绿灯军团',p:72,pk:82,pkn:'白灯',
+    ax:[60,75,85,92,70,90],tg:['能量投射','飞行','宇宙','领袖'],ar:'elemental,cosmic',img:'d-greenlantern.jpg',
+    note:'灯戒持有者。想象力的上限就是战斗力上限。'},
+  {id:'d-aquaman',u:'dc',name:'海王',en:'Aquaman',role:'七海之王 / 正义联盟',p:66,pk:74,pkn:'海神三叉戟',
+    ax:[85,70,82,40,85,55],tg:['力量型','水下','领袖','王者'],ar:'brick,king',img:'d-aquaman.jpg',
+    note:'陆地上是超级英雄，海里是神。'},
+  {id:'d-martian',u:'dc',name:'火星猎人',en:'Martian Manhunter',role:'火星幸存者 / 正义联盟',p:72,pk:80,pkn:'真身解放',
+    ax:[80,78,80,82,75,92],tg:['心灵','飞行','力量型','变身','外星','防御'],ar:'psychic,brick',img:'d-martian.jpg',
+    note:'心灵感应＋变形＋隐身，几乎没有短板。'},
+  {id:'d-doctorfate',u:'dc',name:'命运博士',en:'Doctor Fate',role:'秩序之神的代理人',p:74,pk:86,pkn:'命运头盔全开',
+    ax:[40,55,70,95,60,97],tg:['魔法','神明','时间','心灵'],ar:'mystic',img:'d-doctorfate.jpg',
+    note:'命运头盔的宿主，不是普通法师。'},
+  {id:'d-shazam',u:'dc',name:'沙赞',en:'Shazam',role:'众神之力 / 正义联盟',p:76,pk:82,pkn:'众神之力全开',
+    ax:[90,82,88,85,70,60],tg:['力量型','飞行','能量投射','神明','儿童'],ar:'brick,king',img:'d-shazam.jpg',
+    note:'一句咒语换来六位神的力量。本质还是个孩子。'},
+  {id:'d-greenarrow',u:'dc',name:'绿箭',en:'Green Arrow',role:'星城义警 / 正义联盟',p:45,pk:48,pkn:'军火库',
+    ax:[40,55,42,25,90,50],tg:['弓箭手','凡人','远程','街头','领袖'],ar:'archer',img:'d-greenarrow.jpg',
+    note:'用弓箭的亿万富翁，DC 的「凡人极限」样本。'},
+  {id:'d-deathstroke',u:'dc',name:'丧钟',en:'Deathstroke',role:'强化雇佣兵 / 刺客',p:54,pk:60,pkn:'强化雇佣兵',
+    ax:[55,62,58,30,90,55],tg:['佣兵','格斗','再生','凡人','战术'],ar:'fighter,soldier',img:'d-deathstroke.jpg',
+    note:'超级士兵血清＋战术大脑，专杀英雄的雇佣兵。'},
+  {id:'d-darkseid',u:'dc',name:'达克赛德',en:'Darkseid',role:'天启星暴君 / 新神',p:86,pk:94,pkn:'真身降临',
+    ax:[96,75,96,95,85,95],tg:['神明','宇宙','力量型','反派','能量投射','超高速'],ar:'cosmic,brick',img:'d-darkseid.jpg',
+    note:'欧米伽射线是「必然命中」的概念攻击。'},
+  {id:'d-antimonitor',u:'dc',name:'反监视者',en:'Anti-Monitor',role:'反物质宇宙 / 危机本体',p:93,pk:97,pkn:'反物质宇宙',
+    ax:[93,80,95,99,70,97],tg:['宇宙','能量投射','反派','死亡','现实改写'],ar:'cosmic',img:'d-antimonitor.jpg',
+    note:'吞噬正物质宇宙的存在，危机事件的本体。'},
+  {id:'d-blackadam',u:'dc',name:'黑亚当',en:'Black Adam',role:'坎达克守护者 / 暴君',p:75,pk:81,pkn:'沙赞之力·暴君版',
+    ax:[88,80,86,82,80,65],tg:['力量型','飞行','能量投射','神明','王者'],ar:'king,brick',img:'d-blackadam.jpg',
+    note:'同样的沙赞之力，没有那点善良。'},
+  {id:'d-supergirl',u:'dc',name:'女超人',en:'Supergirl',role:'氪星遗民 / 超级少女',p:77,pk:83,pkn:'太阳耀斑',
+    ax:[88,84,82,80,65,55],tg:['力量型','飞行','能量投射','外星','超高速'],ar:'brick',img:'d-supergirl.jpg',
+    note:'同一套氪星模板，少了些经验。'},
+  {id:'d-zatanna',u:'dc',name:'扎坦娜',en:'Zatanna',role:'倒语魔法师 / 黑暗正义联盟',p:66,pk:80,pkn:'倒语魔法全开',
+    ax:[35,55,55,92,65,95],tg:['魔法','现实改写','心灵','凡人'],ar:'mystic',img:'d-zatanna.jpg',
+    note:'倒着说话的魔术师。她的魔法不解释，只生效。'},
+  {id:'d-cyborg',u:'dc',name:'钢骨',en:'Cyborg',role:'半机械人 / 正义联盟',p:60,pk:74,pkn:'母盒融合',
+    ax:[70,65,80,85,60,88],tg:['科技','机器人','能量投射','组织'],ar:'tech',img:'d-cyborg.jpg',
+    note:'天启星科技装进了棒球运动员的身体。'},
+  {id:'d-nightwing',u:'dc',name:'夜翼',en:'Nightwing',role:'布鲁德海文 / 初代罗宾',p:50,pk:55,pkn:'夜翼',
+    ax:[45,60,50,20,92,70],tg:['格斗','街头','侦查','凡人','领袖'],ar:'street,fighter',img:'d-nightwing.jpg',
+    note:'离开了蝙蝠侠，仍然是最好的街头英雄之一。'},
+
+  /* ---- THE BOYS ---- */
+  {id:'b-homelander',u:'boys',name:'祖国人',en:'Homelander',role:'七人组领袖 / 沃特旗舰',p:71,pk:73,pkn:'全力爆发',
+    ax:[80,80,78,80,55,45],tg:['力量型','飞行','能量投射','领袖','反派','组织'],ar:'brick',em:'HL',
+    note:'披着星条旗的超级武器，情绪极不稳定。'},
+  {id:'b-soldierboy',u:'boys',name:'士兵男孩',en:'Soldier Boy',role:'二战英雄 / 七人组元老',p:68,pk:70,pkn:'辐射全开',
+    ax:[78,55,72,45,75,55],tg:['力量型','防御','能量投射','组织','英雄'],ar:'soldier,brick',em:'SB',
+    note:'比祖国人更老、更硬、也更不讲道理。'},
+  {id:'b-stormfront',u:'boys',name:'风暴前线',en:'Stormfront',role:'七人组 / 长寿纳粹',p:65,pk:66,pkn:'全力放电',
+    ax:[65,70,62,75,50,40],tg:['能量投射','飞行','反派','组织'],ar:'elemental,brick',em:'SF',
+    note:'电击与飞行，外加一套很旧的价值观。'},
+  {id:'b-maeve',u:'boys',name:'梅芙女王',en:'Queen Maeve',role:'七人组 / 战士',p:63,pk:64,pkn:'全力',
+    ax:[70,55,66,30,70,45],tg:['力量型','防御','格斗','组织'],ar:'brick,fighter',em:'QM',
+    note:'七人组里唯一还剩下良心的人。'},
+  {id:'b-noir',u:'boys',name:'玄色',en:'Black Noir',role:'七人组 / 无声杀手',p:59,pk:61,pkn:'无声杀手',
+    ax:[68,60,64,25,82,40],tg:['格斗','刺客','战术','组织','再生'],ar:'fighter,soldier',em:'BN',
+    note:'不会说话的黑衣人，沃特最锋利的刀。'},
+  {id:'b-atrain',u:'boys',name:'A-Train',en:'A-Train',role:'七人组 / 极速者',p:55,pk:56,pkn:'V 强化',
+    ax:[45,85,45,20,50,35],tg:['超高速','组织','反派'],ar:'speed',em:'AT',
+    note:'世界上最快的人——直到心脏先撑不住。'},
+  {id:'b-starlight',u:'boys',name:'星光',en:'Starlight',role:'七人组 / 发光者',p:54,pk:56,pkn:'全力',
+    ax:[60,50,55,70,55,40],tg:['能量投射','飞行','组织','英雄'],ar:'elemental',em:'SL',
+    note:'七人组里最像英雄的那个。'},
+  {id:'b-neuman',u:'boys',name:'维多利亚·纽曼',en:'Victoria Neuman',role:'政客 / 爆头者',p:51,pk:52,pkn:'爆头',
+    ax:[20,40,30,65,55,80],tg:['心灵','战术','反派','组织'],ar:'psychic',em:'VN',
+    note:'隔着屏幕让人头颅炸开，不需要动手。'},
+  {id:'b-butcher',u:'boys',name:'屠夫',en:'Billy Butcher',role:'黑袍小队 / 反英雄',p:48,pk:56,pkn:'临时 V',
+    ax:[50,45,45,30,80,45],tg:['格斗','战术','反英雄','组织','凡人'],ar:'soldier,fighter',em:'BB',
+    note:'把自己也变成怪物，只为了杀怪物。'},
+  {id:'b-deep',u:'boys',name:'深海',en:'The Deep',role:'七人组 / 海洋系',p:44,pk:45,pkn:'全力',
+    ax:[45,45,40,25,35,35],tg:['水下','组织','喜剧','力量型'],ar:'brick,elemental',em:'TD',
+    note:'能和鱼说话。七人组里的笑话，也是唯一的笑点。'},
+
+  /* ---- INVINCIBLE ---- */
+  {id:'i-thragg',u:'invincible',name:'瑟拉格',en:'Thragg',role:'维特鲁姆帝国大统领',p:83,pk:86,pkn:'维特鲁姆之王',
+    ax:[96,82,90,60,90,55],tg:['力量型','飞行','超高速','外星','王者','反派'],ar:'brick,cosmic',em:'TH',
+    note:'统治欲和肌肉一样发达。'},
+  {id:'i-omni',u:'invincible',name:'全能侠',en:'Omni-Man',role:'维特鲁姆征服者 / 诺兰',p:80,pk:84,pkn:'全力',
+    ax:[92,80,86,55,88,55],tg:['力量型','飞行','超高速','外星','防御'],ar:'brick',em:'OM',
+    note:'地球上的十年，是他一生最像人的十年。'},
+  {id:'i-conquest',u:'invincible',name:'征服者',en:'Conquest',role:'维特鲁姆战狂',p:78,pk:82,pkn:'全力',
+    ax:[92,75,85,55,82,50],tg:['力量型','飞行','反派','外星','纯肉体'],ar:'brick',em:'CQ',
+    note:'活了几千年的战狂，只为战斗而活。'},
+  {id:'i-battlebeast',u:'invincible',name:'战斗兽',en:'Battle Beast',role:'银河角斗士',p:77,pk:80,pkn:'全力',
+    ax:[93,70,80,30,92,45],tg:['力量型','格斗','纯肉体','外星'],ar:'fighter,monster',em:'BB',
+    note:'纯肉体天花板，没有花招。'},
+  {id:'i-allen',u:'invincible',name:'艾伦',en:'Allen the Alien',role:'银河联合防线',p:75,pk:79,pkn:'全力',
+    ax:[85,78,82,45,80,50],tg:['力量型','飞行','外星','防御'],ar:'brick',em:'AL',
+    note:'耐揍到离谱，也乐观到离谱。'},
+  {id:'i-mark',u:'invincible',name:'无敌少侠',en:'Invincible',role:'马克·格雷森 / 地球守护者',p:73,pk:82,pkn:'后期觉醒',
+    ax:[85,78,80,30,75,50],tg:['力量型','飞行','超高速','外星','儿童'],ar:'brick,street',em:'MK',
+    note:'从「我爸是英雄」到「我爸是噩梦」，再到自己成为英雄。'},
+  {id:'i-atomeve',u:'invincible',name:'原子伊芙',en:'Atom Eve',role:'原子操控者',p:72,pk:86,pkn:'限制解除',
+    ax:[40,60,60,92,60,98],tg:['现实改写','能量投射','飞行','科技'],ar:'mystic,tech',em:'AE',
+    note:'能改写物质的原子。限制器只是为了让她别太早无敌。'},
+  {id:'i-monstergirl',u:'invincible',name:'怪物女孩',en:'Monster Girl',role:'少年小队 / 变形者',p:63,pk:71,pkn:'怪物形态',
+    ax:[80,55,75,20,65,45],tg:['力量型','变身','巨大化'],ar:'brick,monster',em:'MG',
+    note:'越长大越强，也越难变回来。'},
+  {id:'i-robot',u:'invincible',name:'机器人',en:'Robot',role:'少年小队 / 战术核心',p:58,pk:68,pkn:'全军指挥',
+    ax:[65,50,70,60,70,95],tg:['机器人','科技','战术','组织'],ar:'tech',em:'RB',
+    note:'一个会做道德计算的机器。最危险的是他往往算对了。'},
+  {id:'i-rex',u:'invincible',name:'雷克斯',en:'Rex Splode',role:'少年小队 / 爆破手',p:52,pk:55,pkn:'全力',
+    ax:[45,55,50,55,65,55],tg:['能量投射','组织','远程','儿童'],ar:'blaster',em:'RX',
+    note:'用命换过一次全场的胜利。'},
+
+  /* ---- DRAGON BALL ---- */
+  {id:'db-goku',u:'dragonball',name:'孙悟空',en:'Goku',role:'赛亚人 / 第七宇宙',p:81,pk:84,pkn:'自在极意',
+    ax:[92,92,88,95,90,70],tg:['力量型','飞行','能量投射','超高速','格斗','外星'],ar:'brick,fighter',img:'db-goku.png',
+    note:'把「还能再强」写进了 DNA。'},
+  {id:'db-vegeta',u:'dragonball',name:'贝吉塔',en:'Vegeta',role:'赛亚人王子',p:80,pk:83,pkn:'自我极意',
+    ax:[90,90,87,93,88,65],tg:['力量型','飞行','能量投射','超高速','格斗','外星'],ar:'brick,fighter',img:'db-vegeta.png',
+    note:'骄傲是他最强的形态，也是最贵的破绽。'},
+  {id:'db-gohan',u:'dragonball',name:'孙悟饭',en:'Gohan',role:'混血赛亚人 / 学者',p:78,pk:82,pkn:'野兽悟饭',
+    ax:[88,86,83,85,82,65],tg:['力量型','飞行','能量投射','超高速','儿童'],ar:'brick',img:'db-gohan.png',
+    note:'天赋最高的混血。问题是得有人先把他惹毛。'},
+  {id:'db-piccolo',u:'dragonball',name:'比克',en:'Piccolo',role:'那美克星人 / 地球守护者',p:72,pk:77,pkn:'橙色比克',
+    ax:[82,80,82,82,88,65],tg:['力量型','能量投射','格斗','外星','战术'],ar:'fighter,brick',img:'db-piccolo.png',
+    note:'从魔王到保姆，战斗智商一直在线。'},
+  {id:'db-frieza',u:'dragonball',name:'弗利萨',en:'Frieza',role:'宇宙帝王',p:78,pk:83,pkn:'黑弗利萨',
+    ax:[90,85,85,92,82,75],tg:['力量型','能量投射','反派','宇宙','王者'],ar:'cosmic,king',img:'db-frieza.png',
+    note:'复活一次，就多一个形态。'},
+  {id:'db-buu',u:'dragonball',name:'魔人布欧',en:'Majin Buu',role:'远古魔人 / 混沌',p:76,pk:80,pkn:'悟饭布欧',
+    ax:[90,70,95,85,60,85],tg:['力量型','再生','魔法','反派','混沌'],ar:'monster,mystic',img:'db-buu.png',
+    note:'打碎、再生、再把对手变成巧克力。'},
+  {id:'db-beerus',u:'dragonball',name:'比鲁斯',en:'Beerus',role:'第七宇宙破坏神',p:84,pk:86,pkn:'破坏神',
+    ax:[88,88,85,95,82,88],tg:['神明','力量型','能量投射','宇宙','破坏'],ar:'cosmic,brick',img:'db-beerus.png',
+    note:'心情决定宇宙存亡。'},
+  {id:'db-whis',u:'dragonball',name:'维斯',en:'Whis',role:'天使 / 比鲁斯的师父',p:87,pk:88,pkn:'天使',
+    ax:[80,95,85,95,85,90],tg:['神明','超高速','时间','能量投射','战术'],ar:'cosmic',img:'db-whis.png',
+    note:'战斗对他来说更像教学。'},
+  {id:'db-roshi',u:'dragonball',name:'龟仙人',en:'Master Roshi',role:'龟仙流宗师',p:48,pk:55,pkn:'万国惊天掌',
+    ax:[55,55,55,65,88,55],tg:['格斗','能量投射','凡人','战术'],ar:'fighter',img:'db-roshi.png',
+    note:'好色老头，也是把「武」教给一代人的宗师。'},
+  {id:'db-trunks',u:'dragonball',name:'特兰克斯',en:'Trunks',role:'未来赛亚人 / 剑士',p:72,pk:75,pkn:'超级赛亚人',
+    ax:[82,82,80,82,85,60],tg:['力量型','飞行','能量投射','格斗','时间'],ar:'fighter,brick',img:'db-trunks.png',
+    note:'背着两个世界的希望长大。'},
+  {id:'db-zeno',u:'dragonball',name:'全王',en:'Zeno',role:'十二宇宙的顶点',p:88,pk:88,pkn:'全王',
+    ax:[5,30,40,100,20,100],tg:['宇宙','神明','现实改写','王者'],ar:'cosmic',img:'db-zeno.png',
+    note:'一句话抹掉一个宇宙。他自己并不知道这有多可怕。'},
+  {id:'db-hit',u:'dragonball',name:'希特',en:'Hit',role:'第六宇宙杀手',p:74,pk:76,pkn:'时间跳跃',
+    ax:[75,88,75,70,92,85],tg:['时间','格斗','刺客','外星'],ar:'speed,fighter',img:'db-hit.png',
+    note:'时间停止 0.1 秒，足够决定胜负。'},
+
+  /* ---- ONE PUNCH MAN ---- */
+  {id:'o-saitama',u:'opm',name:'埼玉',en:'Saitama',role:'兴趣使然的英雄',p:96,pk:100,pkn:'无法测量',
+    ax:[100,95,100,45,90,60],tg:['纯肉体','力量型','超高速','英雄','搞笑'],ar:'brick,fighter',img:'opm-saitama.jpg',
+    note:'认真一拳的威力，取决于这一话有多好笑。'},
+  {id:'o-boros',u:'opm',name:'波罗斯',en:'Boros',role:'宇宙霸主',p:80,pk:82,pkn:'流星爆发',
+    ax:[82,85,85,88,80,60],tg:['力量型','飞行','能量投射','宇宙','外星','再生'],ar:'brick,cosmic',img:'opm-boros.jpg',
+    note:'把埼玉打到「稍微认真」，已经是战绩。'},
+  {id:'o-garou',u:'opm',name:'饿狼',en:'Garou',role:'人类怪人',p:78,pk:84,pkn:'宇宙饿狼',
+    ax:[85,95,80,55,95,75],tg:['格斗','力量型','超高速','反派','生物变异'],ar:'fighter,monster',img:'opm-garou.jpg',
+    note:'每一次濒死，都在解锁下一层形态。'},
+  {id:'o-tatsumaki',u:'opm',name:'战栗的龙卷',en:'Tatsumaki',role:'S 级英雄 / 念动力',p:76,pk:78,pkn:'全力',
+    ax:[30,70,55,92,65,95],tg:['能量投射','飞行','精神','英雄'],ar:'psychic',img:'opm-tatsumaki.jpg',
+    note:'念动力能掀翻整座城市，性格也是。'},
+  {id:'o-bang',u:'opm',name:'邦古',en:'Bang',role:'S 级英雄 / 流水岩碎拳',p:70,pk:72,pkn:'全力',
+    ax:[70,75,70,25,95,50],tg:['格斗','凡人','战术','英雄'],ar:'fighter',img:'opm-bang.jpg',
+    note:'老爷子出手，怪人只剩碎块。'},
+  {id:'o-atomic',u:'opm',name:'原子武士',en:'Atomic Samurai',role:'S 级英雄 / 剑圣',p:68,pk:70,pkn:'全力',
+    ax:[65,88,62,35,96,50],tg:['格斗','凡人','远程','英雄'],ar:'fighter',img:'opm-atomic.jpg',
+    note:'拔刀的速度快到看不见刀。'},
+  {id:'o-metal',u:'opm',name:'金属骑士',en:'Metal Knight',role:'S 级英雄 / 军火库',p:66,pk:72,pkn:'全军武装',
+    ax:[55,40,90,85,60,90],tg:['科技','机器人','远程','组织'],ar:'tech',img:'opm-metalnight.jpg',
+    note:'远程遥控的军火库，本体从不亲临战场。'},
+  {id:'o-flashy',u:'opm',name:'闪光的佛莱士',en:'Flashy Flash',role:'S 级英雄 / 忍者',p:66,pk:68,pkn:'全力',
+    ax:[60,98,60,30,85,55],tg:['超高速','格斗','凡人','英雄'],ar:'speed,fighter',img:'opm-flashy.jpg',
+    note:'速度是他唯一的信仰。'},
+  {id:'o-genos',u:'opm',name:'杰诺斯',en:'Genos',role:'S 级英雄 / 改造人',p:64,pk:70,pkn:'全力',
+    ax:[60,70,65,88,65,75],tg:['科技','机器人','能量投射','远程'],ar:'tech,blaster',img:'opm-genos.jpg',
+    note:'每次被拆，都会带着新装备回来。'},
+  {id:'o-fubuki',u:'opm',name:'地狱的吹雪',en:'Fubuki',role:'B 级第一 / 吹雪组',p:56,pk:58,pkn:'全力',
+    ax:[20,55,50,75,60,80],tg:['能量投射','精神','组织','领袖'],ar:'psychic',img:'opm-fubuki.jpg',
+    note:'她的强大在于把人组织起来。'},
+  {id:'o-mumen',u:'opm',name:'无证骑士',en:'Mumen Rider',role:'C 级英雄 / 自行车',p:30,pk:30,pkn:'全力',
+    ax:[25,35,30,10,60,20],tg:['凡人','英雄','组织'],ar:'street',img:'opm-mumen.jpg',
+    note:'没有力量，只有到场。全篇最像英雄的人。'},
+  {id:'o-sonic',u:'opm',name:'音速索尼克',en:'Sonic',role:'忍者 / 赏金猎人',p:62,pk:64,pkn:'全力',
+    ax:[55,92,50,35,88,55],tg:['超高速','刺客','凡人','格斗'],ar:'speed,fighter',img:'opm-sonic.jpg',
+    note:'追着埼玉跑了一整部作品的男人。'}
+];
+const MATRIX = [
+  {name:'宇宙天花板',sub:'各自世界观里的「最强」',note:'定义不同，价格也不同',
+   c:{marvel:'m-oaa',dc:'d-antimonitor',boys:null,invincible:'i-thragg',dragonball:'db-zeno',opm:'o-saitama'}},
+  {name:'飞行坦克',sub:'力气＋飞行＋激光',note:'同一个超人模板，六个宇宙六种定价',
+   c:{marvel:'m-sentry',dc:'d-superman',boys:'b-homelander',invincible:'i-omni',dragonball:'db-goku',opm:'o-boros'}},
+  {name:'神明与王者',sub:'血统即权柄',note:'神性越重，规则系越强',
+   c:{marvel:'m-thor',dc:'d-wonderwoman',boys:null,invincible:null,dragonball:'db-beerus',opm:null}},
+  {name:'极速者',sub:'速度就是战斗力',note:'快是剧情装置，不只是数值',
+   c:{marvel:'m-quicksilver',dc:'d-flash',boys:'b-atrain',invincible:null,dragonball:'db-hit',opm:'o-flashy'}},
+  {name:'科技军火',sub:'凡人用装备抹平差距',note:'钱、工程学、以及敢不敢用',
+   c:{marvel:'m-ironman',dc:'d-batman',boys:null,invincible:'i-robot',dragonball:null,opm:'o-metal'}},
+  {name:'规则系',sub:'魔法 / 精神 / 现实改写',note:'不讲道理的维度，单独计价',
+   c:{marvel:'m-strange',dc:'d-doctorfate',boys:'b-neuman',invincible:'i-atomeve',dragonball:'db-buu',opm:'o-tatsumaki'}},
+  {name:'成长型主角',sub:'从学徒到主力',note:'开局都很弱，结局都不讲道理',
+   c:{marvel:'m-spiderman',dc:'d-nightwing',boys:'b-starlight',invincible:'i-mark',dragonball:'db-gohan',opm:'o-genos'}},
+  {name:'凡人极限',sub:'没有超能力的顶配',note:'这一行最能看出各宇宙的「人类观」',
+   c:{marvel:'m-captain',dc:'d-greenarrow',boys:'b-butcher',invincible:'i-rex',dragonball:'db-roshi',opm:'o-bang'}},
+  {name:'再生打手',sub:'打不死就是战术',note:'恢复力是最被低估的平替属性',
+   c:{marvel:'m-wolverine',dc:'d-deathstroke',boys:'b-noir',invincible:null,dragonball:'db-buu',opm:null}},
+  {name:'远程射手',sub:'凡人的狙击位',note:'命中率也是一种超能力',
+   c:{marvel:'m-hawkeye',dc:'d-greenarrow',boys:null,invincible:'i-rex',dragonball:null,opm:'o-atomic'}},
+  {name:'暴君',sub:'一个人的帝国',note:'反派天花板，通常是本宇宙最强',
+   c:{marvel:'m-thanos',dc:'d-darkseid',boys:'b-homelander',invincible:'i-thragg',dragonball:'db-frieza',opm:'o-garou'}},
+  {name:'巨兽',sub:'纯肉体破坏力',note:'不讲招式，只讲质量',
+   c:{marvel:'m-hulk',dc:null,boys:null,invincible:'i-battlebeast',dragonball:null,opm:null}}
+];
+/* curated iconic pairs: base universe -> forced #1 counterpart */
+const PINS = {
+  'd-superman':{marvel:'m-sentry',boys:'b-homelander',invincible:'i-omni',dragonball:'db-goku'},
+  'm-sentry':{dc:'d-superman'},
+  'd-batman':{marvel:'m-ironman',boys:'b-noir',invincible:'i-robot'},
+  'm-ironman':{dc:'d-batman',invincible:'i-robot',opm:'o-metal'},
+  'b-homelander':{dc:'d-superman',marvel:'m-sentry'},
+  'i-omni':{dc:'d-superman',marvel:'m-sentry'},
+  'i-thragg':{dc:'d-darkseid',marvel:'m-thanos'},
+  'd-flash':{marvel:'m-quicksilver',boys:'b-atrain',dragonball:'db-hit',opm:'o-flashy'},
+  'm-quicksilver':{dc:'d-flash',boys:'b-atrain',opm:'o-flashy'},
+  'b-atrain':{dc:'d-flash',marvel:'m-quicksilver'},
+  'd-doctorfate':{marvel:'m-strange'},
+  'm-strange':{dc:'d-doctorfate'},
+  'd-zatanna':{marvel:'m-wanda'},
+  'm-wanda':{dc:'d-zatanna',invincible:'i-atomeve',dragonball:'db-buu'},
+  'd-shazam':{marvel:'m-thor'},
+  'm-thor':{dc:'d-shazam'},
+  'd-greenarrow':{marvel:'m-hawkeye'},
+  'm-hawkeye':{dc:'d-greenarrow'},
+  'd-deathstroke':{marvel:'m-wolverine',boys:'b-noir'},
+  'm-wolverine':{dc:'d-deathstroke'},
+  'd-darkseid':{marvel:'m-thanos',dragonball:'db-frieza'},
+  'm-thanos':{dc:'d-darkseid',dragonball:'db-frieza'},
+  'd-aquaman':{boys:'b-deep'},
+  'b-deep':{dc:'d-aquaman'},
+  'b-maeve':{dc:'d-wonderwoman'},
+  'b-soldierboy':{marvel:'m-captain'},
+  'b-noir':{dc:'d-batman'},
+  'd-wonderwoman':{marvel:'m-thor',boys:'b-maeve'},
+  'd-martian':{marvel:'m-jeangrey'},
+  'm-jeangrey':{dc:'d-martian',opm:'o-tatsumaki'},
+  'm-spiderman':{dc:'d-nightwing'},
+  'd-nightwing':{marvel:'m-spiderman'},
+  'm-captain':{boys:'b-soldierboy'},
+  'i-mark':{marvel:'m-spiderman'},
+  'i-atomeve':{marvel:'m-wanda',dc:'d-zatanna'},
+  'i-battlebeast':{marvel:'m-hulk'},
+  'm-hulk':{invincible:'i-battlebeast'},
+  'o-saitama':{dc:'d-superman'},
+  'o-tatsumaki':{marvel:'m-jeangrey'},
+  'o-metal':{marvel:'m-ironman',dc:'d-batman'},
+  'o-genos':{dc:'d-cyborg',marvel:'m-ironman'},
+  'd-cyborg':{marvel:'m-ironman',opm:'o-genos'},
+  'db-goku':{dc:'d-superman'},
+  'db-zeno':{dc:'d-antimonitor'},
+  'd-antimonitor':{dragonball:'db-zeno',marvel:'m-oaa'},
+  'db-hit':{dc:'d-flash'},
+  'db-frieza':{dc:'d-darkseid',marvel:'m-thanos'},
+  'db-buu':{marvel:'m-wanda',dc:'d-zatanna'},
+  'db-beerus':{marvel:'m-thor',dc:'d-darkseid'}
+};
+
+/* ============ ENGINE ============ */
+const byId = Object.fromEntries(CHARS.map(c=>[c.id,c]));
+const tagCount = {};
+CHARS.forEach(c=>c.tg.forEach(t=>tagCount[t]=(tagCount[t]||0)+1));
+const tagW = t=>1/Math.sqrt(tagCount[t]||1);
+const univ = id => UNI[id];
+const hex = c => univ(c.u).color;
+const tierOf = p => p>=97?'t0':p>=90?'t05':p>=82?'t1':p>=75?'t15':p>=65?'t2':p>=53?'t3':p>=40?'t4':'t5';
+const tierInfo = t => TIERS.find(x=>x.id===t);
+const pct = (a,b)=>Math.round(b/a*100);
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+
+function tagSim(a,b){
+  const A=a.tg,B=b.tg;
+  const wa=A.reduce((s,t)=>s+tagW(t),0), wb=B.reduce((s,t)=>s+tagW(t),0);
+  let shared=0;
+  A.forEach(t=>{if(B.includes(t))shared+=tagW(t)});
+  if(!shared) return 0;
+  return shared/Math.min(wa,wb);
+}
+function axisSim(a,b){
+  let sum=0;
+  for(let i=0;i<6;i++) sum+=Math.abs(a.ax[i]-b.ax[i]);
+  return clamp(1-sum/600,0,1);
+}
+function powerSim(a,b){ return clamp(1-Math.abs(a.p-b.p)/32,0,1); }
+function archSim(a,b){
+  const A=a.ar.split(','),B=b.ar.split(',');
+  if(A[0]===B[0]) return 1;
+  return A.some(x=>B.includes(x))?0.7:0;
+}
+function scoreOf(a,b){
+  return 0.35*axisSim(a,b)+0.25*tagSim(a,b)+0.15*powerSim(a,b)+0.25*archSim(a,b);
+}
+function rankFor(base,u){
+  let list=CHARS.filter(c=>c.u===u&&c.id!==base.id).map(c=>({c,s:Math.round(scoreOf(base,c)*100)}));
+  list.sort((x,y)=>y.s-x.s||Math.abs(x.c.p-base.p)-Math.abs(y.c.p-base.p));
+  const pin=PINS[base.id]&&PINS[base.id][u];
+  if(pin){ const i=list.findIndex(x=>x.c.id===pin); if(i>0){ const [x]=list.splice(i,1); list.unshift(x); } }
+  return list;
+}
+function biggestGap(a,b){
+  let mi=0,md=-1;
+  for(let i=0;i<6;i++){const d=Math.abs(a.ax[i]-b.ax[i]); if(d>md){md=d;mi=i}}
+  return {name:AX[mi],d:md};
+}
+function sharedTags(a,b){ return a.tg.filter(t=>b.tg.includes(t)); }
+
+/* ============ RENDER HELPERS ============ */
+function imgHTML(c,cls){
+  const u=univ(c.u);
+  if(c.img) return `<img src="assets/crossover/thumbs/${c.img}" alt="${c.name}" loading="lazy" decoding="async">`;
+  return emblemHTML(c,cls||'');
+}
+function emblemHTML(c,cls){
+  const u=univ(c.u);
+  return `<div class="emblem ${cls||''}" style="--uc:${u.color}"><span class="em-glyph">${u.glyph}</span><span class="em-init">${c.em||c.en.slice(0,2).toUpperCase()}</span><span class="em-sub">${u.sub}</span></div>`;
+}
+function imgOrEm(c,boxClass,emClass){
+  return c.img
+    ? `<div class="${boxClass}"><img src="assets/crossover/thumbs/${c.img}" alt="${c.name}" loading="lazy" decoding="async"></div>`
+    : `<div class="${boxClass}">${emblemHTML(c,emClass||'')}</div>`;
+}
+
+/* ============ UNIVERSE STRIP ============ */
+function renderUniStrip(){
+  const el=document.getElementById('uniStrip');
+  el.innerHTML=ORDER.map(id=>{
+    const u=UNI[id], list=CHARS.filter(c=>c.u===id);
+    const top=list.reduce((a,b)=>a.p>b.p?a:b), avg=Math.round(list.reduce((s,c)=>s+c.p,0)/list.length);
+    return `<a class="uni-card u-${id}" href="#radar" data-u="${id}" style="--uc:${u.color}">
+      <div class="uc-top"><span class="uc-en">${u.en}</span><span class="uc-n">${list.length} 人</span></div>
+      <h4>${u.name}</h4><p>${u.blurb}</p>
+      <div class="uc-bar"><i style="width:${top.p}%"></i></div>
+    </a>`;
+  }).join('');
+  el.querySelectorAll('.uni-card').forEach(a=>a.addEventListener('click',()=>{
+    state.u=a.dataset.u; state.q=''; document.getElementById('pickSearch').value='';
+    renderTabs(); renderPicker(); selectChar(FEATURED[state.u]);
+    document.getElementById('radar').scrollIntoView({behavior:'smooth'});
+  }));
+}
+
+/* ============ PICKER ============ */
+const state={u:'marvel',q:'',sel:'m-thor',hist:[]};
+function renderTabs(){
+  const el=document.getElementById('uniTabs');
+  el.innerHTML=ORDER.map(id=>{
+    const u=UNI[id];
+    return `<button class="uni-tab u-${id} ${state.u===id?'on':''}" data-u="${id}" style="--uc:${u.color}"><i></i>${u.name.replace(' 宇宙','')}</button>`;
+  }).join('');
+  el.querySelectorAll('.uni-tab').forEach(b=>b.addEventListener('click',()=>{
+    state.u=b.dataset.u; renderTabs(); renderPicker(); selectChar(FEATURED[state.u]);
+  }));
+}
+function renderPicker(){
+  const q=state.q.trim().toLowerCase();
+  let list=CHARS.filter(c=>c.u===state.u);
+  if(q) list=list.filter(c=>(c.name+' '+c.en+' '+c.tg.join(' ')+' '+c.role).toLowerCase().includes(q));
+  list.sort((a,b)=>b.p-a.p);
+  const el=document.getElementById('pickList');
+  if(!list.length){ el.innerHTML='<div class="pick-empty">没有匹配的角色<br>试试别的关键词</div>'; return; }
+  el.innerHTML=list.map(c=>`<button class="pick ${state.sel===c.id?'on':''}" data-id="${c.id}" style="--uc:${hex(c)}">
+      <span class="pick-p">${imgHTML(c)}</span>
+      <span class="pick-i"><span class="pick-n">${c.name}</span><span class="pick-s">${c.en}</span></span>
+      <span class="pick-pow">${c.p}</span>
+    </button>`).join('');
+  el.querySelectorAll('.pick').forEach(b=>b.addEventListener('click',()=>selectChar(b.dataset.id)));
+}
+
+/* ============ SELECTED CARD ============ */
+function renderSel(c){
+  const t=tierInfo(tierOf(c.p)), u=univ(c.u);
+  const bars=AX.map((a,i)=>`<div class="axis"><span>${a}</span><div class="bar"><i style="width:${c.ax[i]}%"></i></div><b>${c.ax[i]}</b></div>`).join('');
+  document.getElementById('selCard').innerHTML=`
+    <article class="sel-card u-${c.u}" style="--uc:${u.color}">
+      <div class="sel-photo">
+        ${c.img?`<img src="assets/crossover/${c.img}" alt="${c.name}">`:emblemHTML(c,'lg')}
+        <span class="tier-flag" style="color:${t.color}">${t.label} · ${t.name}</span>
+        <span class="pow-flag">${c.p}</span>
+      </div>
+      <div class="sel-info">
+        <div class="sel-top">
+          <span class="badge-u" style="--uc:${u.color}">${u.en}</span>
+          <span class="badge-tier">${t.label} ${t.name} · ${t.range}</span>
+        </div>
+        <h2 class="sel-name">${c.name}</h2>
+        <div class="sel-en">${c.en}</div>
+        <div class="sel-role">${c.role}</div>
+        <p class="sel-note">${c.note}</p>
+        <div class="sel-tags">${c.tg.map((x,i)=>`<span class="tag ${i<2?'hot':''}">${x}</span>`).join('')}</div>
+        <div class="sel-bottom">
+          <div class="axis-bars">${bars}</div>
+          <div class="sel-peak"><b>${c.pk}</b>上限 · <em>${c.pkn}</em><br>战力 ${c.p} / 100</div>
+        </div>
+      </div>
+    </article>`;
+}
+
+/* ============ MATCHES ============ */
+function renderMatches(c){
+  const others=ORDER.filter(u=>u!==c.u);
+  const grid=document.getElementById('matchGrid');
+  grid.innerHTML=others.map(u=>{
+    const list=rankFor(c,u); if(!list.length) return '';
+    const m=list[0], b=m.c;
+    const pinned=!!(PINS[c.id]&&PINS[c.id][u]===b.id);
+    const uniEn=univ(u).en, uc=univ(u).color;
+    if(m.s<45){
+      return `<article class="mc empty u-${u}" style="--uc:${uc}">
+        <div class="mc-top"><span class="mc-uni">${uniEn}</span><span class="mc-empty-tag">NO MATCH</span></div>
+        <div class="mc-empty-body"><b>没有对位</b><p>这个宇宙里找不到干同一份活的人。最接近的是 ${b.name}，也只有 ${m.s}%。</p></div>
+        <p class="mc-why">空缺本身就是世界观差异的一部分。</p>
+      </article>`;
+    }
+    const shared=sharedTags(c,b), gap=biggestGap(c,b), dp=b.p-c.p;
+    const ratio=pct(c.p,b.p);
+    const cls=dp<-1?'minus':dp>1?'plus':'same';
+    const deltaTxt=dp<-1?`−${Math.abs(dp)} 战力 · ${ratio}%`:dp>1?`+${dp} 战力 · ${ratio}%`:'同价';
+    const alt=list.slice(1,3).map(x=>`<a data-id="${x.c.id}">${x.c.name}<i>${x.s}</i></a>`).join(' · ');
+    const why1=shared.length?`共鸣：${shared.slice(0,3).join(' · ')}`:`共鸣：同为${b.tg[0]||'同赛道'}`;
+    const weak=m.s<58;
+    const why2=weak
+      ?`落差：${gap.name}差 ${gap.d} · 本宇宙没有真正的同行`
+      :`落差：${gap.name}差 ${gap.d}${dp?` · 战力 ${dp>0?'+':''}${dp}`:''}`;
+    return `<article class="mc ${weak?'weak':''} u-${u}" data-id="${b.id}" style="--uc:${uc}">
+      <div class="mc-top"><span class="mc-uni">${uniEn}</span>${pinned?'<span class="mc-pin">模板对位</span>':''}<span class="mc-score">${m.s}<small>%</small></span></div>
+      <div class="mc-body">
+        ${imgOrEm(b,'mc-photo')}
+        <div><div class="mc-name">${b.name}</div><span class="mc-en">${b.en}</span>
+        <span class="mc-delta ${cls}">${deltaTxt}</span></div>
+      </div>
+      <div class="mc-tags">${shared.slice(0,3).map(t=>`<span class="tag">${t}</span>`).join('')||`<span class="tag">${b.tg[0]}</span>`}</div>
+      <p class="mc-why"><b>${why1}</b><br>${why2}</p>
+      <div class="mc-alt">算法备选：${alt||'无'}</div>
+    </article>`;
+  }).join('');
+  grid.querySelectorAll('.mc[data-id]').forEach(el=>el.addEventListener('click',e=>{
+    if(e.target.tagName==='A'){ e.stopPropagation(); selectChar(e.target.dataset.id); return; }
+    selectChar(el.dataset.id);
+  }));
+}
+
+/* ============ SELECT ============ */
+function selectChar(id,keepHist){
+  const c=byId[id]; if(!c) return;
+  if(state.sel && state.sel!==id && !keepHist){ state.hist.push(state.sel); if(state.hist.length>20) state.hist.shift(); }
+  state.sel=id; state.u=c.u; state.q='';
+  document.getElementById('pickSearch').value='';
+  renderTabs(); renderPicker(); renderSel(c); renderMatches(c);
+  updateBack();
+  if(location.hash!=='#c='+id) history.replaceState(null,'','#c='+id);
+
+}
+
+/* ============ TIER LANES ============ */
+const laneOn=new Set(ORDER);
+function renderLaneFilters(){
+  const el=document.getElementById('laneFilters');
+  el.innerHTML=ORDER.map(id=>{
+    const u=UNI[id];
+    return `<button class="chip-filter ${laneOn.has(id)?'on':''}" data-u="${id}" style="--uc:${u.color}"><i></i>${u.name}</button>`;
+  }).join('');
+  el.querySelectorAll('.chip-filter').forEach(b=>b.addEventListener('click',()=>{
+    const id=b.dataset.u; laneOn.has(id)?laneOn.delete(id):laneOn.add(id);
+    renderLaneFilters(); renderLanes();
+  }));
+}
+function renderLanes(){
+  const el=document.getElementById('laneList');
+  el.innerHTML=TIERS.map(t=>{
+    const list=CHARS.filter(c=>tierOf(c.p)===t.id&&laneOn.has(c.u)).sort((a,b)=>b.p-a.p);
+    const chips=list.map(c=>{
+      const box=c.img
+        ?`<img src="assets/crossover/thumbs/${c.img}" alt="${c.name}" loading="lazy">`
+        :`<span class="lc-em" style="--uc:${hex(c)}">${c.em}</span>`;
+      return `<a class="lc u-${c.u}" data-id="${c.id}" style="--uc:${hex(c)}" title="${c.en} · ${c.p}">${box}<b>${c.name}</b><em>${c.p}</em></a>`;
+    }).join('');
+    return `<div class="lane u-${''}" style="--tc:${t.color}">
+      <div class="lane-l"><b style="color:${t.color}">${t.label}</b><span>${t.name}</span><small>${t.range}</small></div>
+      <div class="lane-c">${chips||'<span class="lane-empty">— 本档无人</span>'}</div>
+    </div>`;
+  }).join('');
+  el.querySelectorAll('.lc').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault(); selectChar(a.dataset.id);
+    document.getElementById('radar').scrollIntoView({behavior:'smooth',block:'start'});
+  }));
+}
+
+/* ============ MATRIX ============ */
+function renderMatrix(){
+  const head=`<thead><tr><th>原型 / ARCHETYPE</th>${ORDER.map(id=>`<th><span style="color:${UNI[id].color}">${UNI[id].en}</span><em>${UNI[id].name}</em></th>`).join('')}</tr></thead>`;
+  const body=MATRIX.map((r,idx)=>{
+    const cells=ORDER.map(u=>{
+      const id=r.c[u]; const c=id&&byId[id];
+      if(!c) return '<td><span class="mx-cell none"><b>—</b></span></td>';
+      return `<td><a class="mx-cell u-${u}" href="#c=${c.id}" data-id="${c.id}" style="--uc:${UNI[u].color}"><b>${c.name}</b><span>${c.p} · ${tierInfo(tierOf(c.p)).label}</span></a></td>`;
+    }).join('');
+    return `<tr><td class="mx-arch" style="border-left:3px solid rgba(230,36,41,.55)"><b>${r.name}</b><span>${r.sub}</span></td>${cells}</tr>`;
+  }).join('');
+  const el=document.getElementById('mxTable');
+  el.innerHTML=head+'<tbody>'+body+'</tbody>';
+  el.querySelectorAll('.mx-cell[data-id]').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault(); selectChar(a.dataset.id);
+    document.getElementById('radar').scrollIntoView({behavior:'smooth',block:'start'});
+  }));
+}
+
+/* ============ UNI TABLE ============ */
+function renderUniTable(){
+  const rows=ORDER.map(id=>{
+    const u=UNI[id], list=CHARS.filter(c=>c.u===id);
+    const top=list.reduce((a,b)=>a.p>b.p?a:b), avg=(list.reduce((s,c)=>s+c.p,0)/list.length).toFixed(1);
+    return `<tr><td><span class="sw" style="background:${u.color}"></span><b>${u.name}</b></td><td>${list.length}</td><td>${top.p}</td><td>${avg}</td><td style="color:#8c8c9d">${u.tag}</td></tr>`;
+  }).join('');
+  document.getElementById('uniTable').innerHTML=`<thead><tr><th>宇宙</th><th>角色</th><th>最高</th><th>均战</th><th>气质</th></tr></thead><tbody>${rows}</tbody>`;
+}
+
+/* ============ EVENTS ============ */
+function initEvents(){
+  document.getElementById('pickSearch').addEventListener('input',e=>{state.q=e.target.value;renderPicker()});
+  document.getElementById('btnRandom').addEventListener('click',()=>{
+    let c; do{ c=CHARS[Math.floor(Math.random()*CHARS.length)] }while(c.id===state.sel);
+    selectChar(c.id);
+    document.getElementById('radar').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  document.getElementById('btnBack').addEventListener('click',()=>{
+    const prev=state.hist.pop(); if(prev){ selectChar(prev,true); updateBack(); }
+  });
+  document.getElementById('btnCopy').addEventListener('click',async()=>{
+    const url=location.origin+location.pathname+'#c='+state.sel;
+    try{ await navigator.clipboard.writeText(url); }catch(e){
+      const ta=document.createElement('textarea'); ta.value=url; document.body.appendChild(ta); ta.select();
+      try{document.execCommand('copy')}catch(_){} ta.remove();
+    }
+    toast('已复制这条平替对照');
+  });
+  const toTop=document.getElementById('toTop');
+  toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  window.addEventListener('scroll',()=>{ toTop.classList.toggle('on',window.scrollY>700); },{passive:true});
+  document.addEventListener('keydown',e=>{
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){ e.preventDefault(); document.getElementById('pickSearch').focus(); }
+    if(e.key==='Escape'){ document.getElementById('pickSearch').blur(); document.getElementById('pickSearch').value=''; state.q=''; renderPicker(); }
+  });
+  window.addEventListener('hashchange',()=>{
+    const m=location.hash.match(/#c=([\w-]+)/); if(m&&byId[m[1]]) selectChar(m[1]);
+  });
+  const io=new IntersectionObserver(es=>es.forEach(x=>{ if(x.isIntersecting) x.target.classList.add('in') }),{threshold:.08});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+  setTimeout(()=>document.querySelectorAll('.rv:not(.in)').forEach(el=>el.classList.add('in')),1400);
+  const secs=[...document.querySelectorAll('section[id]')];
+  const navA=[...document.querySelectorAll('.nav-links a,.mobile-tabs a')];
+  const spy=new IntersectionObserver(es=>{
+    es.forEach(x=>{ if(x.isIntersecting){
+      const id=x.target.id;
+      navA.forEach(a=>a.classList.toggle('here',a.getAttribute('href')==='#'+id));
+    }});
+  },{rootMargin:'-40% 0px -55% 0px'});
+  secs.forEach(s=>spy.observe(s));
+  document.querySelectorAll('.logo').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})}));
+}
+function toast(msg){
+  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('on');
+  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('on'),1800);
+}
+function updateBack(){ const b=document.getElementById('btnBack'); if(b) b.disabled=!state.hist.length; }
+
+/* ============ BOOT ============ */
+renderUniStrip(); renderLaneFilters(); renderLanes(); renderMatrix(); renderUniTable(); initEvents();
+let boot='m-thor';
+const hm=location.hash.match(/#c=([\w-]+)/); if(hm&&byId[hm[1]]) boot=hm[1];
+selectChar(boot,true);
+</script>
+</body>
+</html>
